@@ -26,13 +26,7 @@ function Main() {
   };
 
   return (
-    <div className="container">
-      {/* 메인 콘텐츠 */}
-      <div className="content">
-        <h1>Main</h1>
-        <p>이곳은 메인 콘텐츠 영역입니다.</p>
-      </div>
-
+    <>
       {/* 사이드바 */}
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
@@ -61,7 +55,7 @@ function Main() {
           </div>
         )}
       </div>
-    </div>
+      </>
   );
 }
 
