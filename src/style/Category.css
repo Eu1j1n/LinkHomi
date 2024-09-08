@@ -1,0 +1,24 @@
+.category-title {
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  margin-left:10px;
+}
+.category-list {
+  font-size: 15px;
+  font-weight: normal;
+  color: #333;
+  cursor: pointer; 
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  border-radius: 4px; 
+  margin-left:10px;
+}
+.category-list:hover {
+  width:200px;
+  background: linear-gradient(135deg, #6165DB, #4B4ED6, #0F139B); /* hover 시 배경색 변경 */
+  color: white; 
+  
+}
+.add-button{
+  margin-left: 100px;
+}
