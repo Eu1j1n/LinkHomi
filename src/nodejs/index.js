@@ -13,7 +13,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'qjtmqjtm5@',
+  password: '',
   database: 'test_db',
 });
 
