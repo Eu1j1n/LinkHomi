@@ -1,21 +1,43 @@
+:root {
+  --box-shadow-style: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.logout-button:hover {
+  background-color: #ff7875;
+}
+
 /* 컨테이너: 사이드바와 메인 콘텐츠를 포함 */
 .container {
   display: flex;
-  height: 100vh;
-  justify-content: space-between;
+  height: 100vh; /* 화면 전체 높이 */
+  width: 100vw; /* 화면 전체 너비 */
 }
 
-/* 메인 콘텐츠 스타일 */
 .content {
-  flex: 1;
+  flex-grow: 1; /* 남는 공간을 차지하도록 설정 */
   padding: 20px;
   background-color: #f4f4f4;
+  color: black;
 }
 
 /* 사이드바 기본 스타일 */
 .sidebar {
-  width: 60px; /* 사이드바의 기본 너비 */
-  background-color: #282c34;
+  box-shadow: var(--box-shadow-style);
+  height: 100%;
+  width: 100px; /* 사이드바의 기본 너비 */
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +47,9 @@
 
 /* 사이드바 열렸을 때의 스타일 */
 .sidebar.open {
-  width: 300px; /* 사이드바가 열릴 때 너비 */
+  box-shadow: var(--box-shadow-style);
+  width: 502px;
+  height: 100%; /* 사이드바가 열릴 때 너비 */
 }
 
 /* 사이드바 내 리스트 스타일 */
@@ -39,16 +63,15 @@
 
 /* 리스트 항목 스타일 */
 .list-item {
+  width: 448px;
+  height: 45px; /* 높이 설정 */
   display: flex;
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
   background-color: #f0f0f0;
   border-radius: 8px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-  height: 60px; /* 높이 설정 */
+  box-shadow: var(--box-shadow-style);
   overflow: hidden; /* 내용이 넘치지 않도록 설정 */
 }
 
@@ -63,6 +86,7 @@
 .list-title {
   flex: 6;
   font-weight: bold;
+  color: black;
 }
 
 /* URL 스타일 */
@@ -76,7 +100,7 @@
 .toggle-button {
   background: none;
   border: none;
-  color: white;
+  color: black;
   font-size: 24px;
   margin-top: 20px;
   cursor: pointer;

@@ -1,24 +1,121 @@
+:root {
+  --box-shadow-style: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.category-container {
+  box-shadow: var(--box-shadow-style);
+  width: 310px;
+  height: 100%;
+  position: relative; /* 하단에 버튼을 배치하기 위해 상대적 위치 */
+  background-color: #f0f0f0;
+}
+
 .category-title {
   font-size: 20px;
   font-weight: bold;
   position: relative;
-  margin-left:10px;
+  margin-left: 10px;
+  color: black;
 }
+
 .category-list {
   font-size: 15px;
   font-weight: normal;
   color: #333;
-  cursor: pointer; 
-  transition: background-color 0.3s ease, color 0.3s ease; 
-  border-radius: 4px; 
-  margin-left:10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 4px;
+  margin-left: 10px;
 }
+
 .category-list:hover {
-  width:200px;
-  background: linear-gradient(135deg, #6165DB, #4B4ED6, #0F139B); /* hover 시 배경색 변경 */
-  color: white; 
-  
+  width: 200px;
+  background: linear-gradient(
+    135deg,
+    #6165db,
+    #4b4ed6,
+    #0f139b
+  ); /* hover 시 배경색 변경 */
+  color: white;
 }
-.add-button{
-  margin-left: 100px;
+
+/* 새로 추가된 스타일 */
+.add-button-container {
+  box-shadow: var(--box-shadow-style);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0; /* 버튼 배경색 */
+  border-top: 1px solid #ccc; /* 선택 사항: 버튼 위에 경계선 */
+}
+
+.add-button {
+  --main-focus: #2d8cf0;
+  --font-color: #323232;
+  --bg-color-sub: #dedede;
+  --bg-color: #eee;
+  --main-color: #323232;
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+  background-color: var(--bg-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.add-button,
+.add-button__icon,
+.add-button__text {
+  transition: all 0.3s;
+}
+
+.add-button .add-button__text {
+  transform: translateX(22px);
+  color: var(--font-color);
+  font-weight: 600;
+}
+
+.add-button .add-button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: var(--bg-color-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button .svg {
+  width: 20px;
+  fill: var(--main-color);
+}
+
+.add-button:hover {
+  background: var(--bg-color);
+}
+
+.add-button:hover .add-button__text {
+  color: transparent;
+}
+
+.add-button:hover .add-button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.add-button:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0px 0px var(--main-color);
 }

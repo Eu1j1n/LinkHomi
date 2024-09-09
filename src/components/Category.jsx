@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import CategoryBoard from './CategoryBoard';
-import { IoMdAdd } from "react-icons/io";
+import { IoMdAdd } from 'react-icons/io'; // 여전히 IoMdAdd 사용
 import '../style/Category.css';
 
 function Category(props) {
@@ -16,7 +16,7 @@ function Category(props) {
   }, []);
 
   const addList = () => {
-    if (inputValue.trim() === '') return; // 빈 입력값은 무시
+    if (inputValue.trim() === '') return;
     const updatedList = [...categoryList, inputValue];
     setCategoryList(updatedList);
     localStorage.setItem('categories', JSON.stringify(updatedList));
@@ -33,36 +33,43 @@ function Category(props) {
       addList();
     }
   };
-  //localStorage 임시 초기화 버튼
+
   const handleClear = () => {
     localStorage.clear();
     alert('초기화 완료');
   };
 
   return (
-    <div className='category-container'>
-      <h1 className='category-title'>
-        {isEditing ? (
-          <input
-            className={`input-text ${isEditing ? 'active' : ''}`}
-            type='text'
-            placeholder='카테고리명을 입력하세요'
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
-            onBlur={addList}
-            onKeyDown={handleKeyDown} // Enter 키로 등록
-            autoFocus
-          />
-        ) : (
-          <>
-            FAVORITE
-            <IoMdAdd onClick={handleEdit} className='add-button' />
-          </>
-        )}
-      </h1>
-      <button onClick={handleClear}>clear</button> {/*임시로 만든 초기화 버튼*/}
-      <CategoryBoard categoryList={categoryList} />
-    </div>
+    <>
+      <div className="category-container">
+        <h1 className="category-title">
+          {isEditing ? (
+            <input
+              className={`input-text ${isEditing ? 'active' : ''}`}
+              type="text"
+              placeholder="카테고리명을 입력하세요"
+              value={inputValue}
+              onChange={(event) => setInputValue(event.target.value)}
+              onBlur={addList}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
+          ) : (
+            <>FAVORITE</>
+          )}
+        </h1>
+        <button onClick={handleClear}>clear</button>{' '}
+        <CategoryBoard categoryList={categoryList} />
+        <div className="add-button-container">
+          <button className="add-button" onClick={handleEdit}>
+            <span className="add-button__text">Add Item</span>
+            <span className="add-button__icon">
+              <IoMdAdd className="svg" />
+            </span>
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 

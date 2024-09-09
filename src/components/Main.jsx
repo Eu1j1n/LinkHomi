@@ -1,33 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 import '../style/Main.css';
+import Category from './Category';
+import { getBrowsingHistory } from '../../chrome-extension/historyService';
 
-// 임시 데이터
-const browsingHistory = [
-  {
-    url: 'https://example.com',
-    title: 'Example',
-    icon: 'https://www.example.com/favicon.ico',
-  },
-  {
-    url: 'https://google.com',
-    title: 'Google',
-    icon: 'https://www.google.com/favicon.ico',
-  },
-  // 추가적인 항목들을 여기에 추가
-];
-
-function Main() {
+function Main({ setIsLoggedIn }) {
+  const [browsingHistory, setBrowsingHistory] = useState([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem('isLoggedIn');
+    navigate('/login');
+  };
+
+  useEffect(() => {
+    if (typeof chrome !== 'undefined' && chrome.runtime) {
+      const fetchBrowsingHistory = async () => {
+        try {
+          const history = await getBrowsingHistory();
+          console.log('Browsing history:', history); // 데이터 로그
+          setBrowsingHistory(history);
+        } catch (error) {
+          console.error('Error fetching browsing history:', error); // 오류 로그
+          setBrowsingHistory([]);
+        }
+      };
+
+      fetchBrowsingHistory();
+    } else {
+      console.error('Chrome runtime is not available');
+    }
+  }, []);
+
   return (
-    <>
-      {/* 사이드바 */}
+    <div className="container">
+      <Category />
+      <div className="content">
+        <h1>Main</h1>
+        <p>이곳은 메인 콘텐츠 영역입니다.</p>
+        <button onClick={handleLogout} className="logout-button">
+          로그아웃
+        </button>
+      </div>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
           <FontAwesomeIcon icon={faClockRotateLeft} className="icon" />
@@ -37,7 +59,7 @@ function Main() {
             {browsingHistory.map((item, index) => (
               <div key={index} className="list-item">
                 <img
-                  src={item.icon}
+                  src={`chrome://favicon/size/32x32/${item.url}`}
                   alt={`${item.title} icon`}
                   className="list-icon"
                 />
@@ -55,7 +77,7 @@ function Main() {
           </div>
         )}
       </div>
-      </>
+    </div>
   );
 }
 

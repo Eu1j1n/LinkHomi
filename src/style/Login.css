@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  flex-direction: column; /* 세로 방향으로 배치 */
+  justify-content: center; /* 세로 방향 중앙 정렬 */
+  align-items: center; /* 가로 방향 중앙 정렬 */
+  height: 100vh; /* 전체 화면 높이로 설정 */
+  margin: 0; /* 기본 마진 제거 */
+  background-color: #f5f5f5; /* 배경색 설정 */
+  color: #fcfcfc; /* 텍스트 색상 설정 */
+  font-family: Arial, sans-serif; /* 폰트 설정 */
+}
+
+h2 {
+  text-align: center; /* 텍스트 중앙 정렬 */
+  margin-bottom: 20px; /* 버튼과 텍스트 사이의 여백 추가 */
+  color: black;
+}
+
+.login-btn {
+  margin-top: 20px; /* 버튼과 텍스트 사이의 여백 추가 */
+}
