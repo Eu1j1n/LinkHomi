@@ -1,5 +1,5 @@
 import { GoogleLogin } from '@react-oauth/google';
-import React from 'react';
+import React, { useCallback } from 'react';
 import axios from 'axios';
 import '../style/Login.css';
 import { useNavigate } from 'react-router-dom';
@@ -27,6 +27,18 @@ export const GoogleLoginBtn = ({ setIsLoggedIn }) => {
   const handleError = (error) => {
     console.error('로그인 실패:', error);
   };
+
+  //user profile 가져오기
+
+  // const googleLogin = useCallback((respone) =>{
+  //   const userInfo = {
+  //     profileImg : respone.profileObj.imageUrl,
+  //     email:respone.profileObj.email,s
+  //     name:respone.profileObj.name
+  //   }
+  //   setUserInfo(userInfo);
+  //   setIsLoggedIn(true);
+  // }, [])
 
   return (
     <div>

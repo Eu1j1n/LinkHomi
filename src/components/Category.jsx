@@ -44,6 +44,8 @@ function Category(props) {
   const modalClose=()=>{
     setIsOpen(false);
   }
+  // const[isLogin, setIsLogin] = useState(false);
+  // const[userInfo, setUserInfo] = useState({});
   
   // const handleClear = () => {
   //   localStorage.clear();
@@ -92,6 +94,10 @@ function Category(props) {
           <CategoryModal isOpen={isOpen} onClose={modalClose} />
           {/*<h1 className='category-title' />*/}
           <CategoryBoard categoryList={categoryList} />
+          {/* {!isLogin
+            ? <GoogleLoginBtn setUserInfo={setUserInfo} setIsLoggedIn={setIsLogin} />
+            : <Profile userInfo={userInfo} />
+          } */}
           </div>
       );
     }
