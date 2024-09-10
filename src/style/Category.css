@@ -119,6 +119,8 @@
   transform: translate(3px, 3px);
   box-shadow: 0px 0px var(--main-color);
 }
+
+
 .website-title {
   margin-top:10px;
   height:100%;
@@ -146,6 +148,31 @@
   background-color: #01684B;
   cursor:pointer;
 }
-.input-space{
-  width:100%;
+.button-container{
+  display:flex;
+  justify-content: flex-end;
+  margin-top:10px;
+}
+.add-category-button{
+  background-color:#3BBA6F;
+  border:none;
+  font-size:10px;
+  width:50px;
+  height:25px;
+  color:white;
+}
+.add-category-button:hover{
+  background-color:#319E5E;
+}
+.close-button{
+  width:50px;
+  height:25px;
+  background-color:#FFFFFF;
+  border-color:#3BBA6F;
+  font-size:10px;
+  margin-left:10px;
+}
+
+.close-button:hover{
+  background-color:#F3F3F3;
 }
