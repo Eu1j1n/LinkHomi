@@ -4,7 +4,6 @@ import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import '../style/Main.css';
 import Category from './Category';
-import { getBrowsingHistory } from '../../chrome-extension/historyService';
 
 function Main({ setIsLoggedIn }) {
   const [browsingHistory, setBrowsingHistory] = useState([]);
@@ -20,25 +19,6 @@ function Main({ setIsLoggedIn }) {
     localStorage.removeItem('isLoggedIn');
     navigate('/login');
   };
-
-  useEffect(() => {
-    if (typeof chrome !== 'undefined' && chrome.runtime) {
-      const fetchBrowsingHistory = async () => {
-        try {
-          const history = await getBrowsingHistory();
-          console.log('Browsing history:', history); // 데이터 로그
-          setBrowsingHistory(history);
-        } catch (error) {
-          console.error('Error fetching browsing history:', error); // 오류 로그
-          setBrowsingHistory([]);
-        }
-      };
-
-      fetchBrowsingHistory();
-    } else {
-      console.error('Chrome runtime is not available');
-    }
-  }, []);
 
   return (
     <div className="container">

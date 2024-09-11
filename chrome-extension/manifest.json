@@ -2,11 +2,25 @@
   "manifest_version": 3,
   "name": "Your Extension",
   "version": "1.0",
+  "action": {
+    "default_popup": "popup.html"
+  },
   "permissions": ["history"],
   "background": {
     "service_worker": "background.js"
   },
-  "action": {
-    "default_popup": "popup.html"
+  "content_security_policy": {
+    "script-src": [
+      "'self'",
+      "https://accounts.google.com",
+      "https://apis.google.com"
+    ],
+    "style-src": ["'self'", "https://fonts.googleapis.com"],
+    "connect-src": [
+      "'self'",
+      "https://accounts.google.com",
+      "https://apis.google.com"
+    ],
+    "img-src": ["'self'", "data:"]
   }
 }

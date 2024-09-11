@@ -1,5 +1,5 @@
 import { GoogleLogin } from '@react-oauth/google';
-import React, { useCallback } from 'react';
+import React from 'react';
 import axios from 'axios';
 import '../style/Login.css';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,8 @@ export const GoogleLoginBtn = ({ setIsLoggedIn }) => {
       .then((res) => {
         console.log('유저 데이터', res.data);
         setIsLoggedIn(true);
+        // userId를 로컬스토리지에 저장
+        localStorage.setItem('userId', res.data.userId);
         navigate('/main');
       })
       .catch((error) => {
