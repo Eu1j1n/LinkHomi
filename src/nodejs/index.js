@@ -8,12 +8,12 @@ const mysql = require('mysql2');
 const app = express();
 const port = 5001;
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-
+const dataPW = process.env.DB_PASSWORD;
 // MySQL 연결
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'qjtmqjtm5@',
+  password: 'root123', // 환경 변수에서 비밀번호 가져오기
   database: 'test_db',
 });
 
@@ -22,6 +22,8 @@ db.connect((err) => {
     console.error('MySQL 연결 오류:', err);
   } else {
     console.log('MySQL에 성공적으로 연결되었습니다.');
+    console.log('DB_PASSWORD:', process.env.DB_PASSWORD); // 비밀번호 출력 (디버깅용)
+    console.log(`Client ID ${process.env.GOOGLE_CLIENT_ID}`);
   }
 });
 
