@@ -5,7 +5,7 @@ import '../style/Category.css';
 
 Modal.setAppElement('#root');
 
-function CategoryModal({ isOpen, onClose, userId }) {
+function CategoryModal({ isOpen, onClose, userId, addCategory }) {
   const [categoryName, setCategoryName] = useState('');
 
   const modalStyle = {
@@ -25,9 +25,11 @@ function CategoryModal({ isOpen, onClose, userId }) {
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
     },
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitting category:', { userId, categoryName }); // userId 확인
+    console.log('카테고리 등록 :', { userId, categoryName });
+    
     axios
       .post('http://localhost:5001/api/add-category', {
         userId,
@@ -35,13 +37,12 @@ function CategoryModal({ isOpen, onClose, userId }) {
       })
       .then((response) => {
         console.log('카테고리 추가 성공:', response);
-        onClose();
+        addCategory(categoryName);
+        setCategoryName(''); // 입력 필드 초기화
+        onClose(); // 모달 닫기
       })
       .catch((error) => {
-        console.error(
-          '카테고리 추가 실패:',
-          error.response?.data || error.message
-        );
+        console.error('카테고리 추가 실패:', error.response?.data || error.message);
       });
   };
 
