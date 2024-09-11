@@ -35,35 +35,37 @@ function CategoryModal({ isOpen, onClose }) {
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
-        style={modalStyle} 
+        style={modalStyle}
       >
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>카테고리 생성</label>
-            <input
-              type="text"
-              style={{
-                marginTop:'20px',
-                marginBottom:'10px',
-                width:'280px',
-                height:'20px',
-                padding:'8px',
-                fontSize:'11px',
-                borderColor:'#D9D9D9'
-              }}
-              placeholder='카테고리명을 입력하세요..'
-              value={categoryName}
-              onChange={(e) => setCategoryName(e.target.value)}
-            />
-          </div>
-          <div className='button-container'>
-            <button type="submit" className='add-category-button'>추가</button>
-            <button type="button" className='close-button' onClick={onClose}>닫기</button>
-          </div>
-        </form>
-      </Modal>
-    </>
-  );
-}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>카테고리 생성</label>
+          <input
+            type="text"
+            style={{
+              marginTop: '20px',
+              marginBottom: '10px',
+              width: '280px',
+              height: '20px',
+              padding: '8px',
+              fontSize: '11px',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+              borderColor: '#D9D9D9'
+            }}
+            placeholder='카테고리명을 입력하세요..'
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
+          />
+        </div>
+        <div className='button-container'>
+          <button type="submit" className='add-category-button'>추가</button>
+          <button type="button" className='close-button' onClick={onClose}>닫기</button>
+        </div>
+      </form>
+    </Modal>
+        </>
+      );
+    }
 
 export default CategoryModal;
