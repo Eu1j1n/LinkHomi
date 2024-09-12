@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import CategoryBoard from './CategoryBoard';
 import titleImage from '../assets/images/title.png';
 import mainlogoImage from '../assets/images/mainlogo.png';
@@ -6,25 +7,32 @@ import CategoryModal from './CategoryModal';
 import '../style/Category.css';
 
 function Category() {
-  // 컴포넌트가 처음 로드될 때 localStorage에서 카테고리 목록을 불러옵니다.
-  const [categoryList, setCategoryList] = useState(() => {
-    const savedCategories = localStorage.getItem('categoryList');
-    return savedCategories ? JSON.parse(savedCategories) : [];
-  });
-
+  const [categoryList, setCategoryList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const userId = localStorage.getItem('userId');
 
   const modalOpen = () => setIsOpen(true);
   const modalClose = () => setIsOpen(false);
 
-  // localStorage에서 userId를 가져옴
-  const userId = localStorage.getItem('userId');
+  // 서버에서 카테고리 목록 불러오기
+  useEffect(() => {
+    if (userId) {
+      axios
+        .get(`http://localhost:5001/api/get-categories/${userId}`)
+        .then((response) => {
+          console.log('DB에서 가져온 카테고리 목록:', response.data);
+          setCategoryList(response.data.map((category) => category.name));
+        })
+        .catch((error) => {
+          console.error('카테고리 조회 오류:', error);
+        });
+    }
+  }, [userId]);
 
-  // 카테고리 추가 함수 (localStorage에 저장도 포함)
   const addCategory = (newCategory) => {
     const updatedCategoryList = [...categoryList, newCategory];
     setCategoryList(updatedCategoryList);
-    localStorage.setItem('categoryList', JSON.stringify(updatedCategoryList)); // localStorage에 저장
+    localStorage.setItem(`categoryList_${userId}`, JSON.stringify(updatedCategoryList)); // localStorage에 저장
   };
 
   return (

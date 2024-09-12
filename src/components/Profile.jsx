@@ -1,5 +1,5 @@
 import React from 'react';
-//로그인 했을 때 이메일, 이름, 이미지 받아오
+//로그인 했을 때 이메일, 이름, 이미지 받아오기 기능 구현 중
 
 export const Profile = ({userInfo}) => {
   return (
