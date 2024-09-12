@@ -39,7 +39,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory }) {
         console.log('카테고리 추가 성공:', response);
         addCategory(categoryName);
         setCategoryName(''); // 입력 필드 초기화
-        onClose(); // 모달 닫기
+        onClose();
       })
       .catch((error) => {
         console.error('카테고리 추가 실패:', error.response?.data || error.message);
