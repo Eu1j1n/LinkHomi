@@ -8,12 +8,12 @@ const mysql = require('mysql2');
 const app = express();
 const port = 5001;
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
-const dataPW = process.env.DB_PASSWORD;
+
 // MySQL 연결
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root123', // 환경 변수에서 비밀번호 가져오기
+  password: 'Freeme0911@',
   database: 'test_db',
 });
 
@@ -22,8 +22,6 @@ db.connect((err) => {
     console.error('MySQL 연결 오류:', err);
   } else {
     console.log('MySQL에 성공적으로 연결되었습니다.');
-    console.log('DB_PASSWORD:', process.env.DB_PASSWORD); // 비밀번호 출력 (디버깅용)
-    console.log(`Client ID ${process.env.GOOGLE_CLIENT_ID}`);
   }
 });
 
@@ -34,23 +32,20 @@ app.use(bodyParser.json()); // JSON 파싱 미들웨어
 app.post('/api/google-login', async (req, res) => {
   const { token } = req.body;
 
-  console.log('클라이언트에서 받은 토큰:', token); // 클라이언트에서 받은 토큰 출력
+  console.log('클라이언트에서 받은 토큰:', token);
 
   try {
-    // 토큰 검증
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience: process.env.GOOGLE_CLIENT_ID, // 클라이언트 ID
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
 
-    // 사용자 정보 추출
     const payload = ticket.getPayload();
-    const userId = payload['sub']; // 사용자 ID
+    const userId = payload['sub'];
     const { name, email, picture } = payload;
 
-    console.log('사용자 ID 및 정보:', { userId, payload }); //사용자 정보 콘솔로 찍히게하기
+    console.log('사용자 ID 및 정보:', { userId, payload });
 
-    // MySQL에 구글 사용자 정보 삽입 코드
     const query = `
       INSERT INTO users (google_id, name, email, picture)
       VALUES (?, ?, ?, ?)
@@ -63,43 +58,79 @@ app.post('/api/google-login', async (req, res) => {
         return res.status(500).json({ error: '사용자 정보 저장 실패' });
       }
 
-      console.log('사용자 정보 저장성공', result);
+      console.log('사용자 정보 저장 성공', result);
       res.status(200).json({ userId, payload });
     });
   } catch (error) {
-    console.error('토큰 검증 오류:', error); // 오류 발생 시 로그 출력
-    res.status(400).json({ error: '유효하지 않은 토큰' }); // 클라이언트에 오류 응답
+    console.error('토큰 검증 오류:', error);
+    res.status(400).json({ error: '유효하지 않은 토큰' });
   }
-}); //구글 로그인 로직
+});
 
-//catory 추가 로직
-// 서버 코드 (index.js)
-
+// 카테고리 추가 로직
 app.post('/api/add-category', (req, res) => {
   const { userId, name } = req.body;
-  console.log('Received data:', { userId, name }); // 수신된 데이터 확인
+  console.log('Received data:', { userId, name });
+
+  if (!userId || !name) {
+    return res.status(400).json({ error: 'userId가 없습니다.' });
+  }
+
+  const checkQuery = `
+    SELECT * FROM categories
+    WHERE user_id = ? AND name = ?
+  `;
+
+  db.query(checkQuery, [userId, name], (err, results) => {
+    if (err) {
+      console.error('중복 확인 오류:', err.message);
+      return res.status(500).json({ error: '중복 확인 실패' });
+    }
+
+    if (results.length > 0) {
+      return res.status(400).json({ error: '이미 존재하는 카테고리입니다.' });
+    }
+
+    const query = `
+      INSERT INTO categories (user_id, name)
+      VALUES (?, ?)
+    `;
+
+    db.query(query, [userId, name], (err, result) => {
+      if (err) {
+        console.error('카테고리 추가 오류:', err.message);
+        return res.status(500).json({ error: '카테고리 추가 실패' });
+      }
+
+      console.log('카테고리 추가 성공', result);
+      res.status(200).json({ success: true });
+    });
+  });
+});
+
+// 카테고리 조회 로직
+app.get('/api/get-categories/:userId', (req, res) => {
+  const { userId } = req.params;
 
   if (!userId) {
     return res.status(400).json({ error: 'userId가 없습니다.' });
   }
 
   const query = `
-    INSERT INTO categories (user_id, name)
-    VALUES (?, ?)
+    SELECT * FROM categories
+    WHERE user_id = ?
   `;
 
-  db.query(query, [userId, name], (err, result) => {
+  db.query(query, [userId], (err, results) => {
     if (err) {
-      console.error('카테고리 추가 오류:', err.message);
-      return res.status(500).json({ error: '카테고리 추가 실패' });
+      console.error('카테고리 조회 오류:', err.message);
+      return res.status(500).json({ error: '카테고리 조회 실패' });
     }
 
-    console.log('카테고리 추가 성공', result);
-    res.status(200).json({ success: true });
+    console.log('카테고리 조회 성공', results);
+    res.status(200).json(results);
   });
 });
-
-//catory 추가 로직
 
 // 서버 시작
 app.listen(port, () => {
