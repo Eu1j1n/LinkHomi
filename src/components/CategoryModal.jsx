@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import '../style/Category.css';
+import Swal from 'sweetalert2'; 
 
 Modal.setAppElement('#root');
 
@@ -28,8 +29,19 @@ function CategoryModal({ isOpen, onClose, userId, addCategory }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('카테고리 등록 :', { userId, categoryName });
     
+    if (!categoryName.trim()) {
+      Swal.fire({
+        title: '입력 오류!',
+        text: '카테고리명을 입력하세요.',
+        icon: 'warning',
+        confirmButtonText: '확인',
+      });
+      return;
+    }
+
+    console.log('카테고리 등록 :', { userId, categoryName });
+
     axios
       .post('http://localhost:5001/api/add-category', {
         userId,
@@ -39,9 +51,22 @@ function CategoryModal({ isOpen, onClose, userId, addCategory }) {
         console.log('카테고리 추가 성공:', response);
         addCategory(categoryName);
         setCategoryName(''); // 입력 필드 초기화
-        onClose();
+        Swal.fire({
+          title: '성공!',
+          text: '카테고리가 성공적으로 추가되었습니다.',
+          icon: 'success',
+          confirmButtonText: '확인',
+        }).then(() => {
+          onClose();
+        });
       })
       .catch((error) => {
+        Swal.fire({
+          title: '오류!',
+          text: `실패: 최대 다섯 개만 등록이 가능합니다`,
+          icon: 'error',
+          confirmButtonText: '확인',
+        });
         console.error('카테고리 추가 실패:', error.response?.data || error.message);
       });
   };
