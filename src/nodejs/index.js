@@ -76,34 +76,56 @@ app.post('/api/add-category', (req, res) => {
     return res.status(400).json({ error: 'userId가 없습니다.' });
   }
 
-  const checkQuery = `
-    SELECT * FROM categories
-    WHERE user_id = ? AND name = ?
+  // 사용자의 카테고리 개수 확인
+  const countQuery = `
+    SELECT COUNT(*) as count FROM categories
+    WHERE user_id = ?
   `;
 
-  db.query(checkQuery, [userId, name], (err, results) => {
+  db.query(countQuery, [userId], (err, results) => {
     if (err) {
-      console.error('중복 확인 오류:', err.message);
-      return res.status(500).json({ error: '중복 확인 실패' });
+      console.error('카테고리 개수 확인 오류:', err.message);
+      return res.status(500).json({ error: '카테고리 개수 확인 실패' });
     }
 
-    if (results.length > 0) {
-      return res.status(400).json({ error: '이미 존재하는 카테고리입니다.' });
+    const categoryCount = results[0].count;
+
+    // 사용자가 이미 5개의 카테고리를 가지고 있는지 확인
+    if (categoryCount >= 5) {
+      return res.status(400).json({ error: '카테고리는 최대 5개까지 생성할 수 있습니다.' });
     }
 
-    const query = `
-      INSERT INTO categories (user_id, name)
-      VALUES (?, ?)
+    // 중복 카테고리 이름 확인
+    const checkQuery = `
+      SELECT * FROM categories
+      WHERE user_id = ? AND name = ?
     `;
 
-    db.query(query, [userId, name], (err, result) => {
+    db.query(checkQuery, [userId, name], (err, results) => {
       if (err) {
-        console.error('카테고리 추가 오류:', err.message);
-        return res.status(500).json({ error: '카테고리 추가 실패' });
+        console.error('중복 확인 오류:', err.message);
+        return res.status(500).json({ error: '중복 확인 실패' });
       }
 
-      console.log('카테고리 추가 성공', result);
-      res.status(200).json({ success: true });
+      if (results.length > 0) {
+        return res.status(400).json({ error: '이미 존재하는 카테고리입니다.' });
+      }
+
+      // 카테고리 추가 쿼리
+      const query = `
+        INSERT INTO categories (user_id, name)
+        VALUES (?, ?)
+      `;
+
+      db.query(query, [userId, name], (err, result) => {
+        if (err) {
+          console.error('카테고리 추가 오류:', err.message);
+          return res.status(500).json({ error: '카테고리 추가 실패' });
+        }
+
+        console.log('카테고리 추가 성공', result);
+        res.status(200).json({ success: true });
+      });
     });
   });
 });
