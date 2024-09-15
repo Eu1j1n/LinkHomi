@@ -11,12 +11,13 @@
   background-color: #f0f0f0;
 }
 
-.category-title {
-  font-size: 20px;
-  font-weight: bold;
-  position: relative;
-  margin-left: 10px;
-  color: black;
+.category {
+  font-size:16px;
+  color: #64748B;
+  margin-left:30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight:bold;
 }
 
 .category-list {
@@ -24,19 +25,35 @@
   font-weight: normal;
   color: #333;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  border-radius: 4px;
-  margin-left: 10px;
+  transition: all 0.3s ease-in-out;
+  margin-left: 30px;
+  margin-right:30px;
+  margin-bottom: 10px;
+  margin-top:10px;
+  padding: 10px 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px; 
 }
 .category-list:hover {
-  width: 200px;
-  background: linear-gradient(
-    135deg,
-    #6165db,
-    #4b4ed6,
-    #0f139b
-  ); 
+  background: linear-gradient(135deg, #06A375, #047857, #035C49);
+  font-weight: bold;
   color: white;
+  padding: 10px 20px; /* padding-left 대신 전체 padding 조정 */
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px, 
+              rgba(0, 0, 0, 0.1) 0px 1px 2px inset; 
+  transition: all 0.3s ease-in-out;
+}
+.category_favorite{
+  font-size:16px;
+  color: #64748B;
+  margin-left:30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-weight:bold;
+}
+
+.favorite-icon{
+  margin-right:10px;
+  margin-top:10px;
 }
 .website-logo{
   width:60px;

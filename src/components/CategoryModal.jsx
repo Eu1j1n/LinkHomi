@@ -29,7 +29,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     if (!categoryName.trim()) {
       Swal.fire({
         title: '입력 오류!',
@@ -61,12 +61,17 @@ function CategoryModal({ isOpen, onClose, userId, addCategory }) {
         });
       })
       .catch((error) => {
+        const errorMessage = error.response?.data?.error || '카테고리 추가 실패';
+
         Swal.fire({
           title: '오류!',
-          text: `실패: 최대 다섯 개만 등록이 가능합니다`,
+          text: errorMessage.includes('이미 존재하는 카테고리') 
+            ? '이미 존재하는 카테고리입니다. 다른 이름을 입력하세요.'
+            : errorMessage,
           icon: 'error',
           confirmButtonText: '확인',
         });
+
         console.error('카테고리 추가 실패:', error.response?.data || error.message);
       });
   };
