@@ -5,6 +5,7 @@ import titleImage from '../assets/images/title.png';
 import mainlogoImage from '../assets/images/mainlogo.png';
 import CategoryModal from './CategoryModal';
 import '../style/Category.css';
+import { FcLike } from "react-icons/fc";
 
 function Category() {
   const [categoryList, setCategoryList] = useState([]);
@@ -44,8 +45,10 @@ function Category() {
       <button onClick={modalOpen} className="add-button">
         Add Category +{' '}
       </button>
+      <div className='category'>Category List</div>
       <CategoryModal isOpen={isOpen} onClose={modalClose} userId={userId} addCategory={addCategory} />
       <CategoryBoard categoryList={categoryList} />
+      <div className='category_favorite'><FcLike className='favorite-icon'/>Favorite</div>
     </div>
   );
 }
