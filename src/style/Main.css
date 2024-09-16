@@ -4,20 +4,6 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.logout-button {
-  padding: 10px 20px;
-  background-color: #ff4d4f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.logout-button:hover {
-  background-color: #ff7875;
-}
-
 /* 컨테이너: 사이드바와 메인 콘텐츠를 포함 */
 .container {
   display: flex;

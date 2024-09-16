@@ -13,7 +13,7 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'Freeme0911@',
+  password: 'root123',
   database: 'test_db',
 });
 
@@ -92,7 +92,9 @@ app.post('/api/add-category', (req, res) => {
 
     // 사용자가 이미 5개의 카테고리를 가지고 있는지 확인
     if (categoryCount >= 5) {
-      return res.status(400).json({ error: '카테고리는 최대 5개까지 생성할 수 있습니다.' });
+      return res
+        .status(400)
+        .json({ error: '카테고리는 최대 5개까지 생성할 수 있습니다.' });
     }
 
     // 중복 카테고리 이름 확인

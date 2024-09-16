@@ -16,9 +16,17 @@ export const GoogleLoginBtn = ({ setIsLoggedIn }) => {
       })
       .then((res) => {
         console.log('유저 데이터', res.data);
+        console.log('유저 프로필', res.data.payload.picture);
+        console.log('유저 이름', res.data.payload.given_name);
         setIsLoggedIn(true);
-        // userId를 로컬스토리지에 저장
+        // userId,Profile,이름을 localStorage에 저장
+        localStorage.setItem(
+          'userName',
+          `${res.data.payload.family_name} ${res.data.payload.given_name}` // 성과 이름 사이에 공백 추가
+        );
+
         localStorage.setItem('userId', res.data.userId);
+        localStorage.setItem('userProfile', res.data.payload.picture);
         navigate('/main');
       })
       .catch((error) => {

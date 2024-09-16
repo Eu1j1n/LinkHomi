@@ -22,13 +22,10 @@ function Main({ setIsLoggedIn }) {
 
   return (
     <div className="container">
-      <Category />
+      <Category setIsLoggedIn={setIsLoggedIn} />
       <div className="content">
         <h1>Main</h1>
         <p>이곳은 메인 콘텐츠 영역입니다.</p>
-        <button onClick={handleLogout} className="logout-button">
-          로그아웃
-        </button>
       </div>
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
