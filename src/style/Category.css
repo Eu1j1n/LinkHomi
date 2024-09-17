@@ -94,7 +94,6 @@
   cursor: pointer;
 }
 
-//모달 버튼 css
 .button-container {
   display: flex;
   justify-content: flex-end;
@@ -131,33 +130,74 @@
 .category_footer {
   height: 10%;
   display: flex;
-  justify-content: space-between; /* 좌우로 배치 */
   align-items: center;
+  gap: 10px; /* 아이템 사이의 간격 */
   padding: 10px;
 }
 
-.logout-btn {
-  width: 100px;
-  height: 30px;
-  background-color: #047857;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 4px;
-  margin-right: 20px;
-}
+.user-info {
+  display: flex;
+  flex-direction: column;
 
-.logout-btn:hover {
-  background-color: #01684b;
-  cursor: pointer;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  margin-left: 2px;
 }
-
 .profile-picture {
   width: 40px;
   height: 40px;
   border-radius: 50%; /* 원형으로 만듦 */
   margin-left: 20px;
+  margin-bottom: 5px;
   object-fit: cover;
+}
+
+.user-name,
+.user-email {
+  color: black; /* 글씨체 색상을 검정으로 설정 */
+  margin: 1.5px; /*1.5 */
+}
+
+.user-name {
+  text-align: left; /* 왼쪽 정렬 */
+}
+
+.user-email {
+  color: #a0abbb; /* 색상 설정 */
+  margin: 0; /* 기본 마진 제거 */
+}
+
+.profile-title {
+  margin-left: 10%;
+  margin-bottom: 2%;
+  color: black;
+}
+
+.logout-btn {
+  width: 250px;
+  height: 40px;
+  background-color: #d9d9d9;
+  border: none;
+  color: black;
+  text-align: center;
+  margin-left: 25px;
+  margin-bottom: 20px;
+  text-decoration: none;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+.logout-btn svg {
+  width: 20px;
+}
+
+.logout-btn:hover {
+  background-color: #c0c0c0;
+  cursor: pointer;
+  color: black; /* 아이콘 색상도 변경 */
+}
+
+.category-container .profile-divider {
+  width: 80%; /* 가로 전체 너비로 설정 */
+  height: 1px; /* 실선의 높이 */
+  margin: 10px auto; /* 수평으로 중앙 정렬 */
 }
