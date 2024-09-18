@@ -20,7 +20,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
   if (err) {
-    console.error("MySQL 연결 오류:", err);
+    console.error("MySQL 연결 오류!!!!!!:", err);
   } else {
     console.log("MySQL에 성공적으로 연결되었습니다.");
   }
@@ -202,6 +202,7 @@ app.post("/api/kakao-pay-approve", async (req, res) => {
 
 // 카카오페이 성공
 app.get("/api/kakao-pay-success", (req, res) => {
+  console.log("카카오페이 성공");
   res.redirect("http://localhost:5173/success?pg_token=" + req.query.pg_token);
 });
 

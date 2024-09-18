@@ -6,13 +6,18 @@ body {
 .subscribe-container {
   padding: 20px;
   text-align: center;
+
   font-family: Arial, sans-serif;
   color: #dcdcdc;
 }
 
+.intro-text {
+  line-height: 1.5; /* 또는 원하는 줄 높이 값을 설정 */
+}
+
 .subscribe-container h1 {
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: 10%;
+  font-size: 35px;
   color: #fff;
 }
 
@@ -64,6 +69,7 @@ body {
 .beginner:hover {
   background-color: #39ff14;
   color: #000;
+  cursor: pointer;
 }
 
 .beginner:hover + .price {
@@ -77,6 +83,7 @@ body {
 .intermediate:hover {
   background-color: #0000ff;
   color: #000;
+  cursor: pointer;
 }
 
 .intermediate:hover + .price {
@@ -90,6 +97,7 @@ body {
 .pro:hover {
   background-color: #e4002b;
   color: #fff;
+  cursor: pointer;
 }
 
 .pro:hover + .price {
