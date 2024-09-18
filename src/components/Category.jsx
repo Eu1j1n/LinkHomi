@@ -9,6 +9,7 @@ import { FcLike } from "react-icons/fc";
 import { useNavigate } from "react-router-dom";
 import { BiLogOut } from "react-icons/bi";
 import { TbLogout2 } from "react-icons/tb";
+import { FaCrown, FaRegStar } from "react-icons/fa"; // FaCrown과 FaRegStar 아이콘 추가
 
 function Category({ setIsLoggedIn }) {
   const [categoryList, setCategoryList] = useState([]);
@@ -43,6 +44,10 @@ function Category({ setIsLoggedIn }) {
       `categoryList_${userId}`,
       JSON.stringify(updatedCategoryList)
     );
+  };
+
+  const handleSubscribeClick = () => {
+    navigate(`/subscribe?email=${encodeURIComponent(userEmail)}`);
   };
 
   const handleLogout = () => {
@@ -80,6 +85,9 @@ function Category({ setIsLoggedIn }) {
         style={{ backgroundColor: "#c0c0c0", border: "none", height: "1px" }}
       />
       <p className="profile-title">Profile</p>
+      <button onClick={handleSubscribeClick} className="subscribe-btn">
+        멤버십 구독
+      </button>
       <div className="category_footer">
         <img
           src={userProfileImage}
@@ -87,7 +95,12 @@ function Category({ setIsLoggedIn }) {
           className="profile-picture"
         />
         <div className="user-info">
-          <p className="user-name">{userName}</p>
+          <p className="user-name">
+            {userName}
+            <FaCrown className="crown-icon" /> {}
+            <FaRegStar className="basic-icon" /> {}
+            <FaRegStar className="standard-icon" /> {}
+          </p>
           <p className="user-email">{userEmail}</p>
         </div>
       </div>

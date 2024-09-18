@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const { OAuth2Client } = require("google-auth-library");
 const mysql = require("mysql2");
+const axios = require("axios");
 
 const app = express();
 const port = 5001;
@@ -31,7 +32,6 @@ app.use(bodyParser.json()); // JSON 파싱 미들웨어
 // 구글 로그인 라우트
 app.post("/api/google-login", async (req, res) => {
   const { token } = req.body;
-
   console.log("클라이언트에서 받은 토큰:", token);
 
   try {
@@ -154,6 +154,65 @@ app.get("/api/get-categories/:userId", (req, res) => {
     console.log("카테고리 조회 성공", results);
     res.status(200).json(results);
   });
+});
+
+// 카카오페이 결제 API
+app.post("/api/kakao-pay-approve", async (req, res) => {
+  const { item_name, total_amount, user_email } = req.body;
+  console.log("Received KakaoPay data:", {
+    item_name,
+    total_amount,
+    user_email,
+  });
+
+  try {
+    const response = await axios.post(
+      "https://open-api.kakaopay.com/online/v1/payment/ready",
+      {
+        cid: "TC0ONETIME",
+        partner_order_id: "partner_order_id",
+        partner_user_id: user_email, // 이메일을 partner_user_id로 사용
+        item_name: item_name,
+        quantity: "1",
+        total_amount: total_amount,
+        vat_amount: "200",
+        tax_free_amount: "0",
+        approval_url: "http://localhost:5173/success",
+        fail_url: "http://localhost:5173/fail",
+        cancel_url: "http://localhost:5173/cancel",
+      },
+      {
+        headers: {
+          Authorization: `SECRET_KEY ${process.env.VITE_KAKAO_REST_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    console.log("카카오페이 승인 응답:", response.data);
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error(
+      "카카오페이 결제 승인 오류:",
+      error.response ? error.response.data : error.message
+    );
+    res.status(500).json({ error: "카카오페이 결제 승인 실패" });
+  }
+});
+
+// 카카오페이 성공
+app.get("/api/kakao-pay-success", (req, res) => {
+  res.redirect("http://localhost:5173/success?pg_token=" + req.query.pg_token);
+});
+
+// 카카오페이 취소
+app.get("/api/kakao-pay-cancel", (req, res) => {
+  res.redirect("http://localhost:5173/cancel");
+});
+
+// 카카오페이 실패
+app.get("/api/kakao-pay-fail", (req, res) => {
+  res.redirect("http://localhost:5173/fail");
 });
 
 // 서버 시작

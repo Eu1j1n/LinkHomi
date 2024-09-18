@@ -11,6 +11,10 @@ function Main({ setIsLoggedIn }) {
   const [isRotated, setRotated] = useState(false); // 추가된 상태
   const navigate = useNavigate();
 
+  const handleSubscribeClick = () => {
+    navigate("/subscribe");
+  };
+
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
     setRotated(!isRotated);

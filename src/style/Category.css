@@ -43,7 +43,7 @@
   background: linear-gradient(135deg, #06a375, #047857, #035c49);
   font-weight: bold;
   color: white;
-  padding: 10px 20px; /* padding-left 대신 전체 padding 조정 */
+  padding: 10px 20px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px,
     rgba(0, 0, 0, 0.1) 0px 1px 2px inset;
   transition: all 0.3s ease-in-out;
@@ -138,10 +138,10 @@
 .user-info {
   display: flex;
   flex-direction: column;
-
   align-items: flex-start; /* 왼쪽 정렬 */
   margin-left: 2px;
 }
+
 .profile-picture {
   width: 40px;
   height: 40px;
@@ -167,9 +167,44 @@
 }
 
 .profile-title {
-  margin-left: 10%;
+  margin-left: 30px; /* 프로필 제목 왼쪽 여백 조정 */
   margin-bottom: 2%;
   color: black;
+  font-size: 18px; /* 적절한 폰트 크기 조정 */
+}
+
+.subscribe-btn {
+  background-color: #047857;
+  border: none;
+  color: white;
+  font-size: 12px;
+  width: 30%;
+  height: 5%;
+  border-radius: 4px;
+  margin-left: 10%;
+  cursor: pointer;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+  animation: pulse 7s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.subscribe-btn:hover {
+  background-color: #01684b;
 }
 
 .logout-btn {
@@ -193,11 +228,26 @@
 .logout-btn:hover {
   background-color: #c0c0c0;
   cursor: pointer;
-  color: black; /* 아이콘 색상도 변경 */
+  color: black;
 }
 
 .category-container .profile-divider {
-  width: 80%; /* 가로 전체 너비로 설정 */
-  height: 1px; /* 실선의 높이 */
-  margin: 10px auto; /* 수평으로 중앙 정렬 */
+  width: 80%;
+  height: 1px;
+  margin: 10px auto;
+}
+
+.crown-icon {
+  color: gold;
+  margin-left: 5px;
+}
+
+.basic-icon {
+  color: #cd7f32;
+  margin-left: 5px;
+}
+
+.standard-icon {
+  color: silver;
+  margin-left: 5px;
 }

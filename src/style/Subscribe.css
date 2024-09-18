@@ -1,0 +1,115 @@
+body {
+  background-color: #000;
+  margin: 0;
+}
+
+.subscribe-container {
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #dcdcdc;
+}
+
+.subscribe-container h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #fff;
+}
+
+.pricing-sections {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.pricing-section {
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #d1d1d1;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s,
+    border-color 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pricing-section:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: #e0e0e0;
+  border-color: #b0b0b0;
+}
+
+.pricing-section h2,
+.pricing-section p {
+  color: #dcdcdc; /* 기본 글씨 색상 */
+  transition: color 0.3s;
+}
+
+.pricing-section:hover h2,
+.pricing-section:hover p {
+  color: #fff; /* 호버 시 글씨 색상 변경 */
+}
+
+.beginner {
+  border-color: #009688;
+}
+
+.beginner:hover {
+  background-color: #39ff14;
+  color: #000;
+}
+
+.beginner:hover + .price {
+  color: #39ff14;
+}
+
+.intermediate {
+  border-color: #003d6e;
+}
+
+.intermediate:hover {
+  background-color: #0000ff;
+  color: #000;
+}
+
+.intermediate:hover + .price {
+  color: #00ffff;
+}
+
+.pro {
+  border-color: #e4002b;
+}
+
+.pro:hover {
+  background-color: #e4002b;
+  color: #fff;
+}
+
+.pro:hover + .price {
+  color: #f2b1b8;
+}
+
+.price {
+  color: #dcdcdc80;
+  margin-top: 10px;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.intro-text {
+  font-size: 55px;
+  color: #ffffff;
+  margin-bottom: 40px;
+  transition: transform 0.3s ease;
+}
+
+.pricing-section:hover .price {
+  color: #fff;
+}
