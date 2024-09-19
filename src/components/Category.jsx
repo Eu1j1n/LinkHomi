@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import CategoryBoard from "./CategoryBoard";
-import titleImage from "../assets/images/title.png";
-import mainlogoImage from "../assets/images/mainlogo.png";
-import CategoryModal from "./CategoryModal";
-import "../style/Category.css";
-import { FcLike } from "react-icons/fc";
-import { useNavigate } from "react-router-dom";
-import { BiLogOut } from "react-icons/bi";
-import { TbLogout2 } from "react-icons/tb";
-import { FaCrown, FaRegStar } from "react-icons/fa"; // FaCrown과 FaRegStar 아이콘 추가
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import CategoryBoard from './CategoryBoard';
+import CategoryModal from './CategoryModal';
+import '../style/Category.css';
+import { FcLike } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
+import { TbLogout2 } from 'react-icons/tb';
+import { FaCrown, FaRegStar } from 'react-icons/fa';
 
-function Category({ setIsLoggedIn }) {
+function Category({ setIsLoggedIn, onMatchedUrls }) {
   const [categoryList, setCategoryList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const userId = localStorage.getItem("userId");
-  const userEmail = localStorage.getItem("userEmail"); // 사용자 이메일 가져오기
-  const userName = localStorage.getItem("userName"); // 사용자 이름 가져오기
-  const userProfileImage = localStorage.getItem("userProfile"); // 사용자 프로필 이미지 URL 가져오기
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+  const userId = localStorage.getItem('userId');
+  const userEmail = localStorage.getItem('userEmail');
+  const userName = localStorage.getItem('userName');
+  const userProfileImage = localStorage.getItem('userProfile');
   const navigate = useNavigate();
 
   const modalOpen = () => setIsOpen(true);
@@ -25,25 +23,28 @@ function Category({ setIsLoggedIn }) {
 
   useEffect(() => {
     if (userId) {
-      axios
-        .get(`http://localhost:5001/api/get-categories/${userId}`)
-        .then((response) => {
-          console.log("DB에서 가져온 카테고리 목록:", response.data);
-          setCategoryList(response.data.map((category) => category.name));
-        })
-        .catch((error) => {
-          console.error("카테고리 조회 오류:", error);
-        });
+      fetchCategories();
     }
   }, [userId]);
 
+  const fetchCategories = () => {
+    axios
+      .get(`http://localhost:5001/api/get-categories/${userId}`)
+      .then((response) => {
+        setCategoryList(
+          response.data.map((category) => ({
+            id: category.id,
+            name: category.name,
+          }))
+        );
+      })
+      .catch((error) => {
+        console.error('카테고리 조회 오류:', error);
+      });
+  };
+
   const addCategory = (newCategory) => {
-    const updatedCategoryList = [...categoryList, newCategory];
-    setCategoryList(updatedCategoryList);
-    localStorage.setItem(
-      `categoryList_${userId}`,
-      JSON.stringify(updatedCategoryList)
-    );
+    fetchCategories(); // 새 카테고리를 추가한 후 카테고리 목록을 다시 가져옵니다.
   };
 
   const handleSubscribeClick = () => {
@@ -52,18 +53,46 @@ function Category({ setIsLoggedIn }) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userProfile");
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userName");
-    navigate("/login");
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userProfile');
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
+    navigate('/login');
+  };
+
+  const handleCategoryClick = async (id) => {
+    try {
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        throw new Error('User ID가 localStorage에 저장되어 있지 않습니다.');
+      }
+
+      const response = await axios.post(
+        'http://localhost:5001/api/check-url',
+        { categoryId: id },
+        { headers: { 'user-id': userId } }
+      );
+
+      if (response.data.match) {
+        console.log('일치하는 URL이 있습니다!');
+        console.log('일치하는 URL 목록:', response.data.urls);
+        onMatchedUrls(response.data.urls); // URL 목록을 부모 컴포넌트로 전달
+      } else {
+        console.log('일치하는 URL이 없습니다.');
+        onMatchedUrls([]); // URL 목록을 빈 배열로 설정
+      }
+
+      setSelectedCategoryId(id); // 클릭된 항목의 ID를 상태로 저장
+    } catch (error) {
+      console.error('서버 요청 오류:', error);
+    }
   };
 
   return (
     <div className="category-container">
       <div className="category-header">
         <button onClick={modalOpen} className="add-button">
-          Add Category +{" "}
+          Add Category +{' '}
         </button>
       </div>
       <div className="category">
@@ -74,7 +103,11 @@ function Category({ setIsLoggedIn }) {
           userId={userId}
           addCategory={addCategory}
         />
-        <CategoryBoard categoryList={categoryList} />
+        <CategoryBoard
+          categoryList={categoryList}
+          selectedCategoryId={selectedCategoryId}
+          onCategoryClick={handleCategoryClick}
+        />
       </div>
       <div className="category_favorite">
         <FcLike className="favorite-icon" />
@@ -82,7 +115,7 @@ function Category({ setIsLoggedIn }) {
       </div>
       <hr
         className="profile-divider"
-        style={{ backgroundColor: "#c0c0c0", border: "none", height: "1px" }}
+        style={{ backgroundColor: '#c0c0c0', border: 'none', height: '1px' }}
       />
       <p className="profile-title">Profile</p>
       <button onClick={handleSubscribeClick} className="subscribe-btn">

@@ -5,13 +5,33 @@
 }
 
 /* 컨테이너: 사이드바와 메인 콘텐츠를 포함 */
+.addUrl-button {
+  margin-top: 85vh;
+  border-radius: 4px;
+  box-shadow: var(--box-shadow-style);
+  background-color: #047857;
+  width: 251px; /* 버튼의 너비 설정 */
+  height: 44px; /* 버튼의 높이 설정 */
+  color: white;
+  border: none;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.addUrl-button:hover {
+  box-shadow: var(--box-shadow-style);
+  background-color: #01684b;
+  cursor: pointer;
+}
+
 .container {
   display: flex;
   height: 100vh; /* 화면 전체 높이 */
   width: 100vw; /* 화면 전체 너비 */
 }
 
-.content {
+.main-content {
   flex-grow: 1; /* 남는 공간을 차지하도록 설정 */
   padding: 20px;
   background-color: #f4f4f4;
@@ -47,41 +67,6 @@
   padding: 10px;
 }
 
-/* 리스트 항목 스타일 */
-.list-item {
-  width: 448px;
-  height: 45px; /* 높이 설정 */
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-shadow: var(--box-shadow-style);
-  overflow: hidden; /* 내용이 넘치지 않도록 설정 */
-}
-
-/* 아이콘 스타일 */
-.list-icon {
-  width: 32px; /* 아이콘 크기 조정 */
-  height: 32px;
-  margin-right: 10px;
-}
-
-/* 제목 스타일 */
-.list-title {
-  flex: 6;
-  font-weight: bold;
-  color: black;
-}
-
-/* URL 스타일 */
-.list-url {
-  flex: 2;
-  color: blue;
-  text-decoration: none;
-}
-
 /* 버튼 스타일 */
 .toggle-button {
   background: none;
@@ -99,3 +84,5 @@
 .rotated {
   transform: rotate(-180deg);
 }
+
+//url 카드
