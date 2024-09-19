@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import CategoryBoard from './CategoryBoard';
-import CategoryModal from './CategoryModal';
-import '../style/Category.css';
-import { FcLike } from 'react-icons/fc';
-import { useNavigate } from 'react-router-dom';
-import { TbLogout2 } from 'react-icons/tb';
-import { FaCrown, FaRegStar } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import CategoryBoard from "./CategoryBoard";
+import CategoryModal from "./CategoryModal";
+import "../style/Category.css";
+import { FcLike } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
+import { TbLogout2 } from "react-icons/tb";
+import { FaCrown, FaRegStar } from "react-icons/fa";
 
 function Category({ setIsLoggedIn, onMatchedUrls }) {
   const [categoryList, setCategoryList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  const userId = localStorage.getItem('userId');
-  const userEmail = localStorage.getItem('userEmail');
-  const userName = localStorage.getItem('userName');
-  const userProfileImage = localStorage.getItem('userProfile');
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null); // 선택된 카테고리 상태
+  const [grade, setGrade] = useState("");
+  const userId = localStorage.getItem("userId");
+  const userEmail = localStorage.getItem("userEmail");
+  const userName = localStorage.getItem("userName");
+  const userProfileImage = localStorage.getItem("userProfile");
   const navigate = useNavigate();
 
   const modalOpen = () => setIsOpen(true);
@@ -26,6 +27,20 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       fetchCategories();
     }
   }, [userId]);
+
+  useEffect(() => {
+    if (userEmail) {
+      axios
+        .get(`http://localhost:5001/api/get-user-grade/${userEmail}`)
+        .then((response) => {
+          setGrade(response.data.grade);
+          console.log(response.data.grade);
+        })
+        .catch((error) => {
+          console.error("사용자 등급 조회 오류:", error);
+        });
+    }
+  }, [userEmail]);
 
   const fetchCategories = () => {
     axios
@@ -39,12 +54,12 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         );
       })
       .catch((error) => {
-        console.error('카테고리 조회 오류:', error);
+        console.error("카테고리 조회 오류:", error);
       });
   };
 
   const addCategory = (newCategory) => {
-    fetchCategories(); // 새 카테고리를 추가한 후 카테고리 목록을 다시 가져옵니다.
+    fetchCategories(); // 새 카테고리를 추가한 후 목록을 다시 가져옴
   };
 
   const handleSubscribeClick = () => {
@@ -53,38 +68,31 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('userProfile');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userName');
-    navigate('/login');
+    localStorage.clear(); // 모든 사용자 데이터를 로컬스토리지에서 제거
+    navigate("/login");
   };
 
   const handleCategoryClick = async (id) => {
     try {
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem("userId");
       if (!userId) {
-        throw new Error('User ID가 localStorage에 저장되어 있지 않습니다.');
+        throw new Error("User ID가 localStorage에 저장되어 있지 않습니다.");
       }
-
       const response = await axios.post(
-        'http://localhost:5001/api/check-url',
+        "http://localhost:5001/api/check-url",
         { categoryId: id },
-        { headers: { 'user-id': userId } }
+        { headers: { "user-id": userId } }
       );
-
       if (response.data.match) {
-        console.log('일치하는 URL이 있습니다!');
-        console.log('일치하는 URL 목록:', response.data.urls);
-        onMatchedUrls(response.data.urls); // URL 목록을 부모 컴포넌트로 전달
+        console.log("일치하는 URL이 있습니다!", response.data.urls);
+        onMatchedUrls(response.data.urls); // URL 목록 전달
       } else {
-        console.log('일치하는 URL이 없습니다.');
-        onMatchedUrls([]); // URL 목록을 빈 배열로 설정
+        console.log("일치하는 URL이 없습니다.");
+        onMatchedUrls([]); // 빈 배열 전달
       }
-
-      setSelectedCategoryId(id); // 클릭된 항목의 ID를 상태로 저장
+      setSelectedCategoryId(id); // 클릭된 카테고리 ID 저장
     } catch (error) {
-      console.error('서버 요청 오류:', error);
+      console.error("서버 요청 오류:", error);
     }
   };
 
@@ -92,7 +100,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
     <div className="category-container">
       <div className="category-header">
         <button onClick={modalOpen} className="add-button">
-          Add Category +{' '}
+          Add Category +
         </button>
       </div>
       <div className="category">
@@ -115,7 +123,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       </div>
       <hr
         className="profile-divider"
-        style={{ backgroundColor: '#c0c0c0', border: 'none', height: '1px' }}
+        style={{ backgroundColor: "#C0C0C0", border: "none", height: "1px" }}
       />
       <p className="profile-title">Profile</p>
       <button onClick={handleSubscribeClick} className="subscribe-btn">
@@ -130,9 +138,9 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         <div className="user-info">
           <p className="user-name">
             {userName}
-            <FaCrown className="crown-icon" /> {}
-            <FaRegStar className="basic-icon" /> {}
-            <FaRegStar className="standard-icon" /> {}
+            {grade === "PRO" && <FaCrown className="crown-icon" />}
+            {grade === "STANDARD" && <FaRegStar className="standard-icon" />}
+            {grade === "BASIC" && <FaRegStar className="basic-icon" />}
           </p>
           <p className="user-email">{userEmail}</p>
         </div>
