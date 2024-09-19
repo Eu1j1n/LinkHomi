@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2"; // sweetalert2 임포트
 import "sweetalert2/dist/sweetalert2.min.css"; // sweetalert2 스타일 임포트
+import axios from "axios"; // axios 임포트
 
 function SuccessPage() {
   const navigate = useNavigate();
@@ -13,17 +14,32 @@ function SuccessPage() {
     const pgToken = queryParams.get("pg_token");
 
     if (pgToken) {
-      // 결제 성공 시 Swal 모달을 띄움
-      Swal.fire({
-        title: "결제 성공!",
-        text: "결제가 성공적으로 완료되었습니다.",
-        icon: "success",
-        confirmButtonText: "메인 페이지로 이동",
-        showCloseButton: true,
-        allowOutsideClick: false,
-      }).then(() => {
-        navigate("/main"); // 모달 확인 후 메인 페이지로 이동
-      });
+      const userEmail = localStorage.getItem("userEmail");
+      const itemName = localStorage.getItem("selected_item_name");
+
+      console.log("useremail" + userEmail);
+      console.log("itemName" + itemName);
+
+      axios
+        .post("http://localhost:5001/api/kakao-pay-success", {
+          user_email: userEmail,
+          item_name: itemName,
+        })
+        .then(() => {
+          Swal.fire({
+            title: "결제 성공!",
+            text: "결제가 성공적으로 완료되었습니다.",
+            icon: "success",
+            confirmButtonText: "메인 페이지로 이동",
+            showCloseButton: true,
+            allowOutsideClick: false,
+          }).then(() => {
+            navigate("/main");
+          });
+        })
+        .catch((error) => {
+          console.error("결제 정보 전송 오류:", error);
+        });
     }
   }, [location.search, navigate]);
 

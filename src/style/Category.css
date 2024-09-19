@@ -3,6 +3,7 @@
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
+
 .category-header {
   width: 100%;
   height: 10%;
@@ -158,7 +159,10 @@
 }
 
 .user-name {
-  text-align: left; /* 왼쪽 정렬 */
+  display: flex;
+  align-items: center; /* 아이콘과 텍스트를 수직으로 중앙 정렬 */
+  font-size: 15px;
+  margin: 0; /* 기본 여백 제거 */
 }
 
 .user-email {
@@ -239,15 +243,20 @@
 
 .crown-icon {
   color: gold;
-  margin-left: 5px;
 }
 
 .basic-icon {
   color: #cd7f32;
-  margin-left: 5px;
 }
 
 .standard-icon {
   color: silver;
-  margin-left: 5px;
+}
+
+.crown-icon,
+.standard-icon,
+.basic-icon {
+  margin-left: 10px;
+  font-size: 1.1em;
+  /* 아이콘 크기 및 간격 조정 */
 }
