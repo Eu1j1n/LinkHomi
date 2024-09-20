@@ -72,6 +72,7 @@
 
 .beginner:hover + .price {
   color: #39ff14;
+  cursor: pointer;
 }
 
 .intermediate {
@@ -86,6 +87,7 @@
 
 .intermediate:hover + .price {
   color: #00ffff;
+  cursor: pointer;
 }
 
 .pro {
@@ -100,6 +102,7 @@
 
 .pro:hover + .price {
   color: #f2b1b8;
+  cursor: pointer;
 }
 
 .price {

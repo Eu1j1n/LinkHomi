@@ -6,8 +6,6 @@ import Swal from "sweetalert2";
 
 Modal.setAppElement("#root");
 
-// CategoryModal.jsx
-
 function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
   const [categoryName, setCategoryName] = useState("");
 
@@ -42,6 +40,8 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       return;
     }
 
+    console.log("grade!!", grade);
+
     axios
       .post("http://localhost:5001/api/add-category", {
         userId,
@@ -51,7 +51,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       .then((response) => {
         console.log("카테고리 추가 성공:", response);
         addCategory(categoryName);
-        setCategoryName(""); // 입력 필드 초기화
+        setCategoryName("");
         Swal.fire({
           title: "성공!",
           text: "카테고리가 성공적으로 추가되었습니다.",
