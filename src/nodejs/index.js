@@ -101,13 +101,33 @@ app.get("/api/get-user-grade/:email", (req, res) => {
   });
 });
 
-// 카테고리 추가 로직
 app.post("/api/add-category", (req, res) => {
-  const { userId, name } = req.body;
-  console.log("Received data:", { userId, name });
+  const { userId, name, grade } = req.body;
+  console.log("Received data:", { userId, name, grade });
 
   if (!userId || !name) {
     return res.status(400).json({ error: "userId가 없습니다." });
+  }
+
+  // 등급에 따른 카테고리 제한 설정
+  let maxCategories;
+  switch (grade) {
+    case "NORMAL":
+      maxCategories = 2;
+      break;
+    case "BASIC":
+      maxCategories = 5;
+      break;
+    case "STANDARD":
+      maxCategories = 10;
+      break;
+    case "PRO":
+      maxCategories = 15;
+      break;
+    default:
+      return res
+        .status(400)
+        .json({ error: "유효하지 않은 사용자 등급입니다." });
   }
 
   // 사용자의 카테고리 개수 확인
@@ -124,10 +144,11 @@ app.post("/api/add-category", (req, res) => {
 
     const categoryCount = results[0].count;
 
-    if (categoryCount >= 5) {
-      return res
-        .status(400)
-        .json({ error: "카테고리는 최대 5개까지 생성할 수 있습니다." });
+    // 카테고리 개수 제한 확인
+    if (categoryCount >= maxCategories) {
+      return res.status(400).json({
+        error: `카테고리는 최대 ${maxCategories}개까지 생성할 수 있습니다.`,
+      });
     }
 
     // 중복 카테고리 이름 확인

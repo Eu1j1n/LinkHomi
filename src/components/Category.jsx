@@ -11,7 +11,7 @@ import { FaCrown, FaRegStar } from "react-icons/fa";
 function Category({ setIsLoggedIn, onMatchedUrls }) {
   const [categoryList, setCategoryList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategoryId, setSelectedCategoryId] = useState(null); // 선택된 카테고리 상태
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [grade, setGrade] = useState("");
   const userId = localStorage.getItem("userId");
   const userEmail = localStorage.getItem("userEmail");
@@ -110,6 +110,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
           onClose={modalClose}
           userId={userId}
           addCategory={addCategory}
+          grade={grade}
         />
         <CategoryBoard
           categoryList={categoryList}
