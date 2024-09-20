@@ -1,5 +1,6 @@
 import React from 'react';
-import '../style/PostCard.css'; // 스타일 시트 임포트
+import '../style/PostCard.css'; 
+import Share from './Share';
 
 function PostCard({ urls }) {
   return (
@@ -24,10 +25,12 @@ function PostCard({ urls }) {
                 </h2>
               </div>
             </a>
+            {/*공유 버튼 부분*/}
+            <Share url={urlObject.url} />
           </div>
         ))
       ) : (
-        <p>No URLs available</p>
+        <p>No URLs available</p> 
       )}
     </div>
   );

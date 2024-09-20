@@ -8,7 +8,7 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  width: 300px;
+  width: 250px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
@@ -36,4 +36,14 @@
   margin: 0;
   font-size: 1.2em;
   font-weight: bold;
+}
+
+/*share button*/
+.share-button{
+  margin-left: 20px;
+  margin-bottom:10px;
+  cursor: pointer;
+}
+.share-button:hover{
+  color: #696969;
 }

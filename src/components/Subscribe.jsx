@@ -13,6 +13,35 @@ function Subscribe() {
   const [grade, setGrade] = useState("");
 
   useEffect(() => {
+    // 페이지가 렌더링될 때 body에 클래스 추가
+    document.body.classList.add("subscribe-page");
+
+    // 페이지가 언마운트될 때 body에서 클래스 제거
+    return () => {
+      document.body.classList.remove("subscribe-page");
+    };
+  }, []);
+
+  useEffect(() => {
+    // 이메일 값을 콘솔에 출력
+    console.log("받아온 이메일:", email);
+
+    // 인트로 텍스트 애니메이션
+    gsap.fromTo(
+      ".intro-text",
+      {
+        opacity: 0,
+        scale: 0.8,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 1.5,
+        ease: "power3.out",
+        delay: 0.2, // 인트로 텍스트 시작 지연
+      }
+    );
+
     // 애니메이션
     gsap.fromTo(
       ".intro-text",
