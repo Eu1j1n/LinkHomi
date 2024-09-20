@@ -9,11 +9,11 @@ import GoogleLoginBtn from './components/GoogleLoginBtn';
 import Main from './components/Main';
 import Subscribe from './components/Subscribe';
 import SuccessPage from './components/SuccessPage';
+import FailPage from './components/FailPage';
+import CancelPage from './components/CancelPage';
 
 import 'normalize.css';
 import './style/Main.css';
-import FailPage from './components/FailPage';
-import CancelPage from './components/CancelPage';
 
 function App() {
   // 페이지가 로드될 때 localStorage에서 로그인 상태를 확인
@@ -36,7 +36,7 @@ function App() {
             isLoggedIn ? (
               <Navigate to="/main" />
             ) : (
-              <GoogleLoginBtn setIsLoggedIn={setIsLoggedIn} />
+              <GoogleLoginBtn setIsLoggedIn={setIsLoggedIn} />  // 상태 업데이트를 위한 prop 전달
             )
           }
         />
@@ -62,7 +62,7 @@ function App() {
           path="/main"
           element={
             isLoggedIn ? (
-              <Main setIsLoggedIn={setIsLoggedIn} />
+              <Main setIsLoggedIn={setIsLoggedIn} />  // 로그아웃을 위한 prop 전달
             ) : (
               <Navigate to="/login" />
             )

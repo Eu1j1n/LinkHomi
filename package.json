@@ -30,6 +30,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.26.1",
     "socket.io-client": "^4.7.5",
+    "split-type": "^0.3.4",
     "sweetalert2": "^11.14.0",
     "sweetalert2-react-content": "^5.0.7"
   },

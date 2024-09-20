@@ -1,28 +1,20 @@
-body {
-  background-color: #000;
-  margin: 0;
-  overflow: hidden; /* 페이지의 스크롤을 숨김 */
-}
-
-html,
-body {
-  height: 100%; /* 전체 높이를 고정 */
+.subscribe-page {
+  background-color: black;
 }
 
 .subscribe-container {
   padding: 20px;
   text-align: center;
-
   font-family: Arial, sans-serif;
   color: #dcdcdc;
 }
 
 .intro-text {
-  line-height: 1.5;
+  line-height: 1.5; /* 또는 원하는 줄 높이 값을 설정 */
 }
 
 .subscribe-container h1 {
-  margin-bottom: 20px;
+  margin-bottom: 10%;
   font-size: 35px;
   color: #fff;
 }
@@ -59,13 +51,13 @@ body {
 
 .pricing-section h2,
 .pricing-section p {
-  color: #dcdcdc;
+  color: #dcdcdc; /* 기본 글씨 색상 */
   transition: color 0.3s;
 }
 
 .pricing-section:hover h2,
 .pricing-section:hover p {
-  color: #fff;
+  color: #fff; /* 호버 시 글씨 색상 변경 */
 }
 
 .beginner {
@@ -75,6 +67,11 @@ body {
 .beginner:hover {
   background-color: #39ff14;
   color: #000;
+  cursor: pointer;
+}
+
+.beginner:hover + .price {
+  color: #39ff14;
 }
 
 .intermediate {
@@ -84,6 +81,11 @@ body {
 .intermediate:hover {
   background-color: #0000ff;
   color: #000;
+  cursor: pointer;
+}
+
+.intermediate:hover + .price {
+  color: #00ffff;
 }
 
 .pro {
@@ -93,6 +95,11 @@ body {
 .pro:hover {
   background-color: #e4002b;
   color: #fff;
+  cursor: pointer;
+}
+
+.pro:hover + .price {
+  color: #f2b1b8;
 }
 
 .price {
@@ -102,11 +109,13 @@ body {
   transition: color 0.3s;
 }
 
-.price:hover {
-  color: #000;
+.intro-text {
+  font-size: 55px;
+  color: #ffffff;
+  margin-bottom: 40px;
+  transition: transform 0.3s ease;
 }
 
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
+.pricing-section:hover .price {
+  color: #fff;
 }
