@@ -1,4 +1,6 @@
 import React from 'react';
+import { PiPencilDuotone } from "react-icons/pi";
+import { BiTrash } from "react-icons/bi";
 import '../style/Category.css';
 
 function CategoryList({ item, isSelected, onClickItem }) {
@@ -13,9 +15,20 @@ function CategoryList({ item, isSelected, onClickItem }) {
             : 'none',
           fontWeight: isSelected ? 'bold' : 'normal',
           color: isSelected ? 'white' : 'black',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         {item.name || 'No name'}
+        <span style={{ 
+            display: 'inline-flex', 
+            gap: '8px'
+          }}
+        >
+          <PiPencilDuotone className='edit'/>
+          <BiTrash className='delete'/>
+        </span>
       </h1>
     </div>
   );
