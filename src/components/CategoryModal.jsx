@@ -1,8 +1,10 @@
+{/*modal css 부분 수정 필요ㅠㅠ*/}
+
 import React, { useState } from "react";
 import Modal from "react-modal";
 import axios from "axios";
-import "../style/Category.css";
 import Swal from "sweetalert2";
+import "../style/Category.css";
 
 Modal.setAppElement("#root");
 
@@ -12,20 +14,23 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
   const modalStyle = {
     content: {
       display: "flex",
+      flexDirection: "column",
       justifyContent: "space-between",
+      alignItems: "center",
       backgroundColor: "#F4F4F4",
       color: "black",
       borderRadius: "8px",
-      maxWidth: "300px",
-      maxHeight: "130px",
+      maxWidth: "270px",
+      maxHeight: "200px",
       margin: "auto",
-      fontSize: "18px",
+      fontSize: "16px",
       fontWeight: "bold",
     },
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,8 +45,6 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       return;
     }
 
-    console.log("grade!!", grade);
-
     axios
       .post("http://localhost:5001/api/add-category", {
         userId,
@@ -49,7 +52,6 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
         grade,
       })
       .then((response) => {
-        console.log("카테고리 추가 성공:", response);
         addCategory(categoryName);
         setCategoryName("");
         Swal.fire({
@@ -57,9 +59,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
           text: "카테고리가 성공적으로 추가되었습니다.",
           icon: "success",
           confirmButtonText: "확인",
-        }).then(() => {
-          onClose();
-        });
+        }).then(onClose);
       })
       .catch((error) => {
         const errorMessage =
@@ -73,31 +73,29 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
           icon: "error",
           confirmButtonText: "확인",
         });
-
-        console.error(
-          "카테고리 추가 실패:",
-          error.response?.data || error.message
-        );
       });
   };
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={modalStyle}>
       <form onSubmit={handleSubmit}>
+          <label className="modal">카테고리 생성</label><br></br>
+          <span className="create-category-description1">최소 두 글자 이상으로 입력해 주세요</span><br></br>
+          <span className="create-category-description2">중복 이름으로 추가하는 것은 불가능합니다</span><br></br>
+          <span className="create-category-description3">멤버십 등급에 따라 카테고리 개수가 제한됩니다</span><br></br>
+          <span className="create-category-description4"> * 더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 *</span><br></br>
         <div>
-          <label>카테고리 생성</label>
           <input
             type="text"
             style={{
-              marginTop: "20px",
-              marginBottom: "10px",
-              width: "280px",
-              height: "20px",
+              marginTop: "10px",
+              width: "100%",
+              maxHeight: "50vh",
               padding: "8px",
-              fontSize: "11px",
+              fontSize: "10px",
               borderColor: "#D9D9D9",
             }}
-            placeholder="카테고리명을 입력하세요.."
+            placeholder="원하는 카테고리명을 입력하세요"
             value={categoryName}
             onChange={(e) => setCategoryName(e.target.value)}
           />
