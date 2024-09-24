@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import "../style/Main.css";
-import Category from "./Category";
-import AddUrlModal from "./AddUrlModal";
-import axios from "axios";
-import PostCard from "./PostCard";
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import '../style/Main.css';
+import Category from './Category';
+import AddUrlModal from './AddUrlModal';
+import axios from 'axios';
+import PostCard from './PostCard';
 function Main({ setIsLoggedIn }) {
   const [browsingHistory, setBrowsingHistory] = useState([]);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -18,7 +18,7 @@ function Main({ setIsLoggedIn }) {
   const navigate = useNavigate();
   useEffect(() => {
     const fetchCategories = async () => {
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId');
       if (userId) {
         try {
           const response = await axios.get(
@@ -26,14 +26,14 @@ function Main({ setIsLoggedIn }) {
           );
           setCategories(response.data);
         } catch (error) {
-          console.error("카테고리 조회 오류:", error);
+          console.error('카테고리 조회 오류:', error);
         }
       }
     };
     fetchCategories();
   }, []);
   const handleSubscribeClick = () => {
-    navigate("/subscribe");
+    navigate('/subscribe');
   };
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -46,7 +46,7 @@ function Main({ setIsLoggedIn }) {
     }
   };
   const handleSaveUrl = (urlData) => {
-    console.log("URL 데이터 저장:", urlData);
+    console.log('URL 데이터 저장:', urlData);
   };
   const handleCategoryChange = (categoryId) => {
     setSelectedCategoryId(categoryId);
@@ -66,11 +66,11 @@ function Main({ setIsLoggedIn }) {
         <p>이곳은 메인 콘텐츠 영역입니다.</p>
         <PostCard urls={matchedUrls} /> {/* PostCard에 URL 목록 전달 */}
       </div>
-      <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+      <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <button className="toggle-button" onClick={toggleSidebar}>
           <FontAwesomeIcon
             icon={faClockRotateLeft}
-            className={`icon ${isRotated ? "rotated" : ""}`}
+            className={`icon ${isRotated ? 'rotated' : ''}`}
           />
         </button>
         {isSidebarOpen && (

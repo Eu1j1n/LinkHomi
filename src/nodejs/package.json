@@ -20,6 +20,7 @@
     "node-cache": "^5.1.2",
     "socket.io": "^4.7.5",
     "sweetalert2": "^11.14.0",
-    "sweetalert2-react-content": "^5.0.7"
+    "sweetalert2-react-content": "^5.0.7",
+    "uuid": "^10.0.0"
   }
 }
