@@ -21,13 +21,6 @@ function LoginPage({ setIsLoggedIn }) {
           <span className="dark">KKLE</span>
         </span>
       </div>
-
-      <h2 className="login-description">
-        링클은 Chrome에서 최고의 성능을 발휘합니다.
-        <br />
-        크롬 브라우저를 이용해주세요!
-      </h2>
-
       <div className="social-login">
         <GoogleLoginBtn setIsLoggedIn={setIsLoggedIn} />
       </div>
