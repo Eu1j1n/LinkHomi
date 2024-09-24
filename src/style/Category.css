@@ -1,20 +1,105 @@
+:root {
+  --box-shadow-style: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.category-container {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: 100%;
+  background-color: #F4F5F7;
+  overflow-y: auto; 
+  max-height: 100vh;
+}
+.profile-divider{
+  backgroundColor: #C0C0C0;
+  border: none;
+  height: 1px;
+}
+.logo-divider {
+  width: 100%;
+  max-width: 80%; 
+  border: none; 
+  border-top: 1px solid #C0C0C0; 
+  margin: 10px auto; 
+}
+
 .category-header {
   width: 100%;
   height: 10%;
 }
-
-.category-container {
-  display: flex;
-  flex-direction: column;
-
-  width: 310px;
-  height: 100%;
-  background-color: #f0f0f0;
+.webSite-logo{
+  width: 200px;
+  margin-left:46px;
+  margin-top:30px;
 }
 
+/*input 부분*/
+.input-container {
+  position: relative;
+  width: 190px;
+  margin-left: 30px;
+  color:#B8BAC0;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px; 
+  top: 48%;
+  transform: translateY(-50%);
+  font-size: 15px; 
+  color: #999; 
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px 10px 10px 40px; 
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+  color:black;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border: 1px solid #9599A1;
+}
+
+input[type="text"]::placeholder {
+  color: #999;
+}
+
+/*버튼*/
+.modal {
+  display:flex;
+  font-size: 20px;
+}
+.create-category-description1{
+  font-size:10px;
+  font-weight:normal;
+  color: red;
+}
+.create-category-description2{
+  font-size:10px;
+  font-weight:normal;
+  color: red;
+}
+.create-category-description3{
+  font-size:10px;
+  font-weight:normal;
+  color: red;
+}
+.create-category-description4{
+  font-size:10px;
+  font-weight:bold;
+  color: red;
+}
+
+/*카테고리 리스트*/
 .category {
   font-size: 16px;
-  color: #64748b;
+  color: black;
   margin-left: 30px;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -43,76 +128,68 @@
     rgba(0, 0, 0, 0.1) 0px 1px 2px inset;
   transition: all 0.3s ease-in-out;
 }
+
+/*즐겨찾기*/
 .category_favorite {
   width: 100%;
-  height: 40%;
   font-size: 16px;
-  color: #64748b;
+  color: black;
   margin-left: 30px;
   margin-top: 30px;
-  margin-bottom: 30px;
   font-weight: bold;
 }
 
 .favorite-icon {
-  margin-right: 10px;
-  margin-top: 10px;
-}
-.website-logo {
-  width: 60px;
-  margin-left: 40px;
-  margin-right: 10px;
-  margin-top: 21px;
-}
-.website-title {
-  height: 100%;
-  margin-right: 10px;
-  width: 120px;
-  margin-bottom: 15px;
-}
-.add-button {
-  width: 251px;
-  height: 44px;
-  background-color: #047857;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 4px;
-  margin-left: 30px;
-  margin-top: 22px;
-}
-.add-button:hover {
-  background-color: #01684b;
-  cursor: pointer;
+  font:20px;
+  margin-right:10px;
 }
 
+/*modal 부분*/
 .button-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top:10px;
+  margin-left:30px;
+}
+.add-button {
+  width: 245px;
+  height: 38px;
+  background-color: #D9D9D9;
+  border: none;
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 13px;
+  border-radius: 4px;
+  margin-right:22px;
+}
+.add-button:hover {
+  background-color: #CDCDCD;
+  cursor: pointer;
 }
 
+
 .add-category-button {
-  background-color: #047857;
+  background-color: #325EFF;
   border: none;
   font-size: 10px;
   width: 50px;
   height: 25px;
   color: white;
+  cursor: pointer;
 }
 
 .add-category-button:hover {
-  background-color: #01684b;
+  background-color: #194BFF;
 }
 
 .close-button {
   width: 50px;
   height: 25px;
   background-color: #ffffff;
-  border-color: #3bba6f;
+  border-color: #325EFF;
   font-size: 10px;
   margin-left: 10px;
   border-width: 1px;
@@ -121,7 +198,11 @@
 
 .close-button:hover {
   background-color: #f3f3f3;
+  cursor:pointer;
 }
+
+/*footer_css*/
+
 .category_footer {
   height: 10%;
   display: flex;
@@ -168,7 +249,7 @@
   margin-left: 30px; /* 프로필 제목 왼쪽 여백 조정 */
   margin-bottom: 3%;
   color: #64748b;
-  font-weight: bold;
+  font-weight:bold;
   font-size: 18px; /* 적절한 폰트 크기 조정 */
 }
 
@@ -255,17 +336,3 @@
   font-size: 1.1em;
 }
 
-.button {
-  background-color: transparent;
-  color: white;
-  border: none;
-  padding: 0px 5px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-  font-size: 12px;
-}
-
-.cancel-button {
-  background-color: transparent;
-}
