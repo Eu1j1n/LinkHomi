@@ -18,6 +18,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   const userName = localStorage.getItem("userName");
   const userProfileImage = localStorage.getItem("userProfile");
   const navigate = useNavigate();
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
+  const [newCategoryName, setNewCategoryName] = useState("");
 
   // 페이지 로드 시 ConfirmCategory가 보이도록 상태 설정
   const [showConfirmCategory, setShowConfirmCategory] = useState(true);
@@ -71,8 +73,28 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.clear(); // 로컬스토리지에서 모든 사용자 데이터 제거
+    localStorage.removeItem("userId"); // userId만 제거
     navigate("/login");
+  };
+  const editCategory = (categoryId, newName) => {
+    axios
+      .put(`http://localhost:5001/api/update-category/${categoryId}`, {
+        name: newName,
+      })
+      .then(() => {
+        setCategoryList((prevList) =>
+          prevList.map((category) =>
+            category.id === categoryId
+              ? { ...category, name: newName }
+              : category
+          )
+        );
+        console.log("카테고리 수정 성공");
+        setIsOpen(false);
+      })
+      .catch((error) => {
+        console.error("카테고리 수정 오류:", error);
+      });
   };
 
   const handleCategoryClick = async (id) => {
@@ -95,6 +117,20 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
     } catch (error) {
       console.error("서버 요청 오류:", error);
     }
+  };
+  const deleteCategory = (categoryId) => {
+    axios
+      .delete(`http://localhost:5001/api/delete-category/${categoryId}`)
+      .then(() => {
+        setCategoryList((prevList) =>
+          prevList.filter((category) => category.id !== categoryId)
+        );
+        console.log("카테고리 삭제 성공");
+        console.log("카테고리 아디디디디", categoryId);
+      })
+      .catch((error) => {
+        console.error("카테고리 삭제 오류:", error);
+      });
   };
 
   return (
@@ -119,6 +155,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
           categoryList={categoryList}
           selectedCategoryId={selectedCategoryId}
           onCategoryClick={handleCategoryClick}
+          onDeleteCategory={deleteCategory}
+          onEditCategory={editCategory}
           addCategory={addCategory}
           isOpen={isOpen}
           modalClose={modalClose}
