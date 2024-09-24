@@ -10,6 +10,7 @@ const NodeCache = require('node-cache');
 // 캐시 인스턴스 생성 (TTL: 1시간)
 
 const ogImageCache = new NodeCache({ stdTTL: 3600 });
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const port = 5001;
@@ -35,58 +36,58 @@ app.use(cors()); // CORS 미들웨어
 app.use(bodyParser.json()); // JSON 파싱 미들웨어
 
 // 구글 로그인 라우트
-app.post('/api/google-login', async (req, res) => {
+app.post('/api/google-login', (req, res) => {
   const { token } = req.body;
-  console.log('클라이언트에서 받은 토큰:', token);
 
-  try {
-    const ticket = await client.verifyIdToken({
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  client
+    .verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID,
+    })
+    .then((ticket) => {
+      // 여기서 헤더 설정
+      res.setHeader('Cross-Origin-Opener-Policy', 'unsafe-none'); // 수정된 부분
+
+      const payload = ticket.getPayload();
+      const googleId = payload.sub;
+      const email = payload.email;
+      const name = payload.name;
+
+      // 기존 사용자가 있는지 먼저 확인
+      const checkUserSql = 'SELECT id FROM users WHERE google_id = ?';
+      db.query(checkUserSql, [googleId], (err, results) => {
+        if (err) {
+          console.error('사용자 조회 오류:', err);
+          return res.status(500).json({ error: '사용자 조회 실패' });
+        }
+
+        if (results.length > 0) {
+          // 기존 사용자일 경우 기존의 userId를 사용
+          const existingUserId = results[0].id;
+          return res.status(200).json({ userId: existingUserId, payload });
+        } else {
+          // 신규 사용자일 경우 새로 UUID 생성
+          const newUserId = uuidv4();
+          const insertUserSql = `INSERT INTO users (id, google_id, email, name) VALUES (?, ?, ?, ?)`;
+          db.query(
+            insertUserSql,
+            [newUserId, googleId, email, name],
+            (err, result) => {
+              if (err) {
+                console.error('사용자 추가 오류:', err);
+                return res.status(500).json({ error: '사용자 추가 실패' });
+              }
+              return res.status(200).json({ userId: newUserId, payload });
+            }
+          );
+        }
+      });
+    })
+    .catch((error) => {
+      console.error('토큰 검증 오류:', error);
+      return res.status(401).json({ error: '유효하지 않은 토큰입니다.' });
     });
-
-    const payload = ticket.getPayload();
-    const userId = payload['sub'];
-    const { name, email, picture } = payload;
-
-    console.log('사용자 ID 및 정보:', { userId, payload });
-
-    const query = `
-      INSERT INTO users (google_id, name, email, picture)
-      VALUES (?, ?, ?, ?)
-      ON DUPLICATE KEY UPDATE name = VALUES(name), email = VALUES(email), picture = VALUES(picture)
-    `;
-
-    db.query(query, [userId, name, email, picture], (err, result) => {
-      if (err) {
-        console.error('사용자 정보 저장 오류:', err);
-        return res.status(500).json({ error: '사용자 정보 저장 실패' });
-      }
-
-      console.log('사용자 정보 저장 성공', result);
-      res.status(200).json({ userId, payload });
-    });
-  } catch (error) {
-    console.error('토큰 검증 오류:', error);
-    res.status(400).json({ error: '유효하지 않은 토큰' });
-  }
-});
-
-app.get('/api/get-user-grade/:email', (req, res) => {
-  const userEmail = req.params.email;
-
-  const sql = 'SELECT grade FROM users WHERE email = ?';
-  db.query(sql, [userEmail], (err, results) => {
-    if (err) {
-      console.error('데이터베이스 조회 오류:', err);
-      return res.status(500).json({ error: '서버 오류' });
-    }
-    if (results.length === 0) {
-      return res.status(404).json({ error: '사용자를 찾을 수 없습니다.' });
-    }
-    const userGrade = results[0].grade;
-    res.json({ grade: userGrade });
-  });
 });
 
 app.get('/api/get-user-grade/:email', (req, res) => {
@@ -194,6 +195,7 @@ app.post('/api/add-category', (req, res) => {
 // 카테고리 조회 로직
 app.get('/api/get-categories/:userId', (req, res) => {
   const { userId } = req.params;
+  console.log(userId);
 
   if (!userId) {
     return res.status(400).json({ error: 'userId가 없습니다.' });
