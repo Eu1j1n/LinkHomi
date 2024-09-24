@@ -1,9 +1,3 @@
-:root {
-  --box-shadow-style: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
-
 .category-header {
   width: 100%;
   height: 10%;
@@ -12,7 +6,7 @@
 .category-container {
   display: flex;
   flex-direction: column;
-  box-shadow: var(--box-shadow-style);
+
   width: 310px;
   height: 100%;
   background-color: #f0f0f0;
@@ -174,7 +168,7 @@
   margin-left: 30px; /* 프로필 제목 왼쪽 여백 조정 */
   margin-bottom: 3%;
   color: #64748b;
-  font-weight:bold;
+  font-weight: bold;
   font-size: 18px; /* 적절한 폰트 크기 조정 */
 }
 
@@ -259,4 +253,19 @@
 .basic-icon {
   margin-left: 10px;
   font-size: 1.1em;
+}
+
+.button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 0px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  font-size: 12px;
+}
+
+.cancel-button {
+  background-color: transparent;
 }

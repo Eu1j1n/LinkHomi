@@ -1,11 +1,17 @@
-import React from 'react';
-import CategoryList from './CategoryList';
+import React from "react";
+import CategoryList from "./CategoryList";
 
-function CategoryBoard({ categoryList, selectedCategoryId, onCategoryClick }) {
-  console.log('Category List:', categoryList); // 데이터 확인
+function CategoryBoard({
+  categoryList,
+  selectedCategoryId,
+  onCategoryClick,
+  onDeleteCategory,
+  onEditCategory,
+}) {
+  console.log("Category List:", categoryList);
 
   const validCategoryList = categoryList.filter(
-    (item) => item && typeof item === 'object' && item.id
+    (item) => item && typeof item === "object" && item.id
   );
 
   return (
@@ -17,6 +23,8 @@ function CategoryBoard({ categoryList, selectedCategoryId, onCategoryClick }) {
             item={item}
             isSelected={item.id === selectedCategoryId}
             onClickItem={onCategoryClick}
+            onDeleteCategory={onDeleteCategory}
+            onEditCategory={onEditCategory}
           />
         ))
       ) : (
