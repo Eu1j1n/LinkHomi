@@ -1,42 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-} from 'react-router-dom';
-import GoogleLoginBtn from './components/GoogleLoginBtn';
-import Main from './components/Main';
-import Subscribe from './components/Subscribe';
-import SuccessPage from './components/SuccessPage';
-import FailPage from './components/FailPage';
-import CancelPage from './components/CancelPage';
+} from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+import LoginPage from "./components/LoginPage";
+import Main from "./components/Main";
+import Subscribe from "./components/Subscribe";
+import SuccessPage from "./components/SuccessPage";
+import FailPage from "./components/FailPage";
+import CancelPage from "./components/CancelPage";
 
-import 'normalize.css';
-import './style/Main.css';
+import "normalize.css";
+import "./style/Main.css";
 
 function App() {
-  // 페이지가 로드될 때 localStorage에서 로그인 상태를 확인
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    const storedLoginStatus = localStorage.getItem('isLoggedIn');
-    return storedLoginStatus === 'true'; // 문자열로 저장되므로 'true'와 비교
+    const storedLoginStatus = localStorage.getItem("isLoggedIn");
+    return storedLoginStatus === "true";
   });
 
   // 로그인 상태가 바뀔 때 localStorage에 저장
   useEffect(() => {
-    localStorage.setItem('isLoggedIn', isLoggedIn);
+    localStorage.setItem("isLoggedIn", isLoggedIn);
   }, [isLoggedIn]);
 
   return (
     <Router>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
+
         <Route
           path="/login"
           element={
             isLoggedIn ? (
               <Navigate to="/main" />
             ) : (
-              <GoogleLoginBtn setIsLoggedIn={setIsLoggedIn} />  // 상태 업데이트를 위한 prop 전달
+              // LoginPage로 setIsLoggedIn 전달
+              <LoginPage setIsLoggedIn={setIsLoggedIn} />
             )
           }
         />
@@ -62,16 +65,11 @@ function App() {
           path="/main"
           element={
             isLoggedIn ? (
-              <Main setIsLoggedIn={setIsLoggedIn} />  // 로그아웃을 위한 prop 전달
+              <Main setIsLoggedIn={setIsLoggedIn} />
             ) : (
               <Navigate to="/login" />
             )
           }
-        />
-
-        <Route
-          path="/"
-          element={<Navigate to={isLoggedIn ? '/main' : '/login'} />}
         />
       </Routes>
     </Router>
