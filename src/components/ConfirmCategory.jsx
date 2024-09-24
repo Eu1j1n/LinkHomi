@@ -1,11 +1,21 @@
-//카테고리 확인하기 누르면 나오는 컴포넌트
 import React from 'react';
 import { FcLike } from "react-icons/fc";
 import { PiListHeartBold } from "react-icons/pi";
 import CategoryBoard from "./CategoryBoard";
 import CategoryModal from "./CategoryModal";
 
-function ConfirmCategory({ categoryList, selectedCategoryId, onCategoryClick, addCategory, isOpen, modalClose, userId, grade }) {
+function ConfirmCategory({ 
+  categoryList, 
+  selectedCategoryId, 
+  onCategoryClick, 
+  addCategory, 
+  isOpen, 
+  modalClose, 
+  userId, 
+  grade,
+  onEditCategory,   // 추가
+  onDeleteCategory  // 추가
+}) {
   return (
     <div>
       <div className="category_favorite">
@@ -26,6 +36,8 @@ function ConfirmCategory({ categoryList, selectedCategoryId, onCategoryClick, ad
           categoryList={categoryList}
           selectedCategoryId={selectedCategoryId}
           onCategoryClick={onCategoryClick}
+          onEditCategory={onEditCategory}     // 전달
+          onDeleteCategory={onDeleteCategory} // 전달
         />
       </div>
     </div>

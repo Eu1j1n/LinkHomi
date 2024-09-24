@@ -163,8 +163,9 @@ input[type="text"]::placeholder {
   display: inline-block;
   font-size: 13px;
   border-radius: 4px;
-  margin-right:22px;
+  margin-right:38px;
 }
+
 .add-button:hover {
   background-color: #CDCDCD;
   cursor: pointer;
