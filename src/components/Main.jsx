@@ -1,3 +1,4 @@
+// Main.jsx
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
@@ -34,8 +35,10 @@ function Main({ setIsLoggedIn }) {
     fetchCategories();
   }, []);
 
-  const handleSaveUrl = (urlData) => {
+  const handleSaveUrl = async (urlData) => {
     console.log('URL 데이터 저장:', urlData);
+    // URL 저장 후 카테고리를 다시 가져옵니다.
+    await fetchCategories();
   };
 
   const handleMatchedUrls = (urls) => {
