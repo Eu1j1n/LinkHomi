@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; // 체크와 X 아이콘 import
-import axios from "axios";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai"; // 체크와 X 아이콘 import 
 import Swal from "sweetalert2";
 import { PiPencilDuotone } from "react-icons/pi";
 import { BiTrash } from "react-icons/bi";
@@ -55,17 +54,17 @@ function CategoryList({
         className="category-list"
         onClick={() => onClickItem(item.id)}
         style={{
+          boxShadow: isSelected ? '0 0 0 1px #557AFF' : '0 0 0 1px rgba(0, 0, 0, 0.1)',
           background: isSelected ? '#BFCBF8' : 'transparent', 
           fontWeight: isSelected ? 'bold' : 'normal',
           color: isSelected ? 'black' : 'inherit',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          border: isSelected ? `2px solid #557AFF` : 'none', 
           borderRadius: '4px', 
-          transition: 'background 0.3s, border 0.3s', 
+          transition: 'background 0.3s, box-shadow 0.3s', 
         }}
-      >
+        >
         {isEditing ? (
           <form
             onSubmit={handleEditSubmit}
@@ -113,7 +112,7 @@ function CategoryList({
                 gap: "8px",
               }}
             >
-              <GoHeartFill className="favorite" />
+              <GoHeartFill className="favorite-icon" />
               <PiPencilDuotone className="edit" onClick={handleEditToggle} />
               <BiTrash className="delete" onClick={handleDelete} />
             </span>
