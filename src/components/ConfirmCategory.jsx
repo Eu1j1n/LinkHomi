@@ -13,12 +13,12 @@ function ConfirmCategory({
   modalClose, 
   userId, 
   grade,
-  onEditCategory,   // 추가
-  onDeleteCategory  // 추가
+  onEditCategory,   
+  onDeleteCategory  
 }) {
   return (
     <div>
-      <div className="category_favorite">
+      <div className="category-favorite">
         <FcLike className="favorite-icon" />
         Favorite
       </div>
@@ -36,8 +36,8 @@ function ConfirmCategory({
           categoryList={categoryList}
           selectedCategoryId={selectedCategoryId}
           onCategoryClick={onCategoryClick}
-          onEditCategory={onEditCategory}     // 전달
-          onDeleteCategory={onDeleteCategory} // 전달
+          onEditCategory={onEditCategory}     
+          onDeleteCategory={onDeleteCategory} 
         />
       </div>
     </div>

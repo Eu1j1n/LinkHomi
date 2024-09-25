@@ -28,7 +28,7 @@ function CategoryBoard({
           />
         ))
       ) : (
-        <p>No categories available</p>
+        <p></p>
       )}
     </div>
   );
