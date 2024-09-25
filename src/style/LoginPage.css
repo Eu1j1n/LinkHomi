@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Gothic:wght@400;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
 
 :root {
   --box-shadow-style: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -7,59 +7,72 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .login-page {
-  height: 100vh; 
-  width: 100vw; 
-  background-image: linear-gradient(to right, #325EFF 50%, white 50%); 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  text-align: center;
 }
 
 .intro-caption {
   font-family: "Jua", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 60px;
+  font-weight: 800;
+  font-size: 80px;
   color: black;
-  margin-bottom: 10px; 
+  margin-bottom: 20px;
 }
 
-.sub {
-  font-family: "Jua", sans-serif; /*폰트 .. 별로임 정하는 중..*/
-  font-weight: 800;
-  font-style: normal;
+.logo-container {
   display: flex;
-  align-items: center; 
-  gap: 10px; 
-  font-size: 130px; 
-  color: white;
-  font-weight: bold;
-  margin-right:100px;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .logo {
-  width: 70px;
-  height: 70px;
+  width: 70px; /* 로고 크기 조정 */
+  height: 70px; /* 로고 크기 조정 */
+  margin-right: 20px; /* 로고와 텍스트 사이의 간격 */
 }
 
-.ink {
-  color: white; 
-  font-size: 100px; 
-  margin-top:10px;
+.brand-name {
+  font-family: "Jua", sans-serif;
+  font-size: 60px; /* 텍스트 크기 조정 */
+  font-weight: bold;
 }
 
-.k {
+.login-description {
+  font-size: 12px;
+}
+
+.highlight {
+  color: #325eff;
+}
+
+.dark {
   color: black;
+  font-size: 65px;
 }
 
-.LE {
-  color: black;
-  font-size: 100px; 
-  margin-top:10px;
+.login-description {
+  font-size: 16px;
+  margin-top: 10px;
+  text-align: center;
 }
-.login-description{
-  font-family: "Nanum Gothic", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size:20px;
-  font-weight:normal;
-  margin-top:30px;
+
+.feature-check {
+  color: #325eff;
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: underline;
 }

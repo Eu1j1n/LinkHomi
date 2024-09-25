@@ -1,36 +1,38 @@
-import React, { useRef, useEffect } from 'react';
-import '../style/Landing.css';
-import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import SplitType from 'split-type';
-import BouncingBall from './BouncingBall';
-import { FaQuestion } from 'react-icons/fa6';
-import CardComponent from './CardComponent';
-import { RxDoubleArrowUp } from 'react-icons/rx';
+import React, { useRef, useEffect } from "react";
+import "../style/Landing.css";
+import { gsap } from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import SplitType from "split-type";
+import BouncingBall from "./BouncingBall";
+import { FaQuestion } from "react-icons/fa6";
+import CardComponent from "./CardComponent";
+import { RxDoubleArrowUp } from "react-icons/rx";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const LandingPage = () => {
   const number = useRef(null);
   const linkkleRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    gsap.from('#h2', {
+    gsap.from("#h2", {
       scrollTrigger: {
-        trigger: '#h2',
-        start: 'top bottom',
-        end: 'top 400px',
+        trigger: "#h2",
+        start: "top bottom",
+        end: "top 400px",
         scrub: 1,
       },
       xPercent: -100,
       opacity: 0,
     });
 
-    gsap.from('#h3', {
+    gsap.from("#h3", {
       scrollTrigger: {
-        trigger: '#h3',
-        start: 'top bottom+=100px',
-        toggleActions: 'play complete none reset',
+        trigger: "#h3",
+        start: "top bottom+=100px",
+        toggleActions: "play complete none reset",
       },
       xPercent: 100,
       opacity: 0.5,
@@ -38,21 +40,21 @@ const LandingPage = () => {
     });
 
     // 'Welcome'의 전체 애니메이션
-    gsap.from('.firstComment', {
+    gsap.from(".firstComment", {
       duration: 1.5,
       opacity: 0,
       scale: 0.8,
-      ease: 'power3.out',
+      ease: "power3.out",
     });
 
     // 'LinkKle' 물결 애니메이션
     const linkkleText = new SplitType(linkkleRef.current, {
-      types: 'chars',
-      charClass: 'rolling-linkkle-char',
+      types: "chars",
+      charClass: "rolling-linkkle-char",
     });
 
     gsap.fromTo(
-      '.rolling-linkkle-char',
+      ".rolling-linkkle-char",
       { y: -10 },
       {
         y: 50,
@@ -60,16 +62,16 @@ const LandingPage = () => {
         stagger: 0.05,
         repeat: -1,
         yoyo: true,
-        ease: 'sine.inOut',
+        ease: "sine.inOut",
       }
     );
 
     // ScrollTrigger 설정
     ScrollTrigger.create({
-      trigger: '#h3',
-      start: 'top bottom+=-200px',
-      endTrigger: '#section2',
-      end: 'bottom top',
+      trigger: "#h3",
+      start: "top bottom+=-200px",
+      endTrigger: "#section2",
+      end: "bottom top",
       onUpdate: (self) => {
         const progress = Math.max(2, Math.ceil(self.progress * 100));
         if (number.current) {
@@ -84,8 +86,12 @@ const LandingPage = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // 부드러운 스크롤을 위해 'smooth'를 사용합니다
+      behavior: "smooth", // 부드러운 스크롤을 위해 'smooth'를 사용합니다
     });
+  };
+
+  const handleSignupClick = () => {
+    navigate("/login");
   };
 
   return (
@@ -94,15 +100,12 @@ const LandingPage = () => {
         <div className="firstComment">
           Welcome to
           <br />
-          <BouncingBall />{' '}
+          <BouncingBall />{" "}
           <span className="rolling-linkkle" ref={linkkleRef}>
             LinkKle !
           </span>
         </div>
-        <button
-          className="start-btn"
-          onClick={scrollToTop} // 버튼 클릭 시 scrollToTop 함수 호출
-        >
+        <button className="start-btn" onClick={handleSignupClick}>
           회원가입
         </button>
       </div>

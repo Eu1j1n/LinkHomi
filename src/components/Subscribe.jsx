@@ -13,17 +13,14 @@ function Subscribe() {
   const [grade, setGrade] = useState("");
 
   useEffect(() => {
-    // 페이지가 렌더링될 때 body에 클래스 추가
     document.body.classList.add("subscribe-page");
 
-    // 페이지가 언마운트될 때 body에서 클래스 제거
     return () => {
       document.body.classList.remove("subscribe-page");
     };
   }, []);
 
   useEffect(() => {
-    // 이메일 값을 콘솔에 출력
     console.log("받아온 이메일:", email);
 
     // 인트로 텍스트 애니메이션
@@ -80,14 +77,14 @@ function Subscribe() {
       axios
         .get(`http://localhost:5001/api/get-user-grade/${userEmail}`)
         .then((response) => {
-          setGrade(response.data.grade || "NORMAL"); // Default to "NORMAL" if grade is empty or undefined
+          setGrade(response.data.grade || "NORMAL");
         })
         .catch((error) => {
           console.error("사용자 등급 조회 오류:", error);
-          setGrade("NORMAL"); // Set to "NORMAL" in case of error
+          setGrade("NORMAL");
         });
     } else {
-      setGrade("NORMAL"); // Set to "NORMAL" if userEmail is not present
+      setGrade("NORMAL");
     }
   }, [userEmail]);
 
@@ -136,7 +133,6 @@ function Subscribe() {
 
       const { next_redirect_pc_url } = response.data;
 
-      // 페이지 스크롤 잠금
       document.body.style.overflow = "hidden";
 
       Swal.fire({

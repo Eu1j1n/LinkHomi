@@ -1,19 +1,34 @@
-import React from 'react';
+import React from "react";
 import "../style/LoginPage.css";
-import logo from "../assets/images/logo.png";
+import logo from "../assets/images/LoginLogo.png";
+import GoogleLoginBtn from "./GoogleLoginBtn";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage(props) {
+function LoginPage({ setIsLoggedIn }) {
+  const navigate = useNavigate();
+
+  const handleFeatureCheckClick = () => {
+    navigate("/");
+  };
   return (
     <div className="login-page">
-      <h3 className='intro-caption'>
-        링클과 함께하세요
-      </h3>
-      <div className='sub'>
+      <h1 className="intro-caption">링클과 함께하세요</h1>
+
+      <div className="logo-container">
         <img src={logo} alt="logo" className="logo" />
-        L<span className='ink'>INK</span><span className='k'>K</span><span className='LE'>LE</span>
+        <span className="brand-name">
+          <span className="highlight">LIN</span>
+          <span className="dark">KKLE</span>
+        </span>
       </div>
-      <h2 className='login-description'>소셜 계정으로 간편하게 가입하세요! </h2>
-      <button>btn</button>
+      <div className="social-login">
+        <GoogleLoginBtn setIsLoggedIn={setIsLoggedIn} />
+      </div>
+
+      <p className="feature-check" onClick={handleFeatureCheckClick}>
+        {" "}
+        링클의 기능을 다시 확인하고 싶으신가요?
+      </p>
     </div>
   );
 }
