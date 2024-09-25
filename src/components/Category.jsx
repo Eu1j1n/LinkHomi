@@ -18,10 +18,16 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   const userName = localStorage.getItem("userName");
   const userProfileImage = localStorage.getItem("userProfile");
   const navigate = useNavigate();
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
+  const [newCategoryName, setNewCategoryName] = useState("");
+
+  // 페이지 로드 시 ConfirmCategory가 보이도록 상태 설정
+  const [showConfirmCategory, setShowConfirmCategory] = useState(true);
 
   const modalOpen = () => setIsOpen(true);
   const modalClose = () => setIsOpen(false);
 
+  // 사용자 카테고리 및 등급 가져오기
   useEffect(() => {
     if (userId) {
       fetchCategories();
@@ -57,16 +63,19 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       });
   };
 
+  const addCategory = () => {
+    fetchCategories(); // 새 카테고리 추가 후 목록 다시 가져오기
+  };
+
   const handleSubscribeClick = () => {
     navigate(`/subscribe?email=${encodeURIComponent(userEmail)}`);
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("userId"); 
+    localStorage.removeItem("userId"); // userId만 제거
     navigate("/login");
   };
-
   const editCategory = (categoryId, newName) => {
     axios
       .put(`http://localhost:5001/api/update-category/${categoryId}`, {
@@ -80,6 +89,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
               : category
           )
         );
+        console.log("카테고리 수정 성공");
         setIsOpen(false);
       })
       .catch((error) => {
@@ -99,16 +109,15 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       );
 
       if (response.data.match) {
-        onMatchedUrls(response.data.urls);
+        onMatchedUrls(response.data.urls); // URL 목록 전달
       } else {
-        onMatchedUrls([]);
+        onMatchedUrls([]); // 빈 배열 전달
       }
-      setSelectedCategoryId(id);
+      setSelectedCategoryId(id); // 클릭된 카테고리 ID 저장
     } catch (error) {
       console.error("서버 요청 오류:", error);
     }
   };
-
   const deleteCategory = (categoryId) => {
     axios
       .delete(`http://localhost:5001/api/delete-category/${categoryId}`)
@@ -116,6 +125,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         setCategoryList((prevList) =>
           prevList.filter((category) => category.id !== categoryId)
         );
+        console.log("카테고리 삭제 성공");
+        console.log("카테고리 아디디디디", categoryId);
       })
       .catch((error) => {
         console.error("카테고리 삭제 오류:", error);
@@ -125,36 +136,40 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   return (
     <div className="category-container">
       <img src={websiteLogo} alt="웹사이트 로고" className="webSite-logo" />
-      <hr className="divider" /> 
+      <hr className="logo-divider" /> 
       
+      {/* 검색 부분 */}
       <div className="input-container">
         <CiSearch className="search-icon" />
         <input type="text" placeholder="카테고리를 입력하세요" />
       </div>
       
+      {/* 카테고리 추가 버튼 부분 */}
       <div className="button-container">
         <button className="add-button" onClick={modalOpen}>+ 추가하기</button>
       </div>
       
-      <ConfirmCategory 
-        categoryList={categoryList}
-        selectedCategoryId={selectedCategoryId}
-        onCategoryClick={handleCategoryClick}
-        onDeleteCategory={deleteCategory}
-        onEditCategory={editCategory}
-        isOpen={isOpen}
-        modalClose={modalClose}
-        userId={userId}
-        grade={grade}
-      />
+      {/* ConfirmCategory 컴포넌트 */}
+      {showConfirmCategory && (
+        <ConfirmCategory 
+          categoryList={categoryList}
+          selectedCategoryId={selectedCategoryId}
+          onCategoryClick={handleCategoryClick}
+          onDeleteCategory={deleteCategory}
+          onEditCategory={editCategory}
+          addCategory={addCategory}
+          isOpen={isOpen}
+          modalClose={modalClose}
+          userId={userId}
+          grade={grade}
+        />
+      )}
 
-      <hr className="profile-divider" />
-      <div className="footer-header">
-        <p className="profile-title">Profile</p>
-        <button 
-          onClick={handleSubscribeClick} 
-          className="subscribe-btn">멤버십 구독</button>
-      </div>
+      {/* Footer */}
+      <hr className="profile-divider" style={{ backgroundColor: "#C0C0C0", border: "none", height: "1px" }} />
+      <p className="profile-title">Profile</p>
+      <button onClick={handleSubscribeClick} className="subscribe-btn">멤버십 구독</button>
+      
       <div className="category_footer">
         <img src={userProfileImage} alt="사용자 프로필" className="profile-picture" />
         <div className="user-info">

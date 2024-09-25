@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faClockRotateLeft,
+  faPlusCircle,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import "../style/Main.css";
 import Category from "./Category";
 import AddUrlModal from "./AddUrlModal";
 import axios from "axios";
 import PostCard from "./PostCard";
-import LeftSidebar from "./LeftSidebar";
 
 function Main({ setIsLoggedIn }) {
-  const [isSidebarOpen, setSidebarOpen] = useState(false); 
+  const [browsingHistory, setBrowsingHistory] = useState([]);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const [isRotated, setRotated] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [matchedUrls, setMatchedUrls] = useState([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,16 +38,32 @@ function Main({ setIsLoggedIn }) {
     fetchCategories();
   }, []);
 
+  const handleSubscribeClick = () => {
+    navigate("/subscribe");
+  };
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+    setRotated(!isRotated);
+  };
+
+  const handleContentClick = () => {
+    if (isSidebarOpen) {
+      setSidebarOpen(false);
+      setRotated(false);
+    }
+  };
+
   const handleSaveUrl = (urlData) => {
     console.log("URL 데이터 저장:", urlData);
   };
 
-  const handleMatchedUrls = (urls) => {
-    setMatchedUrls(urls);
+  const handleCategoryChange = (categoryId) => {
+    setSelectedCategoryId(categoryId);
   };
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen); // 사이드바 열림/닫힘 토글
+  const handleMatchedUrls = (urls) => {
+    setMatchedUrls(urls);
   };
 
   return (
@@ -51,11 +72,14 @@ function Main({ setIsLoggedIn }) {
         setIsLoggedIn={setIsLoggedIn}
         onMatchedUrls={handleMatchedUrls}
       />
-      <div className="main-content">
-        <PostCard urls={matchedUrls} /> 
+
+      <div className="main-content" onClick={handleContentClick}>
+        <h1>Main</h1>
+        <p>이곳은 메인 콘텐츠 영역입니다.</p>
+        <PostCard urls={matchedUrls} />
       </div>
 
-      {/* 고정된 Add URL 버튼 */}
+      {/* 고정된 Add URL 버튼 (사이드바 왼쪽) */}
       <button
         className="addUrl-floating-button"
         onClick={() => setModalOpen(true)}
@@ -63,16 +87,26 @@ function Main({ setIsLoggedIn }) {
         <FontAwesomeIcon icon={faPlusCircle} size="2x" />
       </button>
 
-      {/* 왼쪽 사이드바 컴포넌트 추가함 */}
-      <LeftSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-
-      {isModalOpen && (
-        <AddUrlModal
-          onClose={() => setModalOpen(false)}
-          onSave={handleSaveUrl}
-          categories={categories}
-        />
-      )}
+      <div className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
+        <button className="toggle-button" onClick={toggleSidebar}>
+          <FontAwesomeIcon
+            icon={faClockRotateLeft}
+            className={`icon ${isRotated ? "rotated" : ""}`}
+          />
+        </button>
+        {isSidebarOpen && (
+          <div className="sidebar-content">
+            <p>여기에 사이드바 내용이 들어갑니다.</p>
+          </div>
+        )}
+        {isModalOpen && (
+          <AddUrlModal
+            onClose={() => setModalOpen(false)}
+            onSave={handleSaveUrl}
+            categories={categories}
+          />
+        )}
+      </div>
     </div>
   );
 }

@@ -3,24 +3,32 @@
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
-
-/*공통 부분 구분*/
 .category-container {
   display: flex;
   flex-direction: column;
-  width: 300px;
+  width: 310px;
+  height: 100%;
   background-color: #F4F5F7;
-  border-right: 1px solid #ccc; 
+  overflow-y: auto; 
+  max-height: 100vh;
 }
-
-.divider {
-  background-color: #D9D9D9;
+.profile-divider{
+  backgroundColor: #C0C0C0;
   border: none;
-  width: 250px;
   height: 1px;
-  margin: 10px auto;
+}
+.logo-divider {
+  width: 100%;
+  max-width: 80%; 
+  border: none; 
+  border-top: 1px solid #C0C0C0; 
+  margin: 10px auto; 
 }
 
+.category-header {
+  width: 100%;
+  height: 10%;
+}
 .webSite-logo{
   width: 200px;
   margin-left:46px;
@@ -62,8 +70,7 @@ input[type="text"]::placeholder {
   color: #999;
 }
 
-
-/*모달 창 부분*/
+/*버튼*/
 .modal {
   display:flex;
   font-size: 20px;
@@ -104,7 +111,7 @@ input[type="text"]::placeholder {
 .category-list {
   margin-right: 20px;
   width: 200px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: normal;
   color: #333;
   cursor: pointer;
@@ -112,7 +119,6 @@ input[type="text"]::placeholder {
   padding: 10px 20px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
-
 .category-list:hover {
   background: linear-gradient(135deg, #06a375, #047857, #035c49);
   font-weight: bold;
@@ -124,7 +130,7 @@ input[type="text"]::placeholder {
 }
 
 /*즐겨찾기*/
-.category-favorite {
+.category_favorite {
   width: 100%;
   font-size: 16px;
   color: black;
@@ -135,24 +141,19 @@ input[type="text"]::placeholder {
 
 .favorite-icon {
   font:20px;
-  margin-right:5px;
+  margin-right:10px;
 }
 
-/*버튼 부분 > 다시 확인해서 수정해야함*/
+/*modal 부분*/
 .button-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 5px;
-  margin-left: 33px;
-  gap: 10px; 
-  position: sticky; 
-  bottom: 0; 
-  background-color: #F4F5F7;
-  padding: 10px; 
+  margin-top:10px;
+  margin-left:30px;
 }
 .add-button {
-  width: 240px;
-  height: 35px;
+  width: 245px;
+  height: 38px;
   background-color: #D9D9D9;
   border: none;
   color: black;
@@ -162,14 +163,14 @@ input[type="text"]::placeholder {
   display: inline-block;
   font-size: 13px;
   border-radius: 4px;
-  margin-right:20px;
-  flex-shrink: 0;
+  margin-right:38px;
 }
 
 .add-button:hover {
   background-color: #CDCDCD;
   cursor: pointer;
 }
+
 
 .add-category-button {
   background-color: #325EFF;
@@ -201,38 +202,67 @@ input[type="text"]::placeholder {
   cursor:pointer;
 }
 
-/*푸터 부분*/
-.profile-divider{
-  background-color: #D9D9D9;
-  border: none;
-  width: 250px;
-  height: 1px;
-  margin: 10px auto;
-  margin-top:200px;
-}
-.footer-header {
+/*footer_css*/
+
+.category_footer {
+  height: 10%;
   display: flex;
-  flex-direction: row; 
-  align-items: center; 
-  margin-left: 30px;
+  align-items: center;
+  gap: 10px; /* 아이템 사이의 간격 */
+  padding: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
+  margin-left: 2px;
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* 원형으로 만듦 */
+  margin-left: 20px;
+  margin-bottom: 5px;
+  object-fit: cover;
+}
+
+.user-name,
+.user-email {
+  color: black; /* 글씨체 색상을 검정으로 설정 */
+  margin: 1.5px; /*1.5 */
+}
+
+.user-name {
+  display: flex;
+  align-items: center; /* 아이콘과 텍스트를 수직으로 중앙 정렬 */
+  font-size: 15px;
+  margin: 0; /* 기본 여백 제거 */
+}
+
+.user-email {
+  color: #a0abbb; /* 색상 설정 */
+  margin: 0; /* 기본 마진 제거 */
 }
 
 .profile-title {
-  color: black;
-  font-weight: bold;
-  font-size: 18px;
-  margin-right: 10px; 
+  margin-left: 30px; /* 프로필 제목 왼쪽 여백 조정 */
+  margin-bottom: 3%;
+  color: #64748b;
+  font-weight:bold;
+  font-size: 18px; /* 적절한 폰트 크기 조정 */
 }
 
 .subscribe-btn {
-  background-color: #325EFF;
-  border: #557AFF;
+  background-color: #047857;
+  border: none;
   color: white;
   font-size: 12px;
-  width: 85px;
-  height: 24px;
+  width: 30%;
+  height: 5%;
   border-radius: 4px;
-  margin-left: 90px;
+  margin-left: 10%;
   cursor: pointer;
   text-align: center;
   display: inline-flex;
@@ -242,56 +272,32 @@ input[type="text"]::placeholder {
   animation: pulse 7s infinite;
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 .subscribe-btn:hover {
-  background-color: #0033CC;
-}
-
-.category_footer {
-  height: 10px;
-  margin-bottom : 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-}
-
-.user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  margin-left: 2px;
-}
-
-.profile-picture {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%; 
-  margin-left: 20px;
-  margin-bottom: 5px;
-  object-fit: cover;
-}
-
-.user-name {
-  display: flex;
-  align-items: center; 
-  font-size: 15px;
-  margin: 3px; 
-}
-
-.user-email {
-  color: #a0abbb; 
-  margin: 0; 
+  background-color: #01684b;
 }
 
 .logout-btn {
   width: 250px;
-  height: 35px;
+  height: 50px;
   background-color: #d9d9d9;
   border: none;
   color: black;
   text-align: center;
   margin-left: 25px;
   margin-bottom: 20px;
+  text-decoration: none;
   font-size: 15px;
   border-radius: 4px;
 }
@@ -306,6 +312,11 @@ input[type="text"]::placeholder {
   color: black;
 }
 
+.category-container .profile-divider {
+  width: 80%;
+  height: 1px;
+  margin: 10px auto;
+}
 
 .crown-icon {
   color: gold;
