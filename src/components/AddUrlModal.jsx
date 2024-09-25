@@ -1,5 +1,5 @@
 // AddUrlModal.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import '../style/AddUrlModal.css'; // 모달의 스타일을 정의할 CSS 파일을 임포트하세요
 
@@ -7,21 +7,6 @@ const AddUrlModal = ({ onClose, onSave, categories }) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-
-  useEffect(() => {
-    // 컴포넌트가 마운트될 때 카테고리 데이터를 가져옵니다.
-    const fetchCategories = async () => {
-      try {
-        const userId = localStorage.getItem('userId');
-        const response = await axios.get(`/api/get-categories/${userId}`);
-        setCategories(response.data);
-      } catch (error) {
-        console.error('카테고리 로드 오류:', error);
-      }
-    };
-
-    fetchCategories();
-  }, []);
 
   const handleSave = async () => {
     const userId = localStorage.getItem('userId'); // 사용자 ID를 가져옵니다.
