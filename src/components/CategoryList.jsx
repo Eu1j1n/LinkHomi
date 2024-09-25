@@ -13,40 +13,41 @@ function CategoryList({
   onClickItem,
   onEditCategory,
   onDeleteCategory,
+  onMatchedUrls,
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(item.name);
 
   // 드롭된 URL을 처리하는 핸들러
-  // 드롭된 URL을 처리하는 핸들러
+  // handleDrop 예시 수정
   const handleDrop = async (e) => {
     e.preventDefault();
-
-    // 드래그한 데이터에서 URL과 타이틀 가져오기
     const urlString = e.dataTransfer.getData('text/plain');
 
     try {
-      // JSON.parse를 사용하여 파싱 (타이틀과 URL이 배열로 포함되어 있다고 가정)
-      const data = JSON.parse(urlString);
-      const title = data.title; // 타이틀 가져오기
-      const url = data.url; // URL 가져오기
+      const data = JSON.parse(urlString); // 이 부분이 실패할 수 있음
+      const title = data.title;
+      const url = data.url;
 
-      // 로컬 스토리지에서 사용자 ID 가져오기
       const userId = localStorage.getItem('userId');
-      console.log(userId);
+      if (!userId) {
+        throw new Error('User ID not found in local storage.');
+      }
 
-      // API 호출
       await axios.post(
         'http://localhost:5001/api/add-url',
         {
-          categoryId: item.id, // 카테고리 ID
+          categoryId: item.id,
           url: url,
-          title: title, // 타이틀 추가
+          title: title,
         },
         {
-          headers: { 'user-id': userId }, // 사용자 ID 추가
+          headers: { 'user-id': userId },
         }
       );
+
+      const newUrl = { title, url };
+      onMatchedUrls((prevUrls) => [...prevUrls, newUrl]); // 이 부분에서 URL 리스트 업데이트
 
       Swal.fire({
         title: '성공!',
@@ -58,7 +59,7 @@ function CategoryList({
       console.error('Error adding URL:', error);
       Swal.fire({
         title: '오류!',
-        text: 'URL 추가에 실패했습니다.',
+        text: error.message || 'URL 추가에 실패했습니다.',
         icon: 'error',
         confirmButtonText: '확인',
       });

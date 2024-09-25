@@ -1,5 +1,6 @@
-import React from "react";
-import CategoryList from "./CategoryList";
+// CategoryBoard.jsx
+import React from 'react';
+import CategoryList from './CategoryList';
 
 function CategoryBoard({
   categoryList,
@@ -7,11 +8,10 @@ function CategoryBoard({
   onCategoryClick,
   onDeleteCategory,
   onEditCategory,
+  onMatchedUrls, // onMatchedUrls 추가
 }) {
-  console.log("Category List:", categoryList);
-
   const validCategoryList = categoryList.filter(
-    (item) => item && typeof item === "object" && item.id
+    (item) => item && typeof item === 'object' && item.id
   );
 
   return (
@@ -25,6 +25,7 @@ function CategoryBoard({
             onClickItem={onCategoryClick}
             onDeleteCategory={onDeleteCategory}
             onEditCategory={onEditCategory}
+            onMatchedUrls={onMatchedUrls} // 여기서 전달
           />
         ))
       ) : (

@@ -15,6 +15,7 @@ function ConfirmCategory({
   grade,
   onEditCategory,
   onDeleteCategory,
+  onMatchedUrls, // 여기서 전달
 }) {
   return (
     <div>
@@ -38,6 +39,7 @@ function ConfirmCategory({
           onCategoryClick={onCategoryClick}
           onEditCategory={onEditCategory}
           onDeleteCategory={onDeleteCategory}
+          onMatchedUrls={onMatchedUrls} // 여기서 전달
         />
       </div>
     </div>

@@ -17,6 +17,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   const userEmail = localStorage.getItem('userEmail');
   const userName = localStorage.getItem('userName');
   const userProfileImage = localStorage.getItem('userProfile');
+
   const navigate = useNavigate();
 
   const modalOpen = () => setIsOpen(true);
@@ -144,6 +145,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       </div>
 
       <ConfirmCategory
+        onMatchedUrls={onMatchedUrls} // 여기서 전달
         categoryList={categoryList}
         selectedCategoryId={selectedCategoryId}
         onCategoryClick={handleCategoryClick}
