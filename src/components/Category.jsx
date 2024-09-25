@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ConfirmCategory from "../components/ConfirmCategory"; 
+import ConfirmCategory from "../components/ConfirmCategory";
 import "../style/Category.css";
 import { useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
@@ -61,9 +61,13 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
     navigate(`/subscribe?email=${encodeURIComponent(userEmail)}`);
   };
 
+  const addCategory = (newCategory) => {
+    fetchCategories();
+  };
+
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("userId"); 
+    localStorage.removeItem("userId");
     navigate("/login");
   };
 
@@ -90,7 +94,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   const handleCategoryClick = async (id) => {
     try {
       const userId = localStorage.getItem("userId");
-      if (!userId) throw new Error("User ID가 localStorage에 저장되어 있지 않습니다.");
+      if (!userId)
+        throw new Error("User ID가 localStorage에 저장되어 있지 않습니다.");
 
       const response = await axios.post(
         "http://localhost:5001/api/check-url",
@@ -125,18 +130,20 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   return (
     <div className="category-container">
       <img src={websiteLogo} alt="웹사이트 로고" className="webSite-logo" />
-      <hr className="divider" /> 
-      
+      <hr className="divider" />
+
       <div className="input-container">
         <CiSearch className="search-icon" />
         <input type="text" placeholder="카테고리를 입력하세요" />
       </div>
-      
+
       <div className="button-container">
-        <button className="add-button" onClick={modalOpen}>+ 추가하기</button>
+        <button className="add-button" onClick={modalOpen}>
+          + 추가하기
+        </button>
       </div>
-      
-      <ConfirmCategory 
+
+      <ConfirmCategory
         categoryList={categoryList}
         selectedCategoryId={selectedCategoryId}
         onCategoryClick={handleCategoryClick}
@@ -146,17 +153,22 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         modalClose={modalClose}
         userId={userId}
         grade={grade}
+        addCategory={addCategory}
       />
 
       <hr className="profile-divider" />
       <div className="footer-header">
         <p className="profile-title">Profile</p>
-        <button 
-          onClick={handleSubscribeClick} 
-          className="subscribe-btn">멤버십 구독</button>
+        <button onClick={handleSubscribeClick} className="subscribe-btn">
+          멤버십 구독
+        </button>
       </div>
       <div className="category_footer">
-        <img src={userProfileImage} alt="사용자 프로필" className="profile-picture" />
+        <img
+          src={userProfileImage}
+          alt="사용자 프로필"
+          className="profile-picture"
+        />
         <div className="user-info">
           <p className="user-name">
             {userName}
@@ -167,7 +179,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
           <p className="user-email">{userEmail}</p>
         </div>
       </div>
-      
+
       <button onClick={handleLogout} className="logout-btn">
         <TbLogout2 /> 로그아웃
       </button>

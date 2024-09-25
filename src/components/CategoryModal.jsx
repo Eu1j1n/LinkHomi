@@ -1,4 +1,6 @@
-{/*modal css 부분 수정 필요ㅠㅠ*/}
+{
+  /*modal css 부분 수정 필요ㅠㅠ*/
+}
 
 import React, { useState } from "react";
 import Modal from "react-modal";
@@ -30,7 +32,6 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,13 +46,18 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       return;
     }
 
+    console.log("grade!!", grade);
+    console.log("UserId:", userId);
+
     axios
       .post("http://localhost:5001/api/add-category", {
         userId,
+
         name: categoryName,
         grade,
       })
       .then((response) => {
+        console.log("카테고리 추가 성공:", response);
         addCategory(categoryName);
         setCategoryName("");
         Swal.fire({
@@ -59,7 +65,9 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
           text: "카테고리가 성공적으로 추가되었습니다.",
           icon: "success",
           confirmButtonText: "확인",
-        }).then(onClose);
+        }).then(() => {
+          onClose();
+        });
       })
       .catch((error) => {
         const errorMessage =
@@ -73,17 +81,36 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
           icon: "error",
           confirmButtonText: "확인",
         });
+
+        console.error(
+          "카테고리 추가 실패:",
+          error.response?.data || error.message
+        );
       });
   };
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onClose} style={modalStyle}>
       <form onSubmit={handleSubmit}>
-          <label className="modal">카테고리 생성</label><br></br>
-          <span className="create-category-description1">최소 두 글자 이상으로 입력해 주세요</span><br></br>
-          <span className="create-category-description2">중복 이름으로 추가하는 것은 불가능합니다</span><br></br>
-          <span className="create-category-description3">멤버십 등급에 따라 카테고리 개수가 제한됩니다</span><br></br>
-          <span className="create-category-description4"> * 더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 *</span><br></br>
+        <label className="modal">카테고리 생성</label>
+        <br></br>
+        <span className="create-category-description1">
+          최소 두 글자 이상으로 입력해 주세요
+        </span>
+        <br></br>
+        <span className="create-category-description2">
+          중복 이름으로 추가하는 것은 불가능합니다
+        </span>
+        <br></br>
+        <span className="create-category-description3">
+          멤버십 등급에 따라 카테고리 개수가 제한됩니다
+        </span>
+        <br></br>
+        <span className="create-category-description4">
+          {" "}
+          * 더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 *
+        </span>
+        <br></br>
         <div>
           <input
             type="text"
