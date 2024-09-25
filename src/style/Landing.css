@@ -20,7 +20,7 @@
 }
 
 .landing-firstComment {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 200px;
   font-weight: 700;
   color: #ccff00;
@@ -29,7 +29,7 @@
 }
 
 .landing-rolling-website {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 170px;
   font-weight: 700;
   display: inline-block;
@@ -60,7 +60,7 @@
 .landing-rolling-linkkle {
   display: inline-block;
   position: relative;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 170px;
   font-weight: 800;
   overflow: hidden;
@@ -133,6 +133,7 @@
 }
 
 .landing-second-description {
+  color: black;
   font-size: 28px;
   font-weight: 400;
   color: #fff;
