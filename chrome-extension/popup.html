@@ -1,14 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>React Popup</title>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <title>방문 기록</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="popup.css" />
+    <!-- CSS 파일 연결 -->
+    <script src="./libs/axios.min.js"></script>
+    <script type="module" src="popup.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        width: 250px; /* width를 키워줍니다. */
+      }
+      #searchBar {
+        margin-bottom: 10px;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin: 5px 0;
+        display: flex; /* flex로 정렬 */
+        align-items: center; /* 중앙 정렬 */
+        justify-content: space-between; /* 양쪽 끝으로 정렬 */
+      }
+      .copy-icon {
+        cursor: pointer; /* 커서를 포인터로 변경 */
+        margin-left: 8px; /* 여백 추가 */
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
-    <div id="history"></div>
-    <script src="popup.js"></script>
+    <label for="searchBar" class="search-label">방문기록</label>
+    <input type="text" id="searchBar" placeholder="링크 검색" />
+    <ul id="historyList"></ul>
   </body>
 </html>

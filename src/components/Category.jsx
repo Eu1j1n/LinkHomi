@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import ConfirmCategory from "../components/ConfirmCategory";
-import "../style/Category.css";
-import { useNavigate } from "react-router-dom";
-import { TbLogout2 } from "react-icons/tb";
-import { CiSearch } from "react-icons/ci";
-import { FaCrown, FaRegStar } from "react-icons/fa";
-import websiteLogo from "../assets/images/websiteLogo.png";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import ConfirmCategory from '../components/ConfirmCategory';
+import '../style/Category.css';
+import { useNavigate } from 'react-router-dom';
+import { TbLogout2 } from 'react-icons/tb';
+import { CiSearch } from 'react-icons/ci';
+import { FaCrown, FaRegStar } from 'react-icons/fa';
+import websiteLogo from '../assets/images/websiteLogo.png';
 
 function Category({ setIsLoggedIn, onMatchedUrls }) {
   const [categoryList, setCategoryList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  const [grade, setGrade] = useState("");
-  const userId = localStorage.getItem("userId");
-  const userEmail = localStorage.getItem("userEmail");
-  const userName = localStorage.getItem("userName");
-  const userProfileImage = localStorage.getItem("userProfile");
+  const [grade, setGrade] = useState('');
+  const userId = localStorage.getItem('userId');
+  const userEmail = localStorage.getItem('userEmail');
+  const userName = localStorage.getItem('userName');
+  const userProfileImage = localStorage.getItem('userProfile');
   const navigate = useNavigate();
 
   const modalOpen = () => setIsOpen(true);
@@ -36,7 +36,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
           setGrade(response.data.grade);
         })
         .catch((error) => {
-          console.error("사용자 등급 조회 오류:", error);
+          console.error('사용자 등급 조회 오류:', error);
         });
     }
   }, [userEmail]);
@@ -53,7 +53,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         );
       })
       .catch((error) => {
-        console.error("카테고리 조회 오류:", error);
+        console.error('카테고리 조회 오류:', error);
       });
   };
 
@@ -67,8 +67,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem("userId");
-    navigate("/login");
+    localStorage.removeItem('userId');
+    navigate('/login');
   };
 
   const editCategory = (categoryId, newName) => {
@@ -87,20 +87,20 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         setIsOpen(false);
       })
       .catch((error) => {
-        console.error("카테고리 수정 오류:", error);
+        console.error('카테고리 수정 오류:', error);
       });
   };
 
   const handleCategoryClick = async (id) => {
     try {
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId');
       if (!userId)
-        throw new Error("User ID가 localStorage에 저장되어 있지 않습니다.");
+        throw new Error('User ID가 localStorage에 저장되어 있지 않습니다.');
 
       const response = await axios.post(
-        "http://localhost:5001/api/check-url",
+        'http://localhost:5001/api/check-url',
         { categoryId: id },
-        { headers: { "user-id": userId } }
+        { headers: { 'user-id': userId } }
       );
 
       if (response.data.match) {
@@ -110,7 +110,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       }
       setSelectedCategoryId(id);
     } catch (error) {
-      console.error("서버 요청 오류:", error);
+      console.error('서버 요청 오류:', error);
     }
   };
 
@@ -123,7 +123,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         );
       })
       .catch((error) => {
-        console.error("카테고리 삭제 오류:", error);
+        console.error('카테고리 삭제 오류:', error);
       });
   };
 
@@ -150,10 +150,10 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         onDeleteCategory={deleteCategory}
         onEditCategory={editCategory}
         isOpen={isOpen}
+        addCategory={addCategory}
         modalClose={modalClose}
         userId={userId}
         grade={grade}
-        addCategory={addCategory}
       />
 
       <hr className="profile-divider" />
@@ -172,9 +172,9 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         <div className="user-info">
           <p className="user-name">
             {userName}
-            {grade === "PRO" && <FaCrown className="crown-icon" />}
-            {grade === "STANDARD" && <FaRegStar className="standard-icon" />}
-            {grade === "BASIC" && <FaRegStar className="basic-icon" />}
+            {grade === 'PRO' && <FaCrown className="crown-icon" />}
+            {grade === 'STANDARD' && <FaRegStar className="standard-icon" />}
+            {grade === 'BASIC' && <FaRegStar className="basic-icon" />}
           </p>
           <p className="user-email">{userEmail}</p>
         </div>

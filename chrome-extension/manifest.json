@@ -1,26 +1,14 @@
 {
   "manifest_version": 3,
-  "name": "Your Extension",
+  "name": "History Viewer",
   "version": "1.0",
+  "permissions": ["history", "storage"],
   "action": {
-    "default_popup": "popup.html"
-  },
-  "permissions": ["history"],
-  "background": {
-    "service_worker": "background.js"
-  },
-  "content_security_policy": {
-    "script-src": [
-      "'self'",
-      "https://accounts.google.com",
-      "https://apis.google.com"
-    ],
-    "style-src": ["'self'", "https://fonts.googleapis.com"],
-    "connect-src": [
-      "'self'",
-      "https://accounts.google.com",
-      "https://apis.google.com"
-    ],
-    "img-src": ["'self'", "data:"]
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./assets/icon.png",
+      "48": "./assets/icon.png",
+      "128": "./assets/icon.png"
+    }
   }
 }

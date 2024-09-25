@@ -9,22 +9,22 @@
   display: flex;
   flex-direction: column;
   width: 300px;
-  background-color: #F4F5F7;
-  border-right: 1px solid #ccc; 
+  background-color: #f4f5f7;
+  border-right: 1px solid #ccc;
 }
 
 .divider {
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border: none;
   width: 250px;
   height: 1px;
   margin: 10px auto;
 }
 
-.webSite-logo{
+.webSite-logo {
   width: 200px;
-  margin-left:46px;
-  margin-top:30px;
+  margin-left: 46px;
+  margin-top: 30px;
 }
 
 /*input 부분*/
@@ -32,60 +32,59 @@
   position: relative;
   width: 190px;
   margin-left: 30px;
-  color:#B8BAC0;
+  color: #b8bac0;
 }
 
 .search-icon {
   position: absolute;
-  left: 20px; 
+  left: 20px;
   top: 48%;
   transform: translateY(-50%);
-  font-size: 15px; 
-  color: #999; 
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px 10px 10px 40px; 
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 12px;
-  color:black;
-}
-
-input[type="text"]:focus {
-  outline: none;
-  border: 1px solid #9599A1;
-}
-
-input[type="text"]::placeholder {
+  font-size: 15px;
   color: #999;
 }
 
+input[type='text'] {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+  color: black;
+}
+
+input[type='text']:focus {
+  outline: none;
+  border: 1px solid #9599a1;
+}
+
+input[type='text']::placeholder {
+  color: #999;
+}
 
 /*모달 창 부분*/
 .modal {
-  display:flex;
+  display: flex;
   font-size: 20px;
 }
-.create-category-description1{
-  font-size:10px;
-  font-weight:normal;
+.create-category-description1 {
+  font-size: 10px;
+  font-weight: normal;
   color: red;
 }
-.create-category-description2{
-  font-size:10px;
-  font-weight:normal;
+.create-category-description2 {
+  font-size: 10px;
+  font-weight: normal;
   color: red;
 }
-.create-category-description3{
-  font-size:10px;
-  font-weight:normal;
+.create-category-description3 {
+  font-size: 10px;
+  font-weight: normal;
   color: red;
 }
-.create-category-description4{
-  font-size:10px;
-  font-weight:bold;
+.create-category-description4 {
+  font-size: 10px;
+  font-weight: bold;
   color: red;
 }
 
@@ -134,8 +133,8 @@ input[type="text"]::placeholder {
 }
 
 .favorite-icon {
-  font:20px;
-  margin-right:5px;
+  font: 20px;
+  margin-right: 5px;
 }
 
 /*버튼 부분 > 다시 확인해서 수정해야함*/
@@ -144,16 +143,16 @@ input[type="text"]::placeholder {
   justify-content: flex-end;
   margin-top: 5px;
   margin-left: 33px;
-  gap: 10px; 
-  position: sticky; 
-  bottom: 0; 
-  background-color: #F4F5F7;
-  padding: 10px; 
+  gap: 10px;
+  position: sticky;
+  bottom: 0;
+  background-color: #f4f5f7;
+  padding: 10px;
 }
 .add-button {
   width: 240px;
   height: 35px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border: none;
   color: black;
   text-align: center;
@@ -162,17 +161,17 @@ input[type="text"]::placeholder {
   display: inline-block;
   font-size: 13px;
   border-radius: 4px;
-  margin-right:20px;
+  margin-right: 20px;
   flex-shrink: 0;
 }
 
 .add-button:hover {
-  background-color: #CDCDCD;
+  background-color: #cdcdcd;
   cursor: pointer;
 }
 
 .add-category-button {
-  background-color: #325EFF;
+  background-color: #325eff;
   border: none;
   font-size: 10px;
   width: 50px;
@@ -182,14 +181,14 @@ input[type="text"]::placeholder {
 }
 
 .add-category-button:hover {
-  background-color: #194BFF;
+  background-color: #194bff;
 }
 
 .close-button {
   width: 50px;
   height: 25px;
   background-color: #ffffff;
-  border-color: #325EFF;
+  border-color: #325eff;
   font-size: 10px;
   margin-left: 10px;
   border-width: 1px;
@@ -198,22 +197,22 @@ input[type="text"]::placeholder {
 
 .close-button:hover {
   background-color: #f3f3f3;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 /*푸터 부분*/
-.profile-divider{
-  background-color: #D9D9D9;
+.profile-divider {
+  background-color: #d9d9d9;
   border: none;
   width: 250px;
   height: 1px;
   margin: 10px auto;
-  margin-top:200px;
+  margin-top: 200px;
 }
 .footer-header {
   display: flex;
-  flex-direction: row; 
-  align-items: center; 
+  flex-direction: row;
+  align-items: center;
   margin-left: 30px;
 }
 
@@ -221,12 +220,12 @@ input[type="text"]::placeholder {
   color: black;
   font-weight: bold;
   font-size: 18px;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
 
 .subscribe-btn {
-  background-color: #325EFF;
-  border: #557AFF;
+  background-color: #325eff;
+  border: #557aff;
   color: white;
   font-size: 12px;
   width: 85px;
@@ -243,12 +242,12 @@ input[type="text"]::placeholder {
 }
 
 .subscribe-btn:hover {
-  background-color: #0033CC;
+  background-color: #0033cc;
 }
 
 .category_footer {
   height: 10px;
-  margin-bottom : 20px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -258,14 +257,14 @@ input[type="text"]::placeholder {
 .user-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; 
+  align-items: flex-start;
   margin-left: 2px;
 }
 
 .profile-picture {
   width: 40px;
   height: 40px;
-  border-radius: 50%; 
+  border-radius: 50%;
   margin-left: 20px;
   margin-bottom: 5px;
   object-fit: cover;
@@ -273,14 +272,14 @@ input[type="text"]::placeholder {
 
 .user-name {
   display: flex;
-  align-items: center; 
+  align-items: center;
   font-size: 15px;
-  margin: 3px; 
+  margin: 3px;
 }
 
 .user-email {
-  color: #a0abbb; 
-  margin: 0; 
+  color: #a0abbb;
+  margin: 0;
 }
 
 .logout-btn {
@@ -306,7 +305,6 @@ input[type="text"]::placeholder {
   color: black;
 }
 
-
 .crown-icon {
   color: gold;
 }
@@ -325,4 +323,3 @@ input[type="text"]::placeholder {
   margin-left: 10px;
   font-size: 1.1em;
 }
-

@@ -1,0 +1,45 @@
+/* popup.css */
+.history-list-item {
+  margin-right: 20px;
+  width: 200px;
+  font-size: 13px;
+  font-weight: normal;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  padding: 10px 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+}
+
+.history-list-item:hover {
+  background: linear-gradient(135deg, #06a375, #047857, #035c49);
+  font-weight: bold;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px,
+    rgba(0, 0, 0, 0.1) 0px 1px 2px inset;
+}
+.search-label {
+  font-size: 16px; /* 텍스트 크기 */
+  color: #333; /* 텍스트 색상 */
+  margin-right: 10px; /* 검색 바와의 간격 */
+  display: inline-block; /* 텍스트를 인라인 블록으로 설정 */
+  vertical-align: middle; /* 수직 정렬 조정 */
+  font-weight: bold; /* 글자 두껍게 */
+}
+/* styles.css */
+#searchBar {
+  width: 100px; /* 검색창 너비를 부모 요소에 맞춤 */
+  padding: 10px 15px; /* 여백 추가 */
+  font-size: 14px; /* 글자 크기 */
+  border: 1px solid #ccc; /* 테두리 색상 */
+  border-radius: 5px; /* 둥근 모서리 */
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px; /* 그림자 효과 */
+  transition: border-color 0.3s ease-in-out; /* 테두리 색상 변화 효과 */
+  margin-bottom: 20px; /* 리스트와의 간격 추가 */
+}
+
+#searchBar:focus {
+  border-color: #06a375; /* 포커스 시 테두리 색상 변경 */
+  outline: none; /* 기본 아웃라인 제거 */
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px; /* 포커스 시 그림자 효과 */
+}

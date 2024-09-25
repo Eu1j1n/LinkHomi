@@ -1,11 +1,11 @@
-import { GoogleLogin } from "@react-oauth/google";
-import React, { useEffect, useRef } from "react";
-import axios from "axios";
-import "../style/Login.css";
-import { useNavigate } from "react-router-dom";
-import { gsap } from "gsap";
-import { TextPlugin } from "gsap/TextPlugin";
-import { Helmet } from "react-helmet";
+import { GoogleLogin } from '@react-oauth/google';
+import React, { useEffect, useRef } from 'react';
+import axios from 'axios';
+import '../style/Login.css';
+import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
+import { TextPlugin } from 'gsap/TextPlugin';
+import { Helmet } from 'react-helmet';
 
 gsap.registerPlugin(TextPlugin);
 
@@ -17,33 +17,34 @@ const GoogleLoginBtn = ({ setIsLoggedIn }) => {
   const bubblesRef = useRef(null);
 
   const handleSuccess = (response) => {
-    console.log("로그인 성공", response);
-    console.log("OAuth Token:", response.credential);
+    console.log('로그인 성공', response);
+    console.log('OAuth Token:', response.credential);
 
     axios
-      .post("http://localhost:5001/api/google-login", {
+      .post('http://localhost:5001/api/google-login', {
         token: response.credential,
       })
       .then((res) => {
-        console.log("유저 데이터", res.data);
+        console.log('유저 데이터', res.data);
         setIsLoggedIn(true);
-        // userId를 로컬스토리지에 저장
-        localStorage.setItem("userId", res.data.userId); // UUID로 변경된 userId
-        localStorage.setItem("userProfile", res.data.payload.picture);
-        localStorage.setItem("userEmail", res.data.payload.email);
-        localStorage.setItem("userName", res.data.payload.name);
-        // 사용자 등급도 저장 (예: "basic" 또는 "premium")
-        localStorage.setItem("userGrade", res.data.grade || "NOMAL");
 
-        navigate("/main");
+        // userId를 로컬스토리지에 저장
+        localStorage.setItem('userId', res.data.userId); // UUID로 변경된 userId
+        localStorage.setItem('userProfile', res.data.payload.picture);
+        localStorage.setItem('userEmail', res.data.payload.email);
+        localStorage.setItem('userName', res.data.payload.name);
+        // 사용자 등급도 저장 (예: "basic" 또는 "premium")
+        localStorage.setItem('userGrade', res.data.grade || 'NORMAL'); // 'NOMAL'을 'NORMAL'로 수정
+
+        navigate('/main'); // 페이지 이동
       })
       .catch((error) => {
-        console.error("에러:", error);
+        console.error('에러:', error);
       });
   };
 
   const handleError = (error) => {
-    console.error("로그인 실패:", error);
+    console.error('로그인 실패:', error);
   };
 
   return (
@@ -60,7 +61,7 @@ const GoogleLoginBtn = ({ setIsLoggedIn }) => {
             <GoogleLogin
               onSuccess={handleSuccess}
               onError={handleError}
-              width={"500px"}
+              width={'500px'}
             />
           </div>
         </div>
