@@ -42,15 +42,46 @@
   max-width: 70%; /* 제목의 최대 너비 설정 */
 }
 
+.icon-container {
+  display: flex; /* 가로로 나란히 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  margin-top: 3px; /* 필요에 따라 상단 여백 추가 */
+  margin-left: 12px;
+  margin-bottom: 8px;
+}
+
+/* Share 버튼 */
 .share-button {
-  margin-left: 20px;
-  margin-bottom: 10px;
   cursor: pointer;
   flex-shrink: 0; /* 버튼 크기가 제목에 따라 줄어들지 않도록 고정 */
+  display: flex; /* 내부 요소 중앙 정렬 */
+  align-items: center;
+  justify-content: center; /* 중앙 정렬 */
+  width: 16px; /* 고정 너비 */
+  height: 16px; /* 고정 높이 */
+  margin-left: 5px; /* 버튼 간격 설정 */
+  transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
 }
+
 .share-button:hover {
-  color: #696969;
-  flex-shrink: 0; /* 버튼 크기가 제목에 따라 줄어들지 않도록 고정 */
+  background-color: #f0f0f0; /* 호버 시 배경색 변화 */
+  color: #696969; /* 텍스트 색상 변화 */
+}
+
+/* Delete 버튼 */
+.delete-btn {
+  cursor: pointer; /* 마우스 포인터 표시 */
+  display: flex; /* 내부 요소 중앙 정렬 */
+  align-items: center;
+  justify-content: center; /* 중앙 정렬 */
+  width: 16px; /* Share 버튼과 동일한 너비 */
+  height: 16px; /* Share 버튼과 동일한 높이 */
+  margin-left: 8px; /* 버튼 간격 설정 */
+  transition: background-color 0.3s; /* 배경색 변화 애니메이션 */
+}
+
+.delete-btn:hover {
+  background-color: #f0f0f0; /* 호버 시 배경색 변화 */
 }
 
 .loading-container {

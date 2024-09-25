@@ -473,6 +473,22 @@ app.get('/api/categories/:userId', async (req, res) => {
   }
 });
 
+//urls 삭제 from PostCard.jsx
+app.delete('/api/urls/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = 'DELETE FROM urls WHERE id = ?';
+
+  db.query(sql, [id], (error, results) => {
+    if (error) {
+      return res.status(500).json({ message: 'Error deleting URL' });
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ message: 'URL not found' });
+    }
+    res.status(200).json({ message: 'URL deleted successfully' });
+  });
+});
+
 // 서버 시작
 app.listen(port, () => {
   console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`);

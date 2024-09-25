@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import "../style/Main.css";
-import Category from "./Category";
-import AddUrlModal from "./AddUrlModal";
-import axios from "axios";
-import PostCard from "./PostCard";
-import LeftSidebar from "./LeftSidebar";
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import '../style/Main.css';
+import Category from './Category';
+import AddUrlModal from './AddUrlModal';
+import axios from 'axios';
+import PostCard from './PostCard';
+import LeftSidebar from './LeftSidebar';
 
 function Main({ setIsLoggedIn }) {
-  const [isSidebarOpen, setSidebarOpen] = useState(false); 
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isModalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [matchedUrls, setMatchedUrls] = useState([]);
+  const [urls, setUrls] = useState([]); // URLs 상태 정의
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId');
       if (userId) {
         try {
           const response = await axios.get(
@@ -26,7 +27,7 @@ function Main({ setIsLoggedIn }) {
           );
           setCategories(response.data);
         } catch (error) {
-          console.error("카테고리 조회 오류:", error);
+          console.error('카테고리 조회 오류:', error);
         }
       }
     };
@@ -34,7 +35,7 @@ function Main({ setIsLoggedIn }) {
   }, []);
 
   const handleSaveUrl = (urlData) => {
-    console.log("URL 데이터 저장:", urlData);
+    console.log('URL 데이터 저장:', urlData);
   };
 
   const handleMatchedUrls = (urls) => {
@@ -52,7 +53,12 @@ function Main({ setIsLoggedIn }) {
         onMatchedUrls={handleMatchedUrls}
       />
       <div className="main-content">
-        <PostCard urls={matchedUrls} /> 
+        <PostCard
+          urls={matchedUrls}
+          setUrls={setUrls}
+          onMatchedUrls={handleMatchedUrls}
+        />{' '}
+        {/* setUrls를 전달 */}
       </div>
 
       {/* 고정된 Add URL 버튼 */}
