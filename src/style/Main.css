@@ -4,41 +4,19 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-/* 컨테이너: 사이드바와 메인 콘텐츠를 포함 */
-.addUrl-button {
-  margin-top: 85vh;
-  border-radius: 4px;
-  box-shadow: var(--box-shadow-style);
-  background-color: #047857;
-  width: 251px; /* 버튼의 너비 설정 */
-  height: 44px; /* 버튼의 높이 설정 */
-  color: white;
-  border: none;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.addUrl-button:hover {
-  box-shadow: var(--box-shadow-style);
-  background-color: #01684b;
-  cursor: pointer;
-}
-
+/*전체 화면*/
 .container {
   display: flex;
-  height: 100vh; /* 화면 전체 높이 */
-  width: 100vw; /* 화면 전체 너비 */
+  height: 100vh; 
+  width: 100vw; 
+  overflow: hidden;
 }
-
 .main-content {
-  flex-grow: 1; /* 남는 공간을 차지하도록 설정 */
+  flex-grow: 1; 
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: white;
   color: black;
 }
-
-/* 사이드바 기본 스타일 */
 .sidebar {
   box-shadow: var(--box-shadow-style);
   height: 100%;
@@ -55,17 +33,17 @@
 .sidebar.open {
   box-shadow: var(--box-shadow-style);
   width: 20%;
-  height: 100%; /* 사이드바가 열릴 때 너비 */
+  height: 100%;
 }
 
-/* 사이드바 내 리스트 스타일 */
+/* 일단 없는 기능이라서 일단 주석처리 할게요 으진이가 기능 구현할거면 수정하면 될 듯
 .sidebar-content {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   margin-top: 20px;
   padding: 10px;
-}
+}*/
 
 /* 버튼 스타일 */
 .toggle-button {
@@ -78,7 +56,7 @@
 }
 
 .icon {
-  transition: transform 0.3s ease;
+  transition: transform 0.1s ease;
 }
 
 .rotated {
