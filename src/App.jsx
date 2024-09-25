@@ -22,7 +22,6 @@ function App() {
     return storedLoginStatus === "true";
   });
 
-  // 로그인 상태가 바뀔 때 localStorage에 저장
   useEffect(() => {
     localStorage.setItem("isLoggedIn", isLoggedIn);
   }, [isLoggedIn]);
@@ -38,7 +37,6 @@ function App() {
             isLoggedIn ? (
               <Navigate to="/main" />
             ) : (
-              // LoginPage로 setIsLoggedIn 전달
               <LoginPage setIsLoggedIn={setIsLoggedIn} />
             )
           }

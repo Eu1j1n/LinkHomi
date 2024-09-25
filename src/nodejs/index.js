@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+
 const bodyParser = require("body-parser");
 const { OAuth2Client } = require("google-auth-library");
 const mysql = require("mysql2");
@@ -404,13 +405,12 @@ async function getOGImage(url) {
 
 app.put("/api/update-category/:categoryId", (req, res) => {
   const { categoryId } = req.params;
-  const { name, userId } = req.body; // Ensure you get userId from the request body
+  const { name, userId } = req.body;
 
   if (!name) {
     return res.status(400).json({ message: "새 이름을 입력하세요." });
   }
 
-  // Check if the new name already exists for the user
   const checkQuery = `
     SELECT * FROM categories
     WHERE user_id = ? AND name = ? AND id != ?
@@ -428,7 +428,6 @@ app.put("/api/update-category/:categoryId", (req, res) => {
         .json({ message: "이미 존재하는 카테고리 이름입니다." });
     }
 
-    // Proceed with the update if no duplicates found
     const query = `UPDATE categories SET name = ? WHERE id = ?`;
     db.query(query, [name, categoryId], (err, result) => {
       if (err) {

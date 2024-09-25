@@ -17,9 +17,9 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    gsap.from("#h2", {
+    gsap.from("#landing-h2", {
       scrollTrigger: {
-        trigger: "#h2",
+        trigger: "#landing-h2",
         start: "top bottom",
         end: "top 400px",
         scrub: 1,
@@ -28,9 +28,9 @@ const LandingPage = () => {
       opacity: 0,
     });
 
-    gsap.from("#h3", {
+    gsap.from("#landing-h3", {
       scrollTrigger: {
-        trigger: "#h3",
+        trigger: "#landing-h3",
         start: "top bottom+=100px",
         toggleActions: "play complete none reset",
       },
@@ -39,22 +39,20 @@ const LandingPage = () => {
       duration: 1,
     });
 
-    // 'Welcome'의 전체 애니메이션
-    gsap.from(".firstComment", {
+    gsap.from(".landing-firstComment", {
       duration: 1.5,
       opacity: 0,
       scale: 0.8,
       ease: "power3.out",
     });
 
-    // 'LinkKle' 물결 애니메이션
     const linkkleText = new SplitType(linkkleRef.current, {
       types: "chars",
-      charClass: "rolling-linkkle-char",
+      charClass: "landing-rolling-linkkle-char",
     });
 
     gsap.fromTo(
-      ".rolling-linkkle-char",
+      ".landing-rolling-linkkle-char",
       { y: -10 },
       {
         y: 50,
@@ -66,11 +64,10 @@ const LandingPage = () => {
       }
     );
 
-    // ScrollTrigger 설정
     ScrollTrigger.create({
-      trigger: "#h3",
+      trigger: "#landing-h3",
       start: "top bottom+=-200px",
-      endTrigger: "#section2",
+      endTrigger: "#landing-section2",
       end: "bottom top",
       onUpdate: (self) => {
         const progress = Math.max(2, Math.ceil(self.progress * 100));
@@ -86,7 +83,7 @@ const LandingPage = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth", // 부드러운 스크롤을 위해 'smooth'를 사용합니다
+      behavior: "smooth",
     });
   };
 
@@ -97,48 +94,50 @@ const LandingPage = () => {
   return (
     <>
       <div className="landingPage">
-        <div className="firstComment">
+        <div className="landing-firstComment">
           Welcome to
           <br />
           <BouncingBall />{" "}
-          <span className="rolling-linkkle" ref={linkkleRef}>
+          <span className="landing-rolling-linkkle" ref={linkkleRef}>
             LinkKle !
           </span>
         </div>
-        <button className="start-btn" onClick={handleSignupClick}>
+        <button className="landing-start-btn" onClick={handleSignupClick}>
           회원가입
         </button>
       </div>
-      <div className="divider"></div>
-      <section id="second_header">
-        <h1 className="second-comment">
-          What is LinkKle
-          <FaQuestion />
+      <div className="landing-divider"></div>
+      <section id="landing-second_header">
+        <h1 className="landing-second-comment">
+          What is LinkKle <FaQuestion />
         </h1>
-        <h3 className="second-description">
+        <h3 className="landing-second-description">
           LinkKle은 방문한 웹사이트의 URL을 카테고리별로 정리하여 쉽게 관리할 수
-          있는 웹 서비스입니다.<br></br> 링크를 쉽게 저장하고, 원하는 카테고리로
-          분류하여 언제든지 빠르게 찾아보세요.
+          있는 웹 서비스입니다.
+          <br /> 링크를 쉽게 저장하고, 원하는 카테고리로 분류하여 언제든지
+          빠르게 찾아보세요.
         </h3>
       </section>
-      <div className="divider"></div>
+      <div className="landing-divider"></div>
 
-      <section id="section2">
-        <h2 id="h2">링클을 둘러보세요</h2>
+      <section id="landing-section2">
+        <h2 id="landing-h2">링클을 둘러보세요</h2>
       </section>
       <section>
-        <CardComponent /> {/*예시 이미지 삽입한거임*/}
+        <CardComponent />
       </section>
 
-      <div className="divider"></div>
+      <div className="landing-divider"></div>
       <section>
-        <h2 id="h3">
-          빠르고 간편한 URL 관리 서비스<br></br>지금 바로 시작하세요 !
+        <h2 id="landing-h3">
+          빠르고 간편한 URL 관리 서비스
+          <br />
+          지금 바로 시작하세요 !
         </h2>
-        <button className="upper-button" onClick={scrollToTop}>
+        <button className="landing-upper-button" onClick={scrollToTop}>
           시작하기
         </button>
-        <RxDoubleArrowUp className="arrow" />
+        <RxDoubleArrowUp className="landing-arrow" />
       </section>
     </>
   );
