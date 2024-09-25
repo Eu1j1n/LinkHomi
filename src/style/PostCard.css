@@ -34,20 +34,24 @@
 
 .post-card-title {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
+  white-space: nowrap; /* 제목을 한 줄로 고정 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+  text-overflow: ellipsis; /* 넘칠 경우 ... 처리 */
+  max-width: 70%; /* 제목의 최대 너비 설정 */
 }
 
 .share-button {
   margin-left: 20px;
   margin-bottom: 10px;
   cursor: pointer;
+  flex-shrink: 0; /* 버튼 크기가 제목에 따라 줄어들지 않도록 고정 */
 }
 .share-button:hover {
   color: #696969;
+  flex-shrink: 0; /* 버튼 크기가 제목에 따라 줄어들지 않도록 고정 */
 }
-
-/* 기존 스타일은 유지하고 아래 내용을 추가합니다 */
 
 .loading-container {
   display: flex;
