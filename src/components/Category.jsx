@@ -158,7 +158,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         grade={grade}
       />
 
-      <hr className="profile-divider" />
+      <hr className="divider" />
       <div className="footer-header">
         <p className="profile-title">Profile</p>
         <button onClick={handleSubscribeClick} className="subscribe-btn">
