@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faArrowUp, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import "../style/Main.css";
 import Category from "./Category";
@@ -17,6 +17,7 @@ function Main({ setIsLoggedIn }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
 
+  const searchRef = useRef(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -38,15 +39,12 @@ function Main({ setIsLoggedIn }) {
   const handleSaveUrl = async (urlData) => {
     console.log("URL 데이터 저장:", urlData);
     try {
-      // URL 저장 요청
       const response = await axios.post(
         "http://localhost:5001/api/save-url",
         urlData
       );
       if (response.data) {
-        // URL 저장 후 카테고리 재조회
-        await fetchCategories(); // 새로 고침
-        // 저장된 URL도 matchedUrls에 추가
+        await fetchCategories();
         setMatchedUrls((prev) => [...prev, response.data]);
       }
     } catch (error) {
@@ -68,28 +66,37 @@ function Main({ setIsLoggedIn }) {
     return matchesCategory && matchesTitle;
   });
 
+  // 스크롤을 검색 바 위치로 조정
+  const scrollToTop = () => {
+    if (searchRef.current) {
+      searchRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="container">
       <div>
-      <Category
-        setIsLoggedIn={setIsLoggedIn}
-        onMatchedUrls={handleMatchedUrls}
-        onSelectCategory={setSelectedCategory}
-      />
+        <Category
+          setIsLoggedIn={setIsLoggedIn}
+          onMatchedUrls={handleMatchedUrls}
+          onSelectCategory={setSelectedCategory}
+        />
       </div>
       <div className="main-content">
-      <div className="search-bar">
-  <div className="input-container">
-    <FontAwesomeIcon icon={faSearch} className="search-icon" />
-    <input
-      type="text"
-      placeholder="찾고 싶은 url 제목을 입력하세요"
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="search-input"
-    />
-  </div>
-</div>
+        <div className="search-bar" ref={searchRef}>
+          {" "}
+          {/* ref를 검색 바에 추가 */}
+          <div className="input-container">
+            <FontAwesomeIcon icon={faSearch} className="search-icon" />
+            <input
+              type="text"
+              placeholder="찾고 싶은 url 제목을 입력하세요"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+          </div>
+        </div>
 
         <PostCard
           urls={filteredUrls}
@@ -98,12 +105,18 @@ function Main({ setIsLoggedIn }) {
         />
       </div>
 
-      <button
-        className="addUrl-floating-button"
-        onClick={() => setModalOpen(true)}
-      >
-        <FontAwesomeIcon icon={faPlusCircle} size="2x" />
-      </button>
+      <div className="floating-buttons">
+        <button
+          className="addUrl-floating-button"
+          onClick={() => setModalOpen(true)}
+        >
+          <FontAwesomeIcon icon={faPlus} size="2x" />
+        </button>
+
+        <button className="scrollUp-floating-button" onClick={scrollToTop}>
+          <FontAwesomeIcon icon={faArrowUp} size="2x" />
+        </button>
+      </div>
 
       {isModalOpen && (
         <AddUrlModal

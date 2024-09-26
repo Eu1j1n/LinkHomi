@@ -140,7 +140,12 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
   return (
     <div className="category-container">
-      <img src={websiteLogo} alt="웹사이트 로고" className="webSite-logo" />
+      <img
+        src={websiteLogo}
+        alt="웹사이트 로고"
+        className="webSite-logo"
+        onClick={() => window.location.reload()}
+      />
       <hr className="divider" />
 
       <div className="input-container">
