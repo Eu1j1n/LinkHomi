@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faArrowUp, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import "../style/Main.css";
-import Category from "./Category";
-import AddUrlModal from "./AddUrlModal";
-import axios from "axios";
-import PostCard from "./PostCard";
+// Main.jsx
+import React, { useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faArrowUp, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import '../style/Main.css';
+import Category from './Category';
+import AddUrlModal from './AddUrlModal';
+import axios from 'axios';
+import PostCard from './PostCard';
 
 function Main({ setIsLoggedIn }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [matchedUrls, setMatchedUrls] = useState([]);
   const [urls, setUrls] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ function Main({ setIsLoggedIn }) {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId');
       if (userId) {
         try {
           const response = await axios.get(
@@ -29,7 +30,7 @@ function Main({ setIsLoggedIn }) {
           );
           setCategories(response.data);
         } catch (error) {
-          console.error("카테고리 조회 오류:", error);
+          console.error('카테고리 조회 오류:', error);
         }
       }
     };
@@ -37,10 +38,10 @@ function Main({ setIsLoggedIn }) {
   }, []);
 
   const handleSaveUrl = async (urlData) => {
-    console.log("URL 데이터 저장:", urlData);
+    console.log('URL 데이터 저장:', urlData);
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/save-url",
+        'http://localhost:5001/api/save-url',
         urlData
       );
       if (response.data) {
@@ -48,7 +49,7 @@ function Main({ setIsLoggedIn }) {
         setMatchedUrls((prev) => [...prev, response.data]);
       }
     } catch (error) {
-      console.error("URL 저장 오류:", error);
+      console.error('URL 저장 오류:', error);
     }
   };
 
@@ -66,10 +67,9 @@ function Main({ setIsLoggedIn }) {
     return matchesCategory && matchesTitle;
   });
 
-  // 스크롤을 검색 바 위치로 조정
   const scrollToTop = () => {
     if (searchRef.current) {
-      searchRef.current.scrollIntoView({ behavior: "smooth" });
+      searchRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -84,9 +84,8 @@ function Main({ setIsLoggedIn }) {
       </div>
       <div className="main-content">
         <div className="search-bar" ref={searchRef}>
-          {" "}
           {/* ref를 검색 바에 추가 */}
-          <div className="input-container">
+          <div className="main-input-container">
             <FontAwesomeIcon icon={faSearch} className="search-icon" />
             <input
               type="text"
@@ -97,7 +96,6 @@ function Main({ setIsLoggedIn }) {
             />
           </div>
         </div>
-
         <PostCard
           urls={filteredUrls}
           setUrls={setUrls}
