@@ -1,13 +1,13 @@
 // Main.jsx
-import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { useNavigate } from "react-router-dom";
-import "../style/Main.css";
-import Category from "./Category";
-import AddUrlModal from "./AddUrlModal";
-import axios from "axios";
-import PostCard from "./PostCard";
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import '../style/Main.css';
+import Category from './Category';
+import AddUrlModal from './AddUrlModal';
+import axios from 'axios';
+import PostCard from './PostCard';
 
 function Main({ setIsLoggedIn }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -19,7 +19,7 @@ function Main({ setIsLoggedIn }) {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const userId = localStorage.getItem("userId");
+      const userId = localStorage.getItem('userId');
       if (userId) {
         try {
           const response = await axios.get(
@@ -27,7 +27,7 @@ function Main({ setIsLoggedIn }) {
           );
           setCategories(response.data);
         } catch (error) {
-          console.error("카테고리 조회 오류:", error);
+          console.error('카테고리 조회 오류:', error);
         }
       }
     };
@@ -35,7 +35,7 @@ function Main({ setIsLoggedIn }) {
   }, []);
 
   const handleSaveUrl = async (urlData) => {
-    console.log("URL 데이터 저장:", urlData);
+    console.log('URL 데이터 저장:', urlData);
     // URL 저장 후 카테고리를 다시 가져옵니다.
     await fetchCategories();
   };
@@ -59,7 +59,7 @@ function Main({ setIsLoggedIn }) {
           urls={matchedUrls}
           setUrls={setUrls}
           onMatchedUrls={handleMatchedUrls}
-        />{" "}
+        />{' '}
         {/* setUrls를 전달 */}
       </div>
 
@@ -76,6 +76,7 @@ function Main({ setIsLoggedIn }) {
           onClose={() => setModalOpen(false)}
           onSave={handleSaveUrl} // URL 저장 후 카테고리 업데이트
           categories={categories}
+          onMatchedUrls={handleMatchedUrls}
         />
       )}
 
