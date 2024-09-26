@@ -17,6 +17,7 @@ function Main({ setIsLoggedIn }) {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     const fetchCategories = async () => {
       const userId = localStorage.getItem("userId");
@@ -69,25 +70,26 @@ function Main({ setIsLoggedIn }) {
 
   return (
     <div className="container">
+      <div>
       <Category
         setIsLoggedIn={setIsLoggedIn}
         onMatchedUrls={handleMatchedUrls}
         onSelectCategory={setSelectedCategory}
       />
+      </div>
       <div className="main-content">
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="찾고 싶은 url 제목을 입력하세요"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-
-          <button className="search-btn">
-            <FontAwesomeIcon icon={faSearch} />
-          </button>
-        </div>
+      <div className="search-bar">
+  <div className="input-container">
+    <FontAwesomeIcon icon={faSearch} className="search-icon" />
+    <input
+      type="text"
+      placeholder="찾고 싶은 url 제목을 입력하세요"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="search-input"
+    />
+  </div>
+</div>
 
         <PostCard
           urls={filteredUrls}

@@ -1,7 +1,3 @@
-{
-  /*modal css 부분 수정 필요ㅠㅠ*/
-}
-
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
@@ -13,33 +9,14 @@ Modal.setAppElement('#root');
 function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
   const [categoryName, setCategoryName] = useState('');
 
-  const modalStyle = {
-    content: {
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: '#F4F4F4',
-      color: 'black',
-      borderRadius: '8px',
-      maxWidth: '270px',
-      maxHeight: '200px',
-      margin: 'auto',
-      fontSize: '16px',
-      fontWeight: 'bold',
-    },
-    overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!categoryName.trim()) {
+    // 카테고리명이 두 글자 이상인지 확인하는 부분 
+    if (!categoryName.trim() || categoryName.trim().length < 2) {
       Swal.fire({
         title: '입력 오류!',
-        text: '카테고리명을 입력하세요.',
+        text: '카테고리명을 최소 두 글자 이상 입력하세요.',
         icon: 'warning',
         confirmButtonText: '확인',
       });
@@ -52,7 +29,6 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
     axios
       .post('http://localhost:5001/api/add-category', {
         userId,
-
         name: categoryName,
         grade,
       })
@@ -93,44 +69,37 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} style={modalStyle}>
+    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal" overlayClassName="modal-overlay">
       <form onSubmit={handleSubmit}>
         <label className="modal">카테고리 생성</label>
-        <br></br>
+        <br />
         <span className="create-category-description1">
           최소 두 글자 이상으로 입력해 주세요
         </span>
-        <br></br>
+        <br />
         <span className="create-category-description2">
           중복 이름으로 추가하는 것은 불가능합니다
         </span>
-        <br></br>
+        <br />
         <span className="create-category-description3">
           멤버십 등급에 따라 카테고리 개수가 제한됩니다
         </span>
-        <br></br>
+        <br />
         <span className="create-category-description4">
           {' '}
           * 더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 *
         </span>
-        <br></br>
+        <br />
         <div>
-          <input
-            type="text"
-            style={{
-              marginTop: '10px',
-              width: '100%',
-              maxHeight: '50vh',
-              padding: '8px',
-              fontSize: '10px',
-              borderColor: '#D9D9D9',
-            }}
-            placeholder="원하는 카테고리명을 입력하세요"
-            value={categoryName}
-            onChange={(e) => setCategoryName(e.target.value)}
+        <input
+          type="text"
+          className="input-field" // 추가한 클래스명
+          placeholder="원하는 카테고리명을 입력하세요"
+          value={categoryName}
+          onChange={(e) => setCategoryName(e.target.value)}
           />
         </div>
-        <div className="button-container">
+        <div className="modal-button-container">
           <button type="submit" className="add-category-button">
             추가
           </button>
