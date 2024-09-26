@@ -3,8 +3,9 @@ import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'; // 체크와 X 
 import Swal from 'sweetalert2';
 import { PiPencilDuotone } from 'react-icons/pi';
 import { BiTrash } from 'react-icons/bi';
-import { GoHeartFill } from 'react-icons/go';
 import axios from 'axios'; // axios import
+import { RiHeartsFill } from "react-icons/ri";
+import { RiHeartsLine } from "react-icons/ri";
 import '../style/Category.css';
 
 function CategoryList({
@@ -17,6 +18,7 @@ function CategoryList({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(item.name);
+  const [isFavorite, setIsFavorite] = useState(false); 
 
   // 드롭된 URL을 처리하는 핸들러
   // handleDrop 예시 수정
@@ -98,6 +100,10 @@ function CategoryList({
     }
   };
 
+  const handleFavorite = () => {
+    setIsFavorite(!isFavorite); // 하트 클릭 시 상태 변경 부분
+  };
+
   return (
     <div
       onDrop={handleDrop} // 드롭 핸들러 추가
@@ -166,8 +172,12 @@ function CategoryList({
                 display: 'inline-flex',
                 gap: '8px',
               }}
-            >
-              <GoHeartFill className="favorite-icon" />
+            > {/*즐겨찾기 부분*/}
+              {isFavorite ? (
+                <RiHeartsFill className="favorite-icon" onClick={handleFavorite} />
+              ) : (
+                <RiHeartsLine className="favorite-icon" onClick={handleFavorite} />
+              )} 
               <PiPencilDuotone className="edit" onClick={handleEditToggle} />
               <BiTrash className="delete" onClick={handleDelete} />
             </span>
