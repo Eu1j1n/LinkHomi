@@ -17,22 +17,23 @@ function ConfirmCategory({
   onDeleteCategory,
   onMatchedUrls, // 여기서 전달
 }) {
+  
   return (
     <div>
       <div className="category-favorite">
-        <FcLike className="favorite-icon" />
-        Favorite
-      </div>
-
-      <div className="category">
-        <PiListHeartBold className="list" /> Category List
-        <CategoryModal
+      <CategoryModal
           isOpen={isOpen}
           onClose={modalClose}
           userId={userId}
           addCategory={addCategory}
           grade={grade}
         />
+        <FcLike className="favorite-icon" />
+        Favorite
+      </div>
+
+      <div className="category">
+        <PiListHeartBold className="list" /> Category List
         <CategoryBoard
           categoryList={categoryList}
           selectedCategoryId={selectedCategoryId}

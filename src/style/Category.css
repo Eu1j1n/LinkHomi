@@ -6,19 +6,22 @@
 
 /*공통 부분 구분*/
 .category-container {
+  overflow-y: auto; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   width: 300px;
   background-color: #f4f5f7;
   border-right: 1px solid #ccc;
+  min-height: 500px; /* 원하는 최소 높이 설정 */
 }
 
 .divider {
-  background-color: #d9d9d9;
-  border: none;
-  width: 250px;
+  border: 0.5px solid #d9d9d9; /* 변경 */
   height: 1px;
-  margin: 10px auto;
+  margin-bottom: 10px;
+  width: 250px; /* 원하는 너비로 조정 */
 }
 
 .webSite-logo {
@@ -133,8 +136,8 @@ input[type='text']::placeholder {
 }
 
 .favorite-icon {
-  font: 20px;
-  margin-right: 5px;
+  font-size: 14px !important;
+  margin-right: 3px !important;
 }
 
 /*버튼 부분 > 다시 확인해서 수정해야함*/
@@ -161,7 +164,7 @@ input[type='text']::placeholder {
   display: inline-block;
   font-size: 13px;
   border-radius: 4px;
-  margin-right: 20px;
+  margin-right: 5px;
   flex-shrink: 0;
 }
 
