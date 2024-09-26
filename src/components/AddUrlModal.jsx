@@ -1,9 +1,8 @@
-// AddUrlModal.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../style/AddUrlModal.css'; // 모달의 스타일을 정의할 CSS 파일을 임포트하세요
 
-const AddUrlModal = ({ onClose, onSave, categories }) => {
+const AddUrlModal = ({ onClose, onSave, categories, onMatchedUrls }) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -16,8 +15,18 @@ const AddUrlModal = ({ onClose, onSave, categories }) => {
         { title, url, categoryId: selectedCategory },
         { headers: { 'user-id': userId } } // 사용자 ID를 헤더로 전달합니다.
       );
+
       alert('URL이 성공적으로 추가되었습니다.');
+
+      // onSave를 통해 추가된 URL 데이터를 부모에게 전달
       onSave({ title, url, categoryId: selectedCategory });
+
+      // onMatchedUrls를 호출하여 URL 목록을 업데이트
+      onMatchedUrls((prevUrls) => [
+        ...prevUrls,
+        { id: response.data.id, user_id: userId, title, url }, // response.data.id를 포함
+      ]);
+
       onClose();
     } catch (error) {
       console.error('URL 저장 오류:', error);

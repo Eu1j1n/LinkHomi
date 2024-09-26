@@ -371,8 +371,9 @@ app.post('/api/add-url', (req, res) => {
       return res.status(500).json({ error: 'URL 추가 실패' });
     }
 
+    const newUrlId = result.insertId;
     console.log('URL 추가 성공', result);
-    res.status(200).json({ success: true });
+    res.status(200).json({ success: true, id: newUrlId, userId: userId });
   });
 });
 
@@ -491,6 +492,7 @@ app.delete('/api/urls/:id', (req, res) => {
 
 //즐겨찾기 부분
 
+//2024-09-26
 
 // 서버 시작
 app.listen(port, () => {

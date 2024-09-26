@@ -44,6 +44,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
   const handleDeleteClick = async (index) => {
     const { id, user_id } = urls[index];
     const userId = localStorage.getItem('userId'); // 로컬 스토리지에서 userId 가져오기
+    console.log(urls);
 
     // 삭제 확인 알림
     const result = await Swal.fire({
@@ -102,7 +103,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
     <div className="post-card-container">
       {urls.length > 0 ? (
         urls.map((urlObject, index) => (
-          <div key={urlObject.id} className="post-card">
+          <div key={urlObject.id || index} className="post-card">
             <a
               href={urlObject.url}
               target="_blank"
