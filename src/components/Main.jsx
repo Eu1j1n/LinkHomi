@@ -1,14 +1,13 @@
 // Main.jsx
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from 'react-router-dom';
-import '../style/Main.css';
-import Category from './Category';
-import AddUrlModal from './AddUrlModal';
-import axios from 'axios';
-import PostCard from './PostCard';
-import LeftSidebar from './LeftSidebar';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import "../style/Main.css";
+import Category from "./Category";
+import AddUrlModal from "./AddUrlModal";
+import axios from "axios";
+import PostCard from "./PostCard";
 
 function Main({ setIsLoggedIn }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -20,7 +19,7 @@ function Main({ setIsLoggedIn }) {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem("userId");
       if (userId) {
         try {
           const response = await axios.get(
@@ -28,7 +27,7 @@ function Main({ setIsLoggedIn }) {
           );
           setCategories(response.data);
         } catch (error) {
-          console.error('카테고리 조회 오류:', error);
+          console.error("카테고리 조회 오류:", error);
         }
       }
     };
@@ -36,7 +35,7 @@ function Main({ setIsLoggedIn }) {
   }, []);
 
   const handleSaveUrl = async (urlData) => {
-    console.log('URL 데이터 저장:', urlData);
+    console.log("URL 데이터 저장:", urlData);
     // URL 저장 후 카테고리를 다시 가져옵니다.
     await fetchCategories();
   };
@@ -60,7 +59,7 @@ function Main({ setIsLoggedIn }) {
           urls={matchedUrls}
           setUrls={setUrls}
           onMatchedUrls={handleMatchedUrls}
-        />{' '}
+        />{" "}
         {/* setUrls를 전달 */}
       </div>
 
@@ -72,16 +71,21 @@ function Main({ setIsLoggedIn }) {
         <FontAwesomeIcon icon={faPlusCircle} size="2x" />
       </button>
 
-      {/* 왼쪽 사이드바 컴포넌트 추가함 */}
-      <LeftSidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-
       {isModalOpen && (
         <AddUrlModal
           onClose={() => setModalOpen(false)}
-          onSave={handleSaveUrl}
+          onSave={handleSaveUrl} // URL 저장 후 카테고리 업데이트
           categories={categories}
         />
       )}
+
+      {/* 고정된 Add URL 버튼 */}
+      <button
+        className="addUrl-floating-button"
+        onClick={() => setModalOpen(true)} // 모달 열기
+      >
+        <FontAwesomeIcon icon={faPlusCircle} size="2x" />
+      </button>
     </div>
   );
 }
