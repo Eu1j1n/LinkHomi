@@ -219,7 +219,21 @@ input[type="text"] {
   border-radius: 4px;
   cursor: pointer;
 }
+/*스크롤 부분*/
+.confirm-category-container {
+  max-height: 500px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+}
 
+.confirm-category-container::-webkit-scrollbar {
+  width: 6px; 
+}
+
+.confirm-category-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1; 
+  border-radius: 10px;
+}
 /*푸터 부분*/
 .profile-divider {
   background-color: #d9d9d9;
@@ -343,3 +357,4 @@ input[type="text"] {
   margin-left: 10px;
   font-size: 1.1em;
 }
+
