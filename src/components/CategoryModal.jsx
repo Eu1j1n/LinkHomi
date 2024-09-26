@@ -12,7 +12,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 카테고리명이 두 글자 이상인지 확인하는 부분 
+    // 카테고리명이 두 글자 이상인지 확인하는 부분
     if (!categoryName.trim() || categoryName.trim().length < 2) {
       Swal.fire({
         title: '입력 오류!',
@@ -69,7 +69,12 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onClose} className="modal" overlayClassName="modal-overlay">
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className="modal"
+      overlayClassName="modal-overlay"
+    >
       <form onSubmit={handleSubmit}>
         <label className="modal">카테고리 생성</label>
         <br />
@@ -91,12 +96,12 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
         </span>
         <br />
         <div>
-        <input
-          type="text"
-          className="input-field" // 추가한 클래스명
-          placeholder="원하는 카테고리명을 입력하세요"
-          value={categoryName}
-          onChange={(e) => setCategoryName(e.target.value)}
+          <input
+            type="text"
+            className="input-field" // 추가한 클래스명
+            placeholder="원하는 카테고리명을 입력하세요"
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
           />
         </div>
         <div className="modal-button-container">

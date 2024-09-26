@@ -1,14 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../style/AddUrlModal.css'; // 모달의 스타일을 정의할 CSS 파일을 임포트하세요
 
-const AddUrlModal = ({ onClose, onSave, categories, onMatchedUrls }) => {
+const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [categories, setCategories] = useState([]); // 카테고리 상태 추가
+
+  const userId = localStorage.getItem('userId'); // 사용자 ID를 가져옵니다.
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      if (!userId) {
+        console.error('User ID not found');
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          `http://localhost:5001/api/get-categories/${userId}`
+        );
+        setCategories(response.data); // 카테고리 목록을 상태에 저장
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories(); // 컴포넌트 마운트 시 카테고리 목록을 가져옴
+  }, [userId]);
 
   const handleSave = async () => {
-    const userId = localStorage.getItem('userId'); // 사용자 ID를 가져옵니다.
     try {
       const response = await axios.post(
         'http://localhost:5001/api/add-url',
@@ -42,7 +64,7 @@ const AddUrlModal = ({ onClose, onSave, categories, onMatchedUrls }) => {
         </button>
         <h2>Add New URL</h2>
         <div className="modal-field">
-          <label>Title:</label>
+          <label>제목:</label>
           <input
             type="text"
             value={title}
@@ -58,12 +80,12 @@ const AddUrlModal = ({ onClose, onSave, categories, onMatchedUrls }) => {
           />
         </div>
         <div className="modal-field">
-          <label>Category:</label>
+          <label>폴더:</label>
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            <option value="">Select a category</option>
+            <option value="">저장 할 폴더 선택</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.name}
