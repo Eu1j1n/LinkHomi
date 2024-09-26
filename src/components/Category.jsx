@@ -160,10 +160,10 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
       <div className="button-container">
         <button className="add-button" onClick={modalOpen}>
-          + 추가하기
+          + 카테고리 추가
         </button>
       </div>
-
+      <div className="confirm-category-container">
       <ConfirmCategory
         onMatchedUrls={onMatchedUrls}
         categoryList={filteredCategories}
@@ -177,7 +177,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         userId={userId}
         grade={grade}
       />
-
+      </div>
       <hr className="divider" />
       <div className="footer-header">
         <p className="profile-title">Profile</p>
