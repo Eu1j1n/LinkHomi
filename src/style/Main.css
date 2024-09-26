@@ -89,3 +89,35 @@
   height: 100vh;
   overflow-y: auto;
 }
+
+.search-bar {
+  width: 30%;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  color: white;
+  background-color: #2756ff;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.search-btn:hover {
+  background-color: #1f4bbf;
+}

@@ -1,22 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ConfirmCategory from '../components/ConfirmCategory';
-import '../style/Category.css';
-import { useNavigate } from 'react-router-dom';
-import { TbLogout2 } from 'react-icons/tb';
-import { CiSearch } from 'react-icons/ci';
-import { FaCrown, FaRegStar } from 'react-icons/fa';
-import websiteLogo from '../assets/images/websiteLogo.png';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ConfirmCategory from "../components/ConfirmCategory";
+import "../style/Category.css";
+import { useNavigate } from "react-router-dom";
+import { TbLogout2 } from "react-icons/tb";
+import { CiSearch } from "react-icons/ci";
+import { FaCrown, FaRegStar } from "react-icons/fa";
+import websiteLogo from "../assets/images/websiteLogo.png";
 
 function Category({ setIsLoggedIn, onMatchedUrls }) {
   const [categoryList, setCategoryList] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
-  const [grade, setGrade] = useState('');
-  const userId = localStorage.getItem('userId');
-  const userEmail = localStorage.getItem('userEmail');
-  const userName = localStorage.getItem('userName');
-  const userProfileImage = localStorage.getItem('userProfile');
+  const [grade, setGrade] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const userId = localStorage.getItem("userId");
+  const userEmail = localStorage.getItem("userEmail");
+  const userName = localStorage.getItem("userName");
+  const userProfileImage = localStorage.getItem("userProfile");
 
   const navigate = useNavigate();
 
@@ -37,7 +39,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
           setGrade(response.data.grade);
         })
         .catch((error) => {
-          console.error('사용자 등급 조회 오류:', error);
+          console.error("사용자 등급 조회 오류:", error);
         });
     }
   }, [userEmail]);
@@ -46,17 +48,25 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
     axios
       .get(`http://localhost:5001/api/get-categories/${userId}`)
       .then((response) => {
-        setCategoryList(
-          response.data.map((category) => ({
-            id: category.id,
-            name: category.name,
-          }))
-        );
+        const categories = response.data.map((category) => ({
+          id: category.id,
+          name: category.name,
+        }));
+        setCategoryList(categories);
+        setFilteredCategories(categories); // 기본적으로 모든 카테고리를 표시
       })
       .catch((error) => {
-        console.error('카테고리 조회 오류:', error);
+        console.error("카테고리 조회 오류:", error);
       });
   };
+
+  // 검색어 입력에 따라 필터링된 카테고리 리스트 업데이트
+  useEffect(() => {
+    const filtered = categoryList.filter((category) =>
+      category.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredCategories(filtered);
+  }, [searchTerm, categoryList]);
 
   const handleSubscribeClick = () => {
     navigate(`/subscribe?email=${encodeURIComponent(userEmail)}`);
@@ -68,8 +78,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    localStorage.removeItem('userId');
-    navigate('/login');
+    localStorage.removeItem("userId");
+    navigate("/login");
   };
 
   const editCategory = (categoryId, newName) => {
@@ -88,20 +98,20 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         setIsOpen(false);
       })
       .catch((error) => {
-        console.error('카테고리 수정 오류:', error);
+        console.error("카테고리 수정 오류:", error);
       });
   };
 
   const handleCategoryClick = async (id) => {
     try {
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem("userId");
       if (!userId)
-        throw new Error('User ID가 localStorage에 저장되어 있지 않습니다.');
+        throw new Error("User ID가 localStorage에 저장되어 있지 않습니다.");
 
       const response = await axios.post(
-        'http://localhost:5001/api/check-url',
+        "http://localhost:5001/api/check-url",
         { categoryId: id },
-        { headers: { 'user-id': userId } }
+        { headers: { "user-id": userId } }
       );
 
       if (response.data.match) {
@@ -111,7 +121,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       }
       setSelectedCategoryId(id);
     } catch (error) {
-      console.error('서버 요청 오류:', error);
+      console.error("서버 요청 오류:", error);
     }
   };
 
@@ -124,7 +134,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         );
       })
       .catch((error) => {
-        console.error('카테고리 삭제 오류:', error);
+        console.error("카테고리 삭제 오류:", error);
       });
   };
 
@@ -135,7 +145,12 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
 
       <div className="input-container">
         <CiSearch className="search-icon" />
-        <input type="text" placeholder="카테고리를 입력하세요" />
+        <input
+          type="text"
+          placeholder="카테고리를 입력하세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
       <div className="button-container">
@@ -145,8 +160,8 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       </div>
 
       <ConfirmCategory
-        onMatchedUrls={onMatchedUrls} // 여기서 전달
-        categoryList={categoryList}
+        onMatchedUrls={onMatchedUrls}
+        categoryList={filteredCategories}
         selectedCategoryId={selectedCategoryId}
         onCategoryClick={handleCategoryClick}
         onDeleteCategory={deleteCategory}
@@ -174,9 +189,9 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         <div className="user-info">
           <p className="user-name">
             {userName}
-            {grade === 'PRO' && <FaCrown className="crown-icon" />}
-            {grade === 'STANDARD' && <FaRegStar className="standard-icon" />}
-            {grade === 'BASIC' && <FaRegStar className="basic-icon" />}
+            {grade === "PRO" && <FaCrown className="crown-icon" />}
+            {grade === "STANDARD" && <FaRegStar className="standard-icon" />}
+            {grade === "BASIC" && <FaRegStar className="basic-icon" />}
           </p>
           <p className="user-email">{userEmail}</p>
         </div>

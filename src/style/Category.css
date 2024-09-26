@@ -6,7 +6,7 @@
 
 /*공통 부분 구분*/
 .category-container {
-  overflow-y: auto; 
+  overflow-y: auto;
   border: 1px solid #ccc;
   border-radius: 4px;
   display: flex;
@@ -47,7 +47,7 @@
   color: #999;
 }
 
-input[type='text'] {
+input[type="text"] {
   width: 100%;
   padding: 10px 10px 10px 40px;
   border: 1px solid #ccc;
@@ -56,12 +56,12 @@ input[type='text'] {
   color: black;
 }
 
-input[type='text']:focus {
+input[type="text"]:focus {
   outline: none;
   border: 1px solid #9599a1;
 }
 
-input[type='text']::placeholder {
+input[type="text"]::placeholder {
   color: #999;
 }
 
@@ -164,7 +164,7 @@ input[type='text']::placeholder {
   display: inline-block;
   font-size: 13px;
   border-radius: 4px;
-  margin-right: 5px;
+  margin-right: 18px;
   flex-shrink: 0;
 }
 
