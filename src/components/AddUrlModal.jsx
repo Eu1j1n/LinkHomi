@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../style/AddUrlModal.css'; // 모달의 스타일을 정의할 CSS 파일을 임포트하세요
+import '../style/AddUrlModal.css';
+import logo from '../assets/images/modal.png';
+import Swal from 'sweetalert2';
 
 const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [categories, setCategories] = useState([]); // 카테고리 상태 추가
+  const [categories, setCategories] = useState([]);
 
-  const userId = localStorage.getItem('userId'); // 사용자 ID를 가져옵니다.
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -21,38 +23,58 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
         const response = await axios.get(
           `http://localhost:5001/api/get-categories/${userId}`
         );
-        setCategories(response.data); // 카테고리 목록을 상태에 저장
+        setCategories(response.data);
       } catch (error) {
         console.error('Error fetching categories:', error);
       }
     };
 
-    fetchCategories(); // 컴포넌트 마운트 시 카테고리 목록을 가져옴
+    fetchCategories();
   }, [userId]);
 
   const handleSave = async () => {
+    if (!selectedCategory) {
+      Swal.fire({
+        icon: 'warning',
+        title: '저장 실패!',
+        text: '카테고리를 선택해주세요!',
+        confirmButtonText: '확인',
+      });
+      return; // 폴더 선택이 없으면 함수 종료
+    }
+
     try {
       const response = await axios.post(
         'http://localhost:5001/api/add-url',
         { title, url, categoryId: selectedCategory },
-        { headers: { 'user-id': userId } } // 사용자 ID를 헤더로 전달합니다.
+        { headers: { 'user-id': userId } }
       );
 
-      alert('URL이 성공적으로 추가되었습니다.');
+      // 성공 메시지 표시
+      Swal.fire({
+        icon: 'success',
+        title: '성공!',
+        text: 'URL이 추가되었습니다!',
+        confirmButtonText: '확인',
+      });
 
-      // onSave를 통해 추가된 URL 데이터를 부모에게 전달
       onSave({ title, url, categoryId: selectedCategory });
 
-      // onMatchedUrls를 호출하여 URL 목록을 업데이트
       onMatchedUrls((prevUrls) => [
         ...prevUrls,
-        { id: response.data.id, user_id: userId, title, url }, // response.data.id를 포함
+        { id: response.data.id, user_id: userId, title, url },
       ]);
 
       onClose();
     } catch (error) {
       console.error('URL 저장 오류:', error);
-      alert('URL 저장 실패');
+      // 실패 메시지 표시
+      Swal.fire({
+        icon: 'error',
+        title: '실패!',
+        text: 'URL 저장에 실패하였습니다.',
+        confirmButtonText: '확인',
+      });
     }
   };
 
@@ -62,7 +84,8 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
         <button className="modal-close" onClick={onClose}>
           ×
         </button>
-        <h2>Add New URL</h2>
+        <img src={logo} alt="Modal Logo" className="modal-logo" />
+        <h3 className="add-modal-h3">URL 추가</h3>
         <div className="modal-field">
           <label>제목:</label>
           <input
