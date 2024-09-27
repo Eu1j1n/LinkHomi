@@ -13,13 +13,12 @@ function CategoryList({
   onEditCategory,
   onDeleteCategory,
   onMatchedUrls,
+  editingCategoryId,
+  setEditingCategoryId,
 }) {
-  const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(item.name);
-  const [isFavorite, setIsFavorite] = useState(false);
 
   // 드롭된 URL을 처리하는 핸들러
-  // handleDrop 예시 수정
   const handleDrop = async (e) => {
     e.preventDefault();
     const urlString = e.dataTransfer.getData("text/plain");
@@ -88,14 +87,20 @@ function CategoryList({
   };
 
   const handleEditToggle = () => {
-    setIsEditing(!isEditing);
+    if (editingCategoryId === item.id) {
+      setEditingCategoryId(null);
+    } else {
+      setEditingCategoryId(item.id);
+      setNewName(item.name);
+      onClickItem(item.id);
+    }
   };
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
       await onEditCategory(item.id, newName);
-      setIsEditing(false);
+      setEditingCategoryId(null);
       Swal.fire("수정 완료!", "카테고리가 수정되었습니다.", "success");
     } catch (error) {
       console.error("카테고리 수정 오류:", error);
@@ -103,15 +108,16 @@ function CategoryList({
     }
   };
 
-
   return (
-    <div
-      onDrop={handleDrop} // 드롭 핸들러 추가
-      onDragOver={(e) => e.preventDefault()} // 드래그 오버 시 기본 동작 방지
-    >
+    <div onDrop={handleDrop} onDragOver={(e) => e.preventDefault()}>
       <h1
         className="category-list"
-        onClick={() => onClickItem(item.id)}
+        onClick={() => {
+          // 수정 모드가 아닐 때만 카테고리 클릭 가능
+          if (editingCategoryId === null) {
+            onClickItem(item.id);
+          }
+        }}
         style={{
           boxShadow: isSelected
             ? "0 0 0 1px #557AFF"
@@ -126,7 +132,7 @@ function CategoryList({
           transition: "background 0.3s, box-shadow 0.3s",
         }}
       >
-        {isEditing ? (
+        {editingCategoryId === item.id ? (
           <form
             onSubmit={handleEditSubmit}
             style={{ display: "flex", alignItems: "center" }}
@@ -151,6 +157,9 @@ function CategoryList({
                 marginRight: "5px",
                 display: "flex",
                 alignItems: "center",
+                background: "transparent", // 배경색 투명
+                border: "none", // 테두리 제거
+                cursor: "pointer", // 커서 스타일
               }}
             >
               <AiOutlineCheck className="check-icon" />
@@ -159,7 +168,13 @@ function CategoryList({
               type="button"
               onClick={handleEditToggle}
               className="button cancel-button"
-              style={{ display: "flex", alignItems: "center" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                background: "transparent", // 배경색 투명
+                border: "none", // 테두리 제거
+                cursor: "pointer", // 커서 스타일
+              }}
             >
               <AiOutlineClose className="close-icon" />
             </button>
