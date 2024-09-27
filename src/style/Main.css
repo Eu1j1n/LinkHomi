@@ -4,10 +4,6 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.main-content {
-  margin-top: 100px;
-  margin-left: 1.5rem;
-}
 /* 전체 화면 */
 .container {
   display: flex;
@@ -19,8 +15,36 @@
 .container > .main-content {
   background-color: white;
   color: black;
-  height: 100vh;
-  overflow-y: auto;
+  overflow-y: scroll;
+}
+
+.container > .main-content::-webkit-scrollbar {
+  display: none; 
+}
+
+/*main쪽에 검색 부분 */
+.main-input-container{
+  margin-bottom: 30px;
+  margin-top: 20px;
+  margin-left: 50px;
+}
+.main-search-input{
+  width: 230px !important; 
+  height:30px;
+  padding-left: 15px; 
+  border: 1px solid #ccc;
+  font-size: 12px;
+  color: #B8BAC0;
+  background-color:#F2F3F6;
+}
+.main-search-icon-box{
+  width: 40px;
+  height: 35px;
+  background-color: #2756FF;
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: 13px;
 }
 
 /* 버튼 스타일 */
@@ -35,7 +59,7 @@
 
 .icon {
   transition: transform 0.1s ease;
-  color: black; /* 아이콘 색상 설정 */
+  color: black; 
 }
 
 .rotated {
@@ -82,63 +106,3 @@
   background-color: #e0e0e0;
 }
 
-/* 검색 바 전체 컨테이너 */
-.search-bar {
-  position: fixed; /* 항상 최상단에 위치 */
-  top: 0; /* 페이지 상단에 고정 */
-  left: 50%; /* 화면의 수평 중앙 */
-  transform: translateX(-50%); /* 수평 중앙에 위치시키기 위한 트랜스폼 */
-  width: 100%;
-  max-width: 700px; /* 원하는 너비로 설정 */
-  padding: 10px;
-  box-sizing: border-box;
-  z-index: 1000; /* 다른 UI 요소들 위에 표시되도록 z-index 설정 */
-}
-
-/* 검색 바 전체 컨테이너 */
-.search-bar {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 700px;
-  padding: 10px;
-  box-sizing: border-box;
-  z-index: 1000;
-}
-
-/* main-input-container 스타일 */
-.main-input-container {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 0;
-  padding: 0;
-  width: 100%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-  background-color: #fff;
-}
-
-/* 검색 아이콘 스타일 */
-.search-icon {
-  color: #888;
-  margin-left: 10px;
-}
-
-/* 검색 input 스타일 */
-.search-input {
-  border: none;
-  outline: none;
-  flex: 1;
-  padding: 10px 15px;
-  font-size: 16px;
-  border-left: 1px solid #ccc; /* 아이콘과 입력창 사이에 구분선 추가 */
-}
-
-/* main-input-container 포커스 시 */
-.main-input-container:focus-within {
-  border-color: #007bff;
-  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
-}

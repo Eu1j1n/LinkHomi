@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 11px;
+  margin-left:50px;
 }
 
 .post-card {
