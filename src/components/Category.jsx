@@ -4,7 +4,6 @@ import ConfirmCategory from "../components/ConfirmCategory";
 import "../style/Category.css";
 import { useNavigate } from "react-router-dom";
 import { TbLogout2 } from "react-icons/tb";
-import { CiSearch } from "react-icons/ci";
 import { FaCrown, FaRegStar } from "react-icons/fa";
 import websiteLogo from "../assets/images/websiteLogo.png";
 
@@ -147,17 +146,15 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         onClick={() => window.location.reload()}
       />
       <hr className="divider" />
-
       <div className="input-container">
-        <CiSearch className="search-icon" />
-        <input
-          type="text"
-          placeholder="카테고리를 입력하세요"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
+      <input
+        type="text"
+        className="category-input"
+        placeholder="카테고리를 입력하세요"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
       </div>
-
       <div className="button-container">
         <button className="add-button" onClick={modalOpen}>
           + 카테고리 추가
@@ -185,7 +182,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
           멤버십 구독
         </button>
       </div>
-      <div className="category_footer">
+      <div className="category-footer">
         <img
           src={userProfileImage}
           alt="사용자 프로필"
