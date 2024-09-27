@@ -1,4 +1,3 @@
-// Main.jsx
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faArrowUp, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -83,17 +82,17 @@ function Main({ setIsLoggedIn }) {
         />
       </div>
       <div className="main-content">
-        <div className="search-bar" ref={searchRef}>
+        <div className="main-search-bar" ref={searchRef}> 
           {/* ref를 검색 바에 추가 */}
           <div className="main-input-container">
-            <FontAwesomeIcon icon={faSearch} className="search-icon" />
             <input
               type="text"
               placeholder="찾고 싶은 url 제목을 입력하세요"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
+              className="main-search-input"
             />
+            <button className='main-search-icon-box'><FontAwesomeIcon icon={faSearch} className="main-search-icon" /></button>
           </div>
         </div>
         <PostCard

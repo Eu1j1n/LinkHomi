@@ -1,7 +1,7 @@
-import React from 'react';
-import { PiListHeartBold } from 'react-icons/pi';
+import React, { useState } from 'react';
 import CategoryBoard from './CategoryBoard';
 import CategoryModal from './CategoryModal';
+import { FcAddDatabase } from "react-icons/fc";
 
 function ConfirmCategory({
   categoryList,
@@ -14,13 +14,34 @@ function ConfirmCategory({
   grade,
   onEditCategory,
   onDeleteCategory,
-  onMatchedUrls, // 여기서 전달
+  onMatchedUrls,
 }) {
+  const [sortOrder, setSortOrder] = useState("latest");
+
+  const getSortedCategories = () => {
+    const sortedCategories = [...categoryList]; 
+    return sortedCategories.sort((a, b) => {
+      if (sortOrder === "latest") {
+        return b.id - a.id; 
+      } else {
+        return a.id - b.id; 
+      }
+    });
+  };
+
+  const handleSortChange = (order) => {
+    setSortOrder(order);
+  };
+
   return (
-    <div>
+    <div className="confirm-category-container">
       <div className="category-gap" />
-      <div className="category">
-        <PiListHeartBold className="list" /> Category List
+      <div className="category-title">
+        <FcAddDatabase className='list-icon'/> Category List 
+        <button className='sort-earliest' onClick={() => handleSortChange("oldest")}>오래된 순</button> 
+        <button className='sort-latest' onClick={() => handleSortChange("latest")}>최신순</button>
+      </div>
+      <div className="scrollable-category-list"> 
         <CategoryModal
           isOpen={isOpen}
           onClose={modalClose}
@@ -29,12 +50,12 @@ function ConfirmCategory({
           grade={grade}
         />
         <CategoryBoard
-          categoryList={categoryList}
+          categoryList={getSortedCategories()} //디폴트는 최신순으로 줌
           selectedCategoryId={selectedCategoryId}
           onCategoryClick={onCategoryClick}
           onEditCategory={onEditCategory}
           onDeleteCategory={onDeleteCategory}
-          onMatchedUrls={onMatchedUrls} // 여기서 전달
+          onMatchedUrls={onMatchedUrls}
         />
       </div>
     </div>
