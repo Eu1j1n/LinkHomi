@@ -18,6 +18,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
   const userEmail = localStorage.getItem("userEmail");
   const userName = localStorage.getItem("userName");
   const userProfileImage = localStorage.getItem("userProfile");
+  const [editingCategoryId, setEditingCategoryId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -94,6 +95,7 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
               : category
           )
         );
+        setEditingCategoryId(null); // 수정 후 편집 모드 해제
         setIsOpen(false);
       })
       .catch((error) => {
@@ -147,13 +149,13 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
       />
       <hr className="divider" />
       <div className="input-container">
-      <input
-        type="text"
-        className="category-input"
-        placeholder="카테고리를 입력하세요"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+        <input
+          type="text"
+          className="category-input"
+          placeholder="카테고리를 입력하세요"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
       <div className="button-container">
         <button className="add-button" onClick={modalOpen}>
@@ -161,19 +163,21 @@ function Category({ setIsLoggedIn, onMatchedUrls }) {
         </button>
       </div>
       <div className="confirm-category-container">
-      <ConfirmCategory
-        onMatchedUrls={onMatchedUrls}
-        categoryList={filteredCategories}
-        selectedCategoryId={selectedCategoryId}
-        onCategoryClick={handleCategoryClick}
-        onDeleteCategory={deleteCategory}
-        onEditCategory={editCategory}
-        isOpen={isOpen}
-        addCategory={addCategory}
-        modalClose={modalClose}
-        userId={userId}
-        grade={grade}
-      />
+        <ConfirmCategory
+          onMatchedUrls={onMatchedUrls}
+          categoryList={filteredCategories}
+          selectedCategoryId={selectedCategoryId}
+          onCategoryClick={handleCategoryClick}
+          onDeleteCategory={deleteCategory}
+          onEditCategory={editCategory}
+          isOpen={isOpen}
+          addCategory={addCategory}
+          modalClose={modalClose}
+          userId={userId}
+          grade={grade}
+          editingCategoryId={editingCategoryId}
+          setEditingCategoryId={setEditingCategoryId}
+        />
       </div>
       <hr className="divider" />
       <div className="footer-header">
