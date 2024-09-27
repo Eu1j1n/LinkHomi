@@ -8,7 +8,7 @@
   color: #333333;
   border-radius: 20px;
   width: 430px;
-  padding: 30px;
+  padding: 15px;
   font-size: 18px;
   font-weight: 600;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -18,7 +18,7 @@
 }
 
 .modal-content .add-modal-h3 {
-  width: 100%;
+  width: 80%;
   background-color: #ffffff; /* h3 영역 배경색을 흰색으로 변경 */
   padding: 20px;
   border-radius: 12px;
@@ -38,19 +38,23 @@
 }
 
 .modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 24px;
+  margin-left: 20px;
+  background-color: #ffffff;
+  color: black;
+  padding: 14px 28px;
   border: none;
-  background: none;
-  color: #666;
+  border-radius: 8px;
   cursor: pointer;
-  transition: color 0.2s ease-in-out;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+  box-shadow: 0 4px 12px rgba(74, 123, 255, 0.2);
 }
 
 .modal-close:hover {
-  color: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 123, 255, 0.2);
 }
 
 .modal-field {
