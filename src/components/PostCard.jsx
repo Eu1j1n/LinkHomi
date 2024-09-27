@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import "../style/PostCard.css";
-import Share from "./Share";
-import { BiTrash } from "react-icons/bi";
-import Swal from "sweetalert2";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import '../style/PostCard.css';
+import Share from './Share';
+import { BiTrash } from 'react-icons/bi';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import LoadingScreen from './LoadingScreen'; // LoadingScreen 컴포넌트 import
 
 // OG 이미지 URL을 가져오는 함수
 const getOGImage = async (url) => {
@@ -14,7 +15,7 @@ const getOGImage = async (url) => {
     const data = await response.json();
     return data.ogImage;
   } catch (error) {
-    console.error("Error fetching OG image:", error);
+    console.error('Error fetching OG image:', error);
     return null;
   }
 };
@@ -22,22 +23,22 @@ const getOGImage = async (url) => {
 // 날짜를 포맷팅하는 유틸리티 함수
 const formatDate = (dateString) => {
   if (!dateString) {
-    return "날짜 없음"; // 기본값 설정
+    return '날짜 없음'; // 기본값 설정
   }
 
   // ISO 형식의 문자열을 Date 객체로 변환
   const date = new Date(dateString);
   if (isNaN(date)) {
-    return "유효하지 않은 날짜"; // 유효하지 않은 날짜 처리
+    return '유효하지 않은 날짜'; // 유효하지 않은 날짜 처리
   }
 
   // 날짜 포맷 옵션 설정
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: 'numeric', month: 'long', day: 'numeric' };
   return date.toLocaleDateString(undefined, options);
 };
 
 function PostCard({ urls, setUrls, onMatchedUrls }) {
-  const defaultImage = "./src/assets/images/postLogo.png";
+  const defaultImage = './src/assets/images/postLogo.png';
   const [ogImages, setOgImages] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -46,7 +47,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
       setIsLoading(true);
       const images = {};
       const promises = urls.map(async (urlObject) => {
-        console.log("Created At:", urlObject.createdAt);
+        console.log('Created At:', urlObject.createdAt);
         const ogImage = await getOGImage(urlObject.url);
         images[urlObject.url] = ogImage || defaultImage;
       });
@@ -62,16 +63,16 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
   // URL 삭제 처리
   const handleDeleteClick = async (index) => {
     const { id, user_id } = urls[index];
-    const userId = localStorage.getItem("userId"); // 로컬 스토리지에서 userId 가져오기
+    const userId = localStorage.getItem('userId'); // 로컬 스토리지에서 userId 가져오기
 
     // 삭제 확인 알림
     const result = await Swal.fire({
-      title: "삭제 확인",
-      text: "저장된 URL을 정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다!",
-      icon: "warning",
+      title: '삭제 확인',
+      text: '저장된 URL을 정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다!',
+      icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: "삭제",
-      cancelButtonText: "취소",
+      confirmButtonText: '삭제',
+      cancelButtonText: '취소',
     });
 
     // 사용자가 삭제를 확인한 경우
@@ -86,35 +87,31 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
           onMatchedUrls(updatedUrls); // 상태 업데이트로 리렌더링 유도
 
           Swal.fire({
-            icon: "success",
-            title: "삭제 완료",
-            text: "URL이 성공적으로 삭제되었습니다.",
+            icon: 'success',
+            title: '삭제 완료',
+            text: 'URL이 성공적으로 삭제되었습니다.',
           });
         } catch (error) {
-          console.error("Error deleting URL:", error);
+          console.error('Error deleting URL:', error);
           Swal.fire({
-            icon: "error",
-            title: "삭제 실패",
-            text: "URL 삭제 중 오류가 발생했습니다.",
+            icon: 'error',
+            title: '삭제 실패',
+            text: 'URL 삭제 중 오류가 발생했습니다.',
           });
         }
       } else {
         Swal.fire({
-          icon: "warning",
-          title: "권한 없음",
-          text: "이 URL을 삭제할 수 있는 권한이 없습니다.",
+          icon: 'warning',
+          title: '권한 없음',
+          text: '이 URL을 삭제할 수 있는 권한이 없습니다.',
         });
       }
     }
   };
 
+  // 로딩 중일 때 LoadingScreen 컴포넌트를 반환
   if (isLoading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p>Loading cards...</p>
-      </div>
-    );
+    return <LoadingScreen />;
   }
 
   return (
@@ -138,7 +135,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
               />
               <div className="post-card-content">
                 <h2 className="post-card-title">
-                  {urlObject.title || "No Title"}
+                  {urlObject.title || 'No Title'}
                 </h2>
               </div>
             </a>
