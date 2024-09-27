@@ -19,28 +19,28 @@
 }
 
 .container > .main-content::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 
 /*main쪽에 검색 부분 */
-.main-input-container{
+.main-input-container {
   margin-bottom: 30px;
   margin-top: 20px;
   margin-left: 50px;
 }
-.main-search-input{
-  width: 230px !important; 
-  height:30px;
-  padding-left: 15px; 
+.main-search-input {
+  width: 230px !important;
+  height: 30px;
+  padding-left: 15px;
   border: 1px solid #ccc;
   font-size: 12px;
   color: black;
-  background-color:#F2F3F6;
+  background-color: #f2f3f6;
 }
-.main-search-icon-box{
+.main-search-icon-box {
   width: 40px;
   height: 35px;
-  background-color: #2756FF;
+  background-color: #2756ff;
   border: none;
   color: white;
   display: inline-block;
@@ -59,7 +59,7 @@
 
 .icon {
   transition: transform 0.1s ease;
-  color: black; 
+  color: black;
 }
 
 .rotated {
@@ -88,6 +88,7 @@
   border: none;
   border-radius: 5px;
   display: flex;
+
   justify-content: center;
   align-items: center;
   cursor: pointer;
@@ -105,4 +106,3 @@
 .scrollUp-floating-button:hover {
   background-color: #e0e0e0;
 }
-

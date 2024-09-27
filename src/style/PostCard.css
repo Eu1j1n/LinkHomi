@@ -2,13 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 11px;
-  margin-left:50px;
+  margin-left: 50px;
 }
 
 .post-card {
   border: 1px solid #ddd;
   border-radius: 8px;
-  height:auto;
+  height: auto;
   width: 250px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -102,6 +102,16 @@
   animation: spin 1s linear infinite;
 }
 
+.like-btn {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 24px;
+}
+
+.liked {
+  color: red;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -109,4 +119,22 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.post-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  height: auto;
+  width: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  position: relative; /* 자식 요소의 절대 위치 설정을 위해 추가 */
+}
+
+.post-card-date {
+  font-size: 0.8em; /* 글씨 크기를 작게 설정 */
+  position: absolute; /* 절대 위치 설정 */
+  /* 하단 위치 조정 */
+  right: 12px; /* 우측 위치 조정 */
+  color: #696969; /* 색상 변경 (필요시) */
 }
