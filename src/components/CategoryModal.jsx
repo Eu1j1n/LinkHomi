@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import '../style/Category.css';
+import modal from "../assets/images/modal.png";
 
 Modal.setAppElement('#root');
 
@@ -76,8 +77,10 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       overlayClassName="modal-overlay"
     >
       <form onSubmit={handleSubmit}>
-        <label className="modal">카테고리 생성</label>
+      <img src={modal} alt="logo" className="logo" />
+        <label className="modal">카테고리명을 입력해주세요</label>
         <br />
+        <div className='modal-description'>
         <span className="create-category-description1">
           최소 두 글자 이상으로 입력해 주세요
         </span>
@@ -94,11 +97,12 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
           {' '}
           * 더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 *
         </span>
+        </div>
         <br />
         <div>
           <input
             type="text"
-            className="input-field" // 추가한 클래스명
+            className="modal-input" 
             placeholder="원하는 카테고리명을 입력하세요"
             value={categoryName}
             onChange={(e) => setCategoryName(e.target.value)}

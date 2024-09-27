@@ -35,7 +35,7 @@
   position: relative;
   width: 190px;
   margin-left: 30px;
-  color: #b8bac0;
+  color: black;
 }
 
 .category-input {
@@ -50,82 +50,131 @@
 
 
 /*모달 창 부분*/
+
 .modal {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  background-color: #f4f4f4;
-  color: black;
   align-items: center;
-  border-radius: 8px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #f9f9f9); 
+  color: black;
+  border-radius: 16px;
   width: 400px;
-  padding: 10px;
-  font-size: 20px;
-  font-weight: bold;
+  padding: 30px; 
+  font-size: 20px; 
+  font-weight: 700;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); 
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s; 
   overflow: hidden;
 }
 
-.input-field {
-  margin-top: 10px;
-  width: 50px;
-  max-height: 50vh;
-  padding: 8px;
-  font-size: 10px;
+.modal:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2); 
+  transform: translateY(-5px); 
+}
+
+.modal-divider {
+  border: none;
+  height: 1px;
+  width: 100%;
+  background-color: #e0e0e0; 
+  margin: 20px 0;
+}
+
+.modal-input {
+  width: 90%; 
+  padding: 12px; 
+  font-size: 14px; 
   border: 1px solid #d9d9d9;
   border-radius: 4px;
+  margin-bottom: 15px; 
+  transition: border 0.3s; 
+}
+
+.modal-input:focus {
+  border-color: #325eff; 
+  outline: none; 
 }
 
 .modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7); 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease-in-out; 
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .create-category-description1,
 .create-category-description2,
 .create-category-description3,
 .create-category-description4 {
-  font-size: 12px;
-  margin-left: 20px;
+  font-size: 14px; 
   font-weight: normal;
-  color: red;
+  color: #FF6B6B;
+  margin: 5px 0;
 }
 
 .create-category-description4 {
   font-weight: bold;
+  color: #FF3939;
 }
 
 .modal-button-container {
   display: flex;
-  flex-direction: flex-end;
-  margin-top: 10px;
+  justify-content: center;
+  gap: 15px; 
+  margin-top: 20px;
+  margin-right: 10px;
 }
 
 .add-category-button {
+  width: 100px;
+  height: 40px;
   background-color: #325eff;
   border: none;
-  font-size: 10px;
-  width: 50px;
-  height: 25px;
+  font-size: 16px; 
+  padding: 10px 20px; 
   color: white;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; 
 }
 
 .add-category-button:hover {
   background-color: #194bff;
+  transform: scale(1.05); 
 }
 
 .close-button {
-  width: 50px;
-  height: 25px;
+  padding: 10px 20px; 
+  width: 100px;
+  height: 40px;
   background-color: #ffffff;
-  border-color: #325eff;
-  font-size: 10px;
-  margin-left: 10px;
-  border-width: 1px;
-  border-style: solid;
+  border: 1px solid #325eff;
+  font-size: 14px; 
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; 
 }
 
 .close-button:hover {
   background-color: #f3f3f3;
-  cursor: pointer;
+  transform: scale(1.05); 
 }
 
 /*카테고리 리스트*/
