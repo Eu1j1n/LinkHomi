@@ -4,51 +4,23 @@
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.landingPage {
-  background: black;
-  height: 100vh;
+body {
+  background-color: black; 
+  margin: 0; 
+  overflow-x: hidden; 
+}
+
+.section {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-}
-
-.landing-main {
-  position: relative;
-  height: 400vh;
-}
-
-.landing-firstComment {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 200px;
-  font-weight: 700;
-  color: #ccff00;
-  text-align: center;
-  margin: 0;
-}
-
-.landing-rolling-website {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 170px;
-  font-weight: 700;
-  display: inline-block;
-}
-
-.landing-scroll-arrow {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 100px;
-  color: white;
-  cursor: pointer;
 }
 
 .landing-rolling-ball {
   position: absolute;
-  top: 10px;
+  top: 10px; 
   left: -90px;
   width: 50px;
   height: 50px;
@@ -57,175 +29,150 @@
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
-.landing-rolling-linkkle {
-  display: inline-block;
-  position: relative;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 170px;
-  font-weight: 800;
-  overflow: hidden;
+/*첫번째 페이지*/
+.landingPage {
+  background: black;
+  color: white;
+  overflow-x: hidden; 
 }
 
-.landing-rolling-linkkle span {
-  display: inline-block;
-  position: relative;
-  will-change: transform;
+.landing-firstComment {
+  font-size: 200px;
+  font-weight: 700;
+  color: #ccff00;
+  text-align: center;
 }
 
 .landing-start-btn {
+  display:flex;
+  justify-content: center; 
+  align-items: center; 
   width: 200px;
   height: 60px;
-  margin-top: 40px;
   background-color: black;
   color: white;
   border: 2px solid #ccff00;
   padding: 10px 20px;
   font-size: 20px;
   border-radius: 30px;
+  margin-top:50px;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 .landing-start-btn:hover {
   background-color: #ccff00;
-  font-weight: bold;
   color: black;
+  font-weight:bold;
+}
+.particle {
+  width: 10px;
+  height: 10px;
+  background: #ff66cc;
+  border-radius: 9999px;
+  position: absolute;
+  pointer-events: none; 
 }
 
+@keyframes particle-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+}
+/*두번째 페이지*/
+.second-page {
+  background-color: black;
+  padding: 20px 0;
+}
 .landing-second-comment {
   font-size: 100px;
   font-weight: 900;
-  color: #fff;
-  text-align: left;
-  margin-bottom: 20px;
+  color: #00FFFF;
+  text-align: center;
+  animation: tracking-in-contract 3s ease-in-out forwards infinite; 
 }
 
-.landing-second-comment {
-  color: hsl(0, 0%, 28%);
-  font-size: 55px !important;
-  font-weight: bold !important;
-  font-family: monospace;
-  letter-spacing: 7px !important;
-  cursor: pointer;
-  text-transform: uppercase;
-  padding: 64px;
-  background: linear-gradient(
-    to right,
-    hsl(0, 0%, 30%) 0,
-    hsl(0, 0%, 100%) 10%,
-    hsl(0, 0%, 30%) 20%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: landing-shine 3s infinite linear;
-}
-
-@keyframes landing-shine {
+@keyframes tracking-in-contract {
   0% {
-    background-position: 0;
+    letter-spacing: 20px;
+    opacity: 0;
   }
-  60% {
-    background-position: 600px;
+  40% {
+    opacity: 0.6;
   }
   100% {
-    background-position: 600px;
+    letter-spacing: normal;
+    opacity: 1;
   }
 }
 
-.landing-second-description {
-  color: black;
-  font-size: 28px;
-  font-weight: 400;
-  color: #fff;
-  line-height: 1.5;
-  letter-spacing: 0.5px;
-  margin-bottom: 30px;
-  max-width: 80%;
-  text-align: left;
-  margin-bottom: 30px;
-  word-break: keep-all;
-  line-height: 2;
+.landing-second-description{
+  color: white;
+  font-size: 30px;
+  text-align: center;
 }
 
+.landing-second-page-emphasize {
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  transition: transform 0.3s ease; 
+  animation: zoom 1s ease-in-out infinite; 
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1); 
+  }
+  50% {
+    transform: scale(1.2); 
+  }
+  100% {
+    transform: scale(1); 
+  }
+}
+
+/* 구분선 */
 .landing-divider {
-  height: 0.01%;
-  background-color: #fffce1;
-  margin: 5px auto;
-  width: 90%;
-}
-
-.landing-section {
-  height: 1000px;
-  min-height: 480px;
-  padding: 40px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: black;
+  width: 100%;
+  height: 2px;
+  background-color: black; 
+  margin: 20px 0;
 }
 
 #landing-h2 {
-  color: #00fff3;
+  color:#FF8709;
   font-size: 100px;
 }
-
 #landing-h3 {
-  color: white;
+  color: #FEC5FB;
   font-size: 100px;
 }
 
-.landing-card-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-}
-
-.landing-card-contents {
-  position: relative;
-  width: 500px;
-  height: 300px;
-  background-color: #000;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-}
-
-.landing-card-contents img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  opacity: 0.8;
-  object-fit: cover;
-}
-
-.landing-card-description {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  z-index: 100;
+.landing-upper-button {
+  width: 200px;
+  height: 60px;
+  background-color: black;
   color: white;
+  border: 2px solid white;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size:20px;
 }
-
-.landing-card-description h1,
-.landing-card-description p {
-  margin: 0;
-  text-align: left;
-  margin-left: 20px;
-}
-
-.landing-spacer {
-  width: 100%;
-  height: 100vh;
+.landing-upper-button:hover{
+  background-color: white;
+  color:black;
+  font-weight:bold;
 }
 
 .landing-arrow {
   color: white;
-  font-weight: bold;
-  font-size: 40px;
-  margin-top: 30px;
+  font-size: 2vw;
+  margin-top:40px;
   animation: landing-moveArrow 2s infinite ease-in-out;
 }
 
@@ -241,22 +188,4 @@
   }
 }
 
-.landing-upper-button {
-  width: 200px;
-  height: 60px;
-  margin-top: 40px;
-  background-color: black;
-  color: white;
-  border: 2px solid white;
-  padding: 10px 20px;
-  font-size: 20px;
-  border-radius: 30px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
 
-.landing-upper-button:hover {
-  background-color: white;
-  font-weight: bold;
-  color: black;
-}

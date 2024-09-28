@@ -139,3 +139,31 @@
 .scrollUp-floating-button:hover {
   background-color: #e0e0e0;
 }
+
+/*main부분 오래된순-최신순 부분 css*/
+.main-sort-order{
+  font-size:13px;
+  border: none;
+  background-color:white;
+}
+.main-sort-order:hover{
+  font-size:13px;
+  border: none;
+  background-color:white;
+  cursor:pointer;
+  color: #325eff; 
+  font-weight:bold;
+}
+.main-sort-order.active {
+  color: #325eff; 
+  font-weight: bold; 
+}
+
+.sort-oldest {
+  margin-left:600px;
+  margin-right:10px;
+}
+
+.sort-latest {
+  margin-left:10px;
+}

@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import LoadingScreen from './LoadingScreen'; // LoadingScreen 컴포넌트 import
 
-// OG 이미지 URL을 가져오는 함수
 const getOGImage = async (url) => {
   try {
     const response = await fetch(
@@ -60,12 +59,10 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
     fetchOGImages();
   }, [urls]);
 
-  // URL 삭제 처리
   const handleDeleteClick = async (index) => {
     const { id, user_id } = urls[index];
     const userId = localStorage.getItem('userId'); // 로컬 스토리지에서 userId 가져오기
 
-    // 삭제 확인 알림
     const result = await Swal.fire({
       title: '삭제 확인',
       text: '저장된 URL을 정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다!',
@@ -75,16 +72,12 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
       cancelButtonText: '취소',
     });
 
-    // 사용자가 삭제를 확인한 경우
     if (result.isConfirmed) {
       if (userId === user_id) {
         try {
-          // DELETE 요청 보내기
           await axios.delete(`http://localhost:5001/api/urls/${id}`);
-
-          // 성공적으로 삭제되면 matchedUrls 업데이트
           const updatedUrls = urls.filter((_, idx) => idx !== index);
-          onMatchedUrls(updatedUrls); // 상태 업데이트로 리렌더링 유도
+          onMatchedUrls(updatedUrls);
 
           Swal.fire({
             icon: 'success',
@@ -143,6 +136,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
               <Share url={urlObject.url} />
               <BiTrash
                 className="delete-btn"
+                onClick={() => handleDeleteClick(index)}
                 onClick={() => handleDeleteClick(index)}
               />
 
