@@ -1,45 +1,87 @@
 /* popup.css */
-.history-list-item {
-  margin-right: 20px;
-  width: 200px;
-  font-size: 13px;
-  font-weight: normal;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  padding: 10px 20px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+:root {
+  --primary-color: #bfcbf8;
+  --hover-color: #bfcbf8;
+  --text-color: #333;
+  --background-color: #f5f5f5;
 }
 
-.history-list-item:hover {
-  background: linear-gradient(135deg, #06a375, #047857, #035c49);
-  font-weight: bold;
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 8px,
-    rgba(0, 0, 0, 0.1) 0px 1px 2px inset;
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
 }
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
 .search-label {
-  font-size: 16px; /* 텍스트 크기 */
-  color: #333; /* 텍스트 색상 */
-  margin-right: 10px; /* 검색 바와의 간격 */
-  display: inline-block; /* 텍스트를 인라인 블록으로 설정 */
-  vertical-align: middle; /* 수직 정렬 조정 */
-  font-weight: bold; /* 글자 두껍게 */
+  font-size: 18px;
+  color: var(--text-color);
+  margin-right: 15px;
+  font-weight: 600;
 }
-/* styles.css */
+
 #searchBar {
-  width: 100px; /* 검색창 너비를 부모 요소에 맞춤 */
-  padding: 10px 15px; /* 여백 추가 */
-  font-size: 14px; /* 글자 크기 */
-  border: 1px solid #ccc; /* 테두리 색상 */
-  border-radius: 5px; /* 둥근 모서리 */
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px; /* 그림자 효과 */
-  transition: border-color 0.3s ease-in-out; /* 테두리 색상 변화 효과 */
-  margin-bottom: 20px; /* 리스트와의 간격 추가 */
+  flex-grow: 1;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #searchBar:focus {
-  border-color: #06a375; /* 포커스 시 테두리 색상 변경 */
-  outline: none; /* 기본 아웃라인 제거 */
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 8px; /* 포커스 시 그림자 효과 */
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(6, 163, 117, 0.2);
+}
+
+.history-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.history-list-item {
+  background-color: white;
+  border-radius: 10px;
+  padding: 15px 20px;
+  font-size: 14px;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.history-list-item:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, var(--primary-color), var(--hover-color));
+  color: white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-label {
+    margin-bottom: 10px;
+  }
+
+  #searchBar {
+    margin-top: 10px;
+    width: 70%;
+  }
 }
