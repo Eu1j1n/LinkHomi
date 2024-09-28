@@ -4,8 +4,6 @@ import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import SplitType from 'split-type';
 import BouncingBall from './BouncingBall';
-import { FaQuestion } from 'react-icons/fa6';
-import CardComponent from './CardComponent';
 import { RxDoubleArrowUp } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
 
@@ -88,51 +86,81 @@ const LandingPage = () => {
   };
 
   const handleSignupClick = () => {
-    navigate('/login');
+    setTimeout(() => {
+      navigate('/login');
+    }, 1000);
   };
+  const createParticles = (e) => {
+    const particleCount = 20; // 생성할 파티클 수
+    const buttonRect = e.currentTarget.getBoundingClientRect();
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      document.body.appendChild(particle);
+
+      // 파티클 위치 설정
+      const x = Math.random() * buttonRect.width + buttonRect.left;
+      const y = Math.random() * buttonRect.height + buttonRect.top;
+
+      particle.style.left = `${x}px`;
+      particle.style.top = `${y}px`;
+
+      // 파티클 애니메이션
+      gsap.to(particle, {
+        duration: 1,
+        x: Math.random() * 200 - 100, 
+        y: Math.random() * 200 - 100, 
+        opacity: 0,
+        ease: 'power2.out',
+        onComplete: () => {
+          particle.remove(); 
+        },
+      });
+    }
+  };
+
 
   return (
     <>
-      <div className="landingPage">
+      <div className="landingPage section">
         <div className="landing-firstComment">
           Welcome to
           <br />
           <BouncingBall />{' '}
           <span className="landing-rolling-linkkle" ref={linkkleRef}>
-            LinkKle !
+            LINKKLE !
           </span>
         </div>
-        <button className="landing-start-btn" onClick={handleSignupClick}>
+        <button className="landing-start-btn" onMouseEnter={createParticles} onClick={handleSignupClick}>
           회원가입
         </button>
       </div>
+
       <div className="landing-divider"></div>
-      <section id="landing-second_header">
-        <h1 className="landing-second-comment">
-          What is LinkKle <FaQuestion />
-        </h1>
+      <div className='second-page section'>
+        <h1 className="landing-second-comment">WHAT IS LINKKLE ?</h1>
         <h3 className="landing-second-description">
-          LinkKle은 방문한 웹사이트의 URL을 카테고리별로 정리하여 쉽게 관리할 수
-          있는 웹 서비스입니다.
-          <br /> 링크를 쉽게 저장하고, 원하는 카테고리로 분류하여 언제든지
-          빠르게 찾아보세요.
+          <p>링클은 방문한 웹사이트의 URL을 카테고리별로 쉽게 관리할 수 있는 웹 서비스입니다.</p>
+          <p className='landing-second-page-emphasize' style={{ fontSize: '50px' }}>
+            한 번의 드래그로 URL을 쉽게 복사하세요!
+          </p>
         </h3>
-      </section>
+      </div>
+
       <div className="landing-divider"></div>
 
-      <section id="landing-section2">
+      <section id="landing-section2" className="section">
         <h2 id="landing-h2">링클을 둘러보세요</h2>
       </section>
-      <section>
-        <CardComponent />
-      </section>
 
       <div className="landing-divider"></div>
-      <section>
+
+      <section className="section">
         <h2 id="landing-h3">
           빠르고 간편한 URL 관리 서비스
           <br />
-          지금 바로 시작하세요 !
+          링클과 시작하세요 !
         </h2>
         <button className="landing-upper-button" onClick={scrollToTop}>
           시작하기

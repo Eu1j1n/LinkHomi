@@ -15,8 +15,8 @@ function Main({ setIsLoggedIn }) {
   const [urls, setUrls] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOrder, setSortOrder] = useState('oldest'); 
   const navigate = useNavigate();
-
   const searchRef = useRef(null);
 
   useEffect(() => {
@@ -44,8 +44,8 @@ function Main({ setIsLoggedIn }) {
         urlData
       );
       if (response.data) {
-        await fetchCategories();
-        setMatchedUrls((prev) => [...prev, response.data]);
+        const newUrl = { ...response.data, created_at: new Date() };
+        setMatchedUrls((prev) => [newUrl, ...prev]); 
       }
     } catch (error) {
       console.error("URL 저장 오류:", error);
@@ -64,6 +64,12 @@ function Main({ setIsLoggedIn }) {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
     return matchesCategory && matchesTitle;
+  });
+
+  const sortedUrls = [...filteredUrls].sort((a, b) => {
+    return sortOrder === 'latest'
+      ? new Date(b.created_at) - new Date(a.created_at)
+      : new Date(a.created_at) - new Date(b.created_at);
   });
 
   const scrollToTop = () => {
@@ -92,13 +98,26 @@ function Main({ setIsLoggedIn }) {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="main-search-input"
             />
-            <button className="main-search-icon-box">
+            <button className='main-search-icon-box'>
               <FontAwesomeIcon icon={faSearch} className="main-search-icon" />
+            </button>
+            <button
+              className={`main-sort-order sort-oldest ${sortOrder === 'oldest' ? 'active' : ''}`}
+              onClick={() => setSortOrder('oldest')}
+            >
+              오래된 순
+            </button>
+            <span className="sort-divider">|</span>
+            <button
+              className={`main-sort-order sort-latest ${sortOrder === 'latest' ? 'active' : ''}`}
+              onClick={() => setSortOrder('latest')}
+            >
+              최신순
             </button>
           </div>
         </div>
         <PostCard
-          urls={filteredUrls}
+          urls={sortedUrls}
           setUrls={setUrls}
           onMatchedUrls={handleMatchedUrls}
         />

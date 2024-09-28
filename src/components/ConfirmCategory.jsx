@@ -38,20 +38,21 @@ function ConfirmCategory({
     <div className="confirm-category-container">
       <div className="category-gap" />
       <div className="category-title">
-        <FcAddDatabase className="list-icon" /> Category List
-        <button
-          className="sort-earliest"
-          onClick={() => handleSortChange("oldest")}
-        >
-          오래된 순
-        </button>
-        <button
-          className="sort-latest"
-          onClick={() => handleSortChange("latest")}
-        >
-          최신순
-        </button>
-      </div>
+  <FcAddDatabase className="list-icon" /> Category List
+  <span
+    className={`sort-order ${sortOrder === "oldest" ? "active" : ""}`}
+    onClick={() => handleSortChange("oldest")}
+  >
+    오래된 순
+  </span>
+  <span
+    className={`sort-order ${sortOrder === "latest" ? "active" : ""}`}
+    onClick={() => handleSortChange("latest")}
+  >
+    최신순
+  </span>
+</div>
+
       <div className="scrollable-category-list">
         <CategoryModal
           isOpen={isOpen}

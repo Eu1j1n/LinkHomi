@@ -77,7 +77,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
       overlayClassName="modal-overlay"
     >
       <form onSubmit={handleSubmit}>
-      <img src={modal} alt="logo" className="logo" />
+      <img src={modal} alt="modal" className="modal-icon" />
         <label className="modal">카테고리명을 입력해주세요</label>
         <br />
         <div className='modal-description'>
@@ -95,7 +95,7 @@ function CategoryModal({ isOpen, onClose, userId, addCategory, grade }) {
         <br />
         <span className="create-category-description4">
           {' '}
-          * 더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 *
+          더 많은 카테고리를 추가하고 싶다면 멤버십을 이용하세요 
         </span>
         </div>
         <br />

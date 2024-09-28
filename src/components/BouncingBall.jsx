@@ -3,20 +3,19 @@ import { gsap } from 'gsap';
 
 const BouncingBall = () => {
   useEffect(() => {
-    gsap.set('.rolling-ball', { x: 100 });
+    gsap.set('.landing-rolling-ball', { x: 100 });
 
-    // 구르는 애니메이션 설정
-    gsap.to('.rolling-ball', {
-      x: 1000,
+    gsap.to('.landing-rolling-ball', {
+      x: 850,
       duration: 2, 
-      repeat: -1, // 무한 반복
-      yoyo: true, // 애니메이션이 되돌아옴
-      ease: 'power1.inOut', 
+      repeat: -1,
+      yoyo: true,
+      ease: 'power1.inOut',
     });
   }, []);
 
   return (
-    <div className="rolling-ball"></div>
+    <div className="landing-rolling-ball"></div>
   );
 };
 
