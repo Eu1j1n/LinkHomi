@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "../style/AddUrlModal.css";
-import logo from "../assets/images/modal.png";
-import Swal from "sweetalert2";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import '../style/AddUrlModal.css';
+import logo from '../assets/images/modal.png';
+import Swal from 'sweetalert2';
 
 const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [title, setTitle] = useState('');
+  const [url, setUrl] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [categories, setCategories] = useState([]);
 
-  const userId = localStorage.getItem("userId");
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchCategories = async () => {
       if (!userId) {
-        console.error("User ID not found");
+        console.error('User ID not found');
         return;
       }
 
@@ -25,7 +25,7 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
         );
         setCategories(response.data);
       } catch (error) {
-        console.error("Error fetching categories:", error);
+        console.error('Error fetching categories:', error);
       }
     };
 
@@ -35,33 +35,31 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
   const handleSave = async () => {
     if (!selectedCategory) {
       Swal.fire({
-        icon: "warning",
-        title: "저장 실패!",
-        text: "카테고리를 선택해주세요!",
-        confirmButtonText: "확인",
+        icon: 'warning',
+        title: '저장 실패!',
+        text: '카테고리를 선택해주세요!',
+        confirmButtonText: '확인',
       });
       return; // 폴더 선택이 없으면 함수 종료
     }
 
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/add-url",
+        'http://localhost:5001/api/add-url',
         { title, url, categoryId: selectedCategory },
-        { headers: { "user-id": userId } }
+        { headers: { 'user-id': userId } }
       );
 
       // 성공 메시지 표시
       Swal.fire({
-        icon: "success",
-        title: "성공!",
-        text: "URL이 추가되었습니다!",
-        confirmButtonText: "확인",
+        icon: 'success',
+        title: '성공!',
+        text: 'URL이 추가되었습니다!',
+        confirmButtonText: '확인',
       });
 
       onSave({ title, url, categoryId: selectedCategory });
       const { id, created_at } = response.data;
-
-      alert("URL이 성공적으로 추가되었습니다.");
 
       onMatchedUrls((prevUrls) => [
         ...prevUrls,
@@ -77,13 +75,13 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
 
       onClose();
     } catch (error) {
-      console.error("URL 저장 오류:", error);
+      console.error('URL 저장 오류:', error);
       // 실패 메시지 표시
       Swal.fire({
-        icon: "error",
-        title: "실패!",
-        text: "URL 저장에 실패하였습니다.",
-        confirmButtonText: "확인",
+        icon: 'error',
+        title: '실패!',
+        text: 'URL 저장에 실패하였습니다.',
+        confirmButtonText: '확인',
       });
     }
   };
