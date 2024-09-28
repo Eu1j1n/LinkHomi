@@ -147,7 +147,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
               />
 
               <p className="post-card-date">
-                {formatDate(urlObject.created_at)} {/* created_at 사용 */}
+                {formatDate(urlObject.created_at)} 
               </p>
             </div>
           </div>
