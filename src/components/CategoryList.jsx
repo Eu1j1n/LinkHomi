@@ -18,7 +18,6 @@ function CategoryList({
 }) {
   const [newName, setNewName] = useState(item.name);
 
-  // 드롭된 URL을 처리하는 핸들러
   const handleDrop = async (e) => {
     e.preventDefault();
     const urlString = e.dataTransfer.getData("text/plain");
@@ -50,7 +49,9 @@ function CategoryList({
         title,
         url,
         user_id: response.data.userId,
+        created_at: response.data.created_at, // 서버에서 반환된 created_at 값 추가
       };
+
       onMatchedUrls((prevUrls) => [...prevUrls, newUrl]);
 
       Swal.fire({

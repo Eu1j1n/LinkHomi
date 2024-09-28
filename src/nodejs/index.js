@@ -348,18 +348,10 @@ app.delete("/api/delete-category/:id", (req, res) => {
   });
 });
 
-// URL 추가 로직
 app.post("/api/add-url", (req, res) => {
-  const { title, url, categoryId } = req.body;
-  const userId = req.headers["user-id"]; // 헤더에서 userId를 가져옵니다.
+  const { categoryId, url, title } = req.body;
+  const userId = req.headers["user-id"];
 
-  console.log("Received data:", { title, url, categoryId, userId });
-
-  if (!title || !url || !categoryId || !userId) {
-    return res.status(400).json({ error: "모든 필드를 입력해주세요." });
-  }
-
-  // URL 추가 쿼리
   const query = `
     INSERT INTO urls (user_id, title, url, category_id, created_at)
     VALUES (?, ?, ?, ?, NOW())
@@ -367,13 +359,30 @@ app.post("/api/add-url", (req, res) => {
 
   db.query(query, [userId, title, url, categoryId], (err, result) => {
     if (err) {
-      console.error("URL 추가 오류:", err.message);
       return res.status(500).json({ error: "URL 추가 실패" });
     }
 
     const newUrlId = result.insertId;
-    console.log("URL 추가 성공", result);
-    res.status(200).json({ success: true, id: newUrlId, userId: userId });
+
+    const selectQuery = `
+      SELECT created_at FROM urls WHERE id = ?
+    `;
+
+    db.query(selectQuery, [newUrlId], (err, rows) => {
+      if (err) {
+        return res.status(500).json({ error: "Created_at 조회 실패" });
+      }
+
+      const createdAt = rows[0].created_at;
+      res.status(200).json({
+        success: true,
+        id: newUrlId,
+        title: title,
+        url: url,
+        userId: userId,
+        created_at: createdAt,
+      });
+    });
   });
 });
 
