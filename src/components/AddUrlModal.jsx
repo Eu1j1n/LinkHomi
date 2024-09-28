@@ -81,9 +81,6 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>
-          ×
-        </button>
         <img src={logo} alt="Modal Logo" className="modal-logo" />
         <h3 className="add-modal-h3">URL 추가</h3>
         <div className="modal-field">
@@ -116,9 +113,14 @@ const AddUrlModal = ({ onClose, onSave, onMatchedUrls }) => {
             ))}
           </select>
         </div>
-        <button className="modal-save" onClick={handleSave}>
-          Save
-        </button>
+        <div className="modal-buttons">
+          <button className="modal-save" onClick={handleSave}>
+            저장
+          </button>
+          <button className="modal-close" onClick={onClose}>
+            닫기
+          </button>
+        </div>
       </div>
     </div>
   );

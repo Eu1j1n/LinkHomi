@@ -1,17 +1,22 @@
 .post-card-container {
-  margin: 10px;
   display: flex;
   flex-wrap: wrap;
-  margin-left: 55px;
+  justify-content: center; /* 중앙 정렬 */
+  width: 100%; /* 전체 너비 차지 */
+  max-width: 1920px; /* 최대 너비 설정 (옵션) */
+  max-height: 1080px;
+  margin: 0 auto; /* 중앙 정렬을 위해 자동 여백 설정 */
+  padding: 0 10px; /* 좌우 여백 줄이기 */
 }
 
 .post-card {
   border: 1px solid #ddd;
   border-radius: 8px;
   height: auto;
-  width: 250px;
+  width: 250px; /* 카드 너비 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  margin: 10px; /* 카드 간의 여백 설정 */
 }
 
 .post-card:hover {
@@ -102,7 +107,7 @@
   animation: spin 1s linear infinite;
 } */
 
-.like-btn {
+/* .like-btn {
   cursor: pointer;
   margin-left: 10px;
   font-size: 24px;
@@ -119,7 +124,7 @@
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 .post-card {
   border: 1px solid #ddd;
