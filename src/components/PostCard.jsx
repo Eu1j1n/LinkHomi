@@ -137,7 +137,6 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
               <BiTrash
                 className="delete-btn"
                 onClick={() => handleDeleteClick(index)}
-                onClick={() => handleDeleteClick(index)}
               />
 
               <p className="post-card-date">
