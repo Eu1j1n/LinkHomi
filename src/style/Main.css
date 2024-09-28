@@ -26,11 +26,23 @@
 .main-input-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   margin-bottom: 30px;
   margin-top: 20px;
+  /* margin-left: 150px; */
   margin-left: 50px;
   transition: transform 0.3s ease; /* 부드러운 전환 효과 */
+}
+/* 1920x1080 해상도일 때 margin-left 변경 */
+@media (min-width: 1920px) and (min-height: 1080px) {
+  .main-input-container {
+    margin-left: 150px;
+  }
+}
+@media (min-width: 1920px) and (min-height: 935px) {
+  .main-input-container {
+    margin-left: 150px;
+  }
 }
 
 .main-search-input {
