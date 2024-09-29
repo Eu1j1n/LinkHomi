@@ -40,9 +40,9 @@
 }
 
 .category-input {
-  width: 220px !important; 
-  height:30px;
-  padding-left: 15px; 
+  width: 220px !important;
+  height: 30px;
+  padding-left: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 12px;
@@ -57,31 +57,31 @@
   align-items: center;
   text-align: center;
   background: linear-gradient(135deg, #ffffff, #f9f9f9);
-  color: #333; 
+  color: #333;
   border-radius: 16px;
   width: 400px;
   padding: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   font-size: 18px;
   font-weight: 600;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s;
 }
 
 .modal-input {
-  width: 100%; 
-  max-width: 350px; 
-  padding: 14px; 
-  font-size: 16px; 
+  width: 100%;
+  max-width: 350px;
+  padding: 14px;
+  font-size: 16px;
   border: 1px solid #d9d9d9;
-  border-radius: 8px; 
+  border-radius: 8px;
   margin-bottom: 20px;
-  transition: border 0.3s, box-shadow 0.3s; 
+  transition: border 0.3s, box-shadow 0.3s;
 }
 
 .modal-input:focus {
   border-color: #325eff;
   outline: none;
-  box-shadow: 0 0 5px rgba(50, 94, 255, 0.5); 
+  box-shadow: 0 0 5px rgba(50, 94, 255, 0.5);
 }
 
 .modal-overlay {
@@ -100,7 +100,7 @@
 .modal-icon {
   width: 100px;
   height: 100px;
-  margin-bottom: 20px; 
+  margin-bottom: 20px;
 }
 
 @keyframes fadeIn {
@@ -118,13 +118,13 @@
 .create-category-description4 {
   font-size: 14px;
   font-weight: normal;
-  color: #FF6B6B;
-  gap:20px;
+  color: #ff6b6b;
+  gap: 20px;
 }
 
 .create-category-description4 {
   font-weight: bold;
-  color: #FF3939;
+  color: #ff3939;
   margin-top: 10px;
   font-size: 15px;
 }
@@ -132,15 +132,15 @@
 .modal-button-container {
   display: flex;
   justify-content: center;
-  gap: 20px; 
-  margin-top: 15px; 
-  margin-bottom: 10px; 
+  gap: 20px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .add-category-button {
-  width: 120px; 
+  width: 120px;
   height: 45px;
-  background-color: #325eff; 
+  background-color: #325eff;
   border: none;
   font-size: 16px;
   color: white;
@@ -152,15 +152,15 @@
 .add-category-button:hover {
   background-color: #194bff;
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(50, 94, 255, 0.3); 
+  box-shadow: 0 4px 10px rgba(50, 94, 255, 0.3);
 }
 
 .close-button {
-  padding: 12px 20px; 
-  width: 120px; 
-  height: 45px; 
+  padding: 12px 20px;
+  width: 120px;
+  height: 45px;
   background-color: #ffffff;
-  border: 1px solid #325eff; 
+  border: 1px solid #325eff;
   font-size: 14px;
   border-radius: 4px;
   cursor: pointer;
@@ -170,9 +170,8 @@
 .close-button:hover {
   background-color: #f3f3f3;
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
 
 /*카테고리 리스트*/
 .category {
@@ -239,46 +238,46 @@
 }
 
 .confirm-category-container {
-  max-width: 480px; 
-  margin-left:10px;
+  max-width: 480px;
+  margin-left: 10px;
 }
 
 .category-title {
-  font-size: 16px; 
+  font-size: 16px;
   margin-left: 10px;
-  font-weight: bold;  
+  font-weight: bold;
   display: flex;
   color: #172147;
-  align-items: center; 
+  align-items: center;
 }
 
 .list-icon {
-  margin-right: 10px; 
+  margin-right: 10px;
   font-size: 25px;
-  margin-bottom:1px;
+  margin-bottom: 1px;
 }
 .scrollable-category-list {
-  max-height: 380px; 
-  overflow-y: auto; 
+  max-height: 380px;
+  overflow-y: auto;
   padding: 10px;
 }
 
 .scrollable-category-list::-webkit-scrollbar {
-  width: 6px; 
+  width: 6px;
 }
 
 .scrollable-category-list::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
   border-radius: 10px;
 }
 
 .scrollable-category-list::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
   border-radius: 10px;
 }
 
 .scrollable-category-list::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 
 /*푸터 부분*/
@@ -406,18 +405,75 @@
 /*최신순-오래된 순 css*/
 .sort-order {
   cursor: pointer;
-  color: black; 
+  color: black;
   font-size: 12px;
   font-weight: normal;
   margin-left: 17px;
 }
 
 .sort-order:hover {
-  color: #325eff; 
-  font-weight: bold; 
+  color: #325eff;
+  font-weight: bold;
 }
 
 .sort-order.active {
-  color: #325eff; 
-  font-weight: bold; 
+  color: #325eff;
+  font-weight: bold;
+}
+
+@media (min-width: 1920px) and (min-height: 1080px) {
+  .sort-order {
+    cursor: pointer;
+    color: black;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 8px;
+  }
+}
+@media (min-width: 1920px) and (min-height: 935px) {
+  .sort-order {
+    cursor: pointer;
+    color: black;
+    font-size: 12px;
+    font-weight: normal;
+    margin-left: 8px;
+  }
+}
+
+.category-check-icon {
+  margin-right: 5px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+.category-close-icon {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+//카테고리 이름 수정하는 부분 일부 반응형
+@media (min-width: 1920px) and (min-height: 935px) {
+  .category-check-icon {
+    margin-right: -10px;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
+@media (min-width: 1920px) and (min-height: 1080px) {
+  .category-check-icon {
+    margin-right: -10px;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
 }
