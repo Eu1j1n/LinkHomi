@@ -108,7 +108,12 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
   }
 
   return (
-    <div className="post-card-container">
+    <div
+      className="post-card-container"
+      onDragOver={(e) => e.preventDefault()}
+      onDrop={(e) => e.preventDefault()} // 상위 컴포넌트에서 처리하도록 함
+    >
+      {' '}
       {urls.length > 0 ? (
         urls.map((urlObject, index) => (
           <div key={urlObject.id || index} className="post-card">
@@ -140,7 +145,7 @@ function PostCard({ urls, setUrls, onMatchedUrls }) {
               />
 
               <p className="post-card-date">
-                {formatDate(urlObject.created_at)} 
+                {formatDate(urlObject.created_at)}
               </p>
             </div>
           </div>
