@@ -188,4 +188,40 @@ body {
   }
 }
 
+.sort-category-description{
+  width:880px;
+  margin: 0px;
+  height: auto; 
+}
 
+
+
+.LangingImg3-page{
+  animation: slideUp 3s ease-in-out infinite; 
+}
+.landingImg3-description{
+  color: white;
+  font-size:30px;
+  text-align: center;
+  font-weight: bold;
+  flex: 1; 
+  line-height: 1.8; 
+  margin-bottom: 0;
+}
+
+.payService{
+  width:880px;
+  margin: 0px;
+  height: auto; 
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px); 
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1; 
+  }
+}
