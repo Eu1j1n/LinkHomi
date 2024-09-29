@@ -12,7 +12,7 @@ import Subscribe from "./components/Subscribe";
 import SuccessPage from "./components/SuccessPage";
 import FailPage from "./components/FailPage";
 import CancelPage from "./components/CancelPage";
-import ErrorPage from "./components/ErrorPage"; // ErrorPage import 추가
+import ErrorPage from "./components/ErrorPage";
 
 import "normalize.css";
 import "./style/Main.css";
