@@ -73,7 +73,7 @@ function CategoryList({
 
   const handleDelete = () => {
     Swal.fire({
-      title: `${item.name} 카테고리를 삭제하시겠습니까?`,
+      title: `${item.name}카테고리를 삭제하시겠습니까?`,
       text: "이 작업은 되돌릴 수 없습니다!",
       icon: "warning",
       showCancelButton: true,
