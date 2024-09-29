@@ -4,6 +4,7 @@ import "../style/Subscribe.css";
 import { gsap } from "gsap";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { TbMoneybag } from "react-icons/tb";
 
 function Subscribe() {
   const location = useLocation();
@@ -153,8 +154,8 @@ function Subscribe() {
   return (
     <div className="subscribe-container">
       <h1 className="intro-text">
-        카카오페이를 통해 간편하게 결제하고
-        <br />단 한 번의 결제로 카테고리를 확장하여 보다 세밀하게 관리해 보세요!
+        결제 프리미엄 서비스 <TbMoneybag className="subscribe-icon"/>
+        <br />단 한 번의 결제로 카테고리를 확장하여 세밀하게 관리하세요!
       </h1>
       <p className="current-grade">현재 등급: {grade || "NORMAL"}</p>
       <div className="pricing-sections">
