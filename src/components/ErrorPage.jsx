@@ -8,12 +8,12 @@ function ErrorPage(props) {
     const balls = document.querySelectorAll(".bounce-ball");
     balls.forEach((ball, index) => {
       gsap.to(ball, {
-        y: -30,
-        duration: 0.5,
+        y: -20,
+        duration: 0.6,
         repeat: -1,
         yoyo: true,
         delay: index * 0.2,
-        ease: "bounce.out",
+        ease: "power1.out",
       });
     });
   }, []);

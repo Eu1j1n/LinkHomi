@@ -197,7 +197,7 @@ function Subscribe() {
         </div>
 
         <div
-          className={`pricing-wrapper ${grade === "PRO" ? "disabled" : ""}`} // PRO 등급에서 PRO 패키지 비활성화
+          className={`pricing-wrapper ${grade === "PRO" ? "disabled" : ""}`}
           onClick={() => handlePayment("PRO", 14700)}
         >
           <div className="pricing-section pro">
