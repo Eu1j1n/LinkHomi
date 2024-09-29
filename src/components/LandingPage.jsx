@@ -6,10 +6,11 @@ import SplitType from 'split-type';
 import BouncingBall from './BouncingBall';
 import { RxDoubleArrowUp } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
-import payService from "../assets/images/payService.png";
-import category from "../assets/images/category.png";
+import payService from '../assets/images/payService.png';
+import category from '../assets/images/category.png';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const LandingPage = () => {
   const number = useRef(null);
@@ -81,9 +82,10 @@ const LandingPage = () => {
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
+    gsap.to(window, {
+      scrollTo: { y: 0, autoKill: true },
+      duration: 1, // 스크롤 속도 (1초 동안 부드럽게 이동)
+      ease: 'power2.out', // 부드러운 가속 감속 효과
     });
   };
 
@@ -94,7 +96,7 @@ const LandingPage = () => {
   };
 
   const createParticles = (e) => {
-    const particleCount = 40; 
+    const particleCount = 40;
     const buttonRect = e.currentTarget.getBoundingClientRect();
 
     for (let i = 0; i < particleCount; i++) {
@@ -112,21 +114,20 @@ const LandingPage = () => {
       // 파티클 애니메이션
       gsap.to(particle, {
         duration: 1,
-        x: Math.random() * 200 - 100, 
-        y: Math.random() * 200 - 100, 
+        x: Math.random() * 200 - 100,
+        y: Math.random() * 200 - 100,
         opacity: 0,
         ease: 'power2.out',
         onComplete: () => {
-          particle.remove(); 
+          particle.remove();
         },
       });
     }
   };
 
-
   return (
     <>
-    {/*첫번째 페이지*/}
+      {/*첫번째 페이지*/}
       <div className="landingPage section">
         <div className="landing-firstComment">
           Welcome to
@@ -136,17 +137,27 @@ const LandingPage = () => {
             LINKKLE !
           </span>
         </div>
-        <button className="landing-start-btn" onMouseEnter={createParticles} onClick={handleSignupClick}>
+        <button
+          className="landing-start-btn"
+          onMouseEnter={createParticles}
+          onClick={handleSignupClick}
+        >
           회원가입
         </button>
       </div>
       {/*두번째 페이지*/}
       <div className="landing-divider"></div>
-      <div className='second-page section'>
+      <div className="second-page section">
         <h1 className="landing-second-comment">WHAT IS LINKKLE ?</h1>
         <h3 className="landing-second-description">
-          <p>링클은 방문한 웹사이트의 URL을 카테고리별로 쉽게 관리할 수 있는 웹 서비스입니다.</p>
-          <p className='landing-second-page-emphasize' style={{ fontSize: '50px' }}>
+          <p>
+            링클은 방문한 웹사이트의 URL을 카테고리별로 쉽게 관리할 수 있는 웹
+            서비스입니다.
+          </p>
+          <p
+            className="landing-second-page-emphasize"
+            style={{ fontSize: '50px' }}
+          >
             한 번의 드래그로 URL을 쉽게 복사하세요!
           </p>
         </h3>
@@ -157,33 +168,46 @@ const LandingPage = () => {
         <h2 id="landing-h2">링클을 둘러보세요</h2>
       </section>
 
-
       {/*3-1카테고리 설명 부분*/}
       <div className="landing-divider"></div>
       <section id="landing-section2" className="section">
-        <div className='LangingImg3-page'>
-        <p className='landingImg3-description'>
-         <span style={{ fontSize: '60px', fontWeight: 'bold' }}>URL 관리, 이제 더 쉽고 간편하게</span> <br />
-          나만의 카테고리를 만들어 필요한 URL을 저장하고 관리하세요.<br></br>직접 만든 카테고리 안에서 원하는 링크를 손쉽게 찾으세요
-        </p>
-        <img src={category} alt="category" className="sort-category-description" />
+        <div className="LangingImg3-page">
+          <p className="landingImg3-description">
+            <span style={{ fontSize: '60px', fontWeight: 'bold' }}>
+              URL 관리, 이제 더 쉽고 간편하게
+            </span>{' '}
+            <br />
+            나만의 카테고리를 만들어 필요한 URL을 저장하고 관리하세요.<br></br>
+            직접 만든 카테고리 안에서 원하는 링크를 손쉽게 찾으세요
+          </p>
+          <img
+            src={category}
+            alt="category"
+            className="sort-category-description"
+          />
         </div>
       </section>
 
       <div className="landing-divider"></div>
       <section id="landing-section2" className="section">
-        <div className='LangingImg3-page'>
-        <p className='landingImg3-description'>결제 프리미엄 서비스를 제공합니다<br></br>등급별로 제공되는 다양한 기능을 통해 작업 효율을 극대화할 수 있습니다. </p>
-        <img src={payService} alt="payService" className="payService" />
+        <div className="LangingImg3-page">
+          <p className="landingImg3-description">
+            결제 프리미엄 서비스를 제공합니다<br></br>등급별로 제공되는 다양한
+            기능을 통해 작업 효율을 극대화할 수 있습니다.{' '}
+          </p>
+          <img src={payService} alt="payService" className="payService" />
         </div>
       </section>
 
       {/*결제 서비스 설명 부분*/}
       <div className="landing-divider"></div>
       <section id="landing-section2" className="section">
-        <div className='LangingImg3-page'>
-        <p className='landingImg3-description'>결제 프리미엄 서비스를 제공합니다<br></br>등급별로 제공되는 다양한 기능을 통해 작업 효율을 극대화할 수 있습니다. </p>
-        <img src={payService} alt="payService" className="payService" />
+        <div className="LangingImg3-page">
+          <p className="landingImg3-description">
+            결제 프리미엄 서비스를 제공합니다<br></br>등급별로 제공되는 다양한
+            기능을 통해 작업 효율을 극대화할 수 있습니다.{' '}
+          </p>
+          <img src={payService} alt="payService" className="payService" />
         </div>
       </section>
       <div className="landing-divider"></div>

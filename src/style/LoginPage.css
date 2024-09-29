@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
 
 :root {
   --box-shadow-style: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -24,7 +24,7 @@ body {
 }
 
 .intro-caption {
-  font-family: "Jua", sans-serif;
+  font-family: 'Jua', sans-serif;
   font-weight: 800;
   font-size: 80px;
   color: black;
@@ -38,13 +38,13 @@ body {
 }
 
 .logo {
-  width: 70px; 
+  width: 70px;
   height: 70px;
-  margin-right: 20px; 
+  margin-right: 20px;
 }
 
 .brand-name {
-  font-family: "Jua", sans-serif;
+  font-family: 'Jua', sans-serif;
   font-size: 60px; /* 텍스트 크기 조정 */
   font-weight: bold;
 }
