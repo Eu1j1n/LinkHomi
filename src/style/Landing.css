@@ -197,8 +197,9 @@ body {
 
 
 .LangingImg3-page{
-  animation: slideUp 3s ease-in-out infinite; 
+  animation: slideUp 3s ease-in-out ; 
 }
+
 .landingImg3-description{
   color: white;
   font-size:30px;

@@ -122,9 +122,8 @@
   box-shadow: 0 4px 12px rgba(74, 123, 255, 0.2);
 }
 .modal-logo {
-  width: 60px; /* Adjust as needed */
+  width:100px; /* Adjust as needed */
   height: auto;
-  margin-bottom: 15px;
 }
 
 @keyframes fadeIn {
