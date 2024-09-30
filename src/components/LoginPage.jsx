@@ -1,84 +1,87 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import '../style/LoginPage.css';
-import logo from '../assets/images/LoginLogo.png';
-import GoogleLoginBtn from './GoogleLoginBtn';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import "../style/LoginPage.css";
+import GoogleLoginBtn from "./GoogleLoginBtn";
+import { useNavigate } from "react-router-dom";
+import { gsap } from "gsap";
+import SplitType from "split-type";
 
 function LoginPage({ setIsLoggedIn }) {
   const navigate = useNavigate();
-  const introCaptionRef = useRef(null);
-  const logoContainerRef = useRef(null);
-  const socialLoginRef = useRef(null);
-  const featureCheckRef = useRef(null);
+  const linkkleRef = useRef(null);
+  const joinUsRef = useRef(null);
 
   useEffect(() => {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    gsap.fromTo(
+      ".logo",
+      { opacity: 0, scale: 0.5 },
+      { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" }
+    );
 
-    tl.from(introCaptionRef.current, { y: -50, opacity: 0, duration: 1 })
-      .from(
-        logoContainerRef.current,
-        { scale: 0.8, opacity: 0, duration: 1 },
-        '-=0.5'
-      )
-      .from(socialLoginRef.current, { y: 50, opacity: 0, duration: 1 }, '-=0.5')
-      .from(featureCheckRef.current, { opacity: 0, duration: 1 }, '-=0.5');
+    const combinedText = new SplitType(
+      [joinUsRef.current, linkkleRef.current],
+      {
+        types: "chars",
+        charClass: "combined-char",
+      }
+    );
 
-    // Hover animation for feature check
-    gsap.to(featureCheckRef.current, {
-      scale: 1.05,
-      duration: 0.3,
-      paused: true,
-      ease: 'power1.inOut',
-    });
+    gsap.fromTo(
+      ".combined-char",
+      { y: 50, opacity: 0, rotation: 180, scale: 0.5 },
+      {
+        y: 0,
+        opacity: 1,
+        rotation: 0,
+        scale: 1,
+        duration: 1,
+        stagger: 0.1,
+        ease: "elastic.out(1, 0.5)",
+        onComplete: () => {
+          gsap.to(".combined-char", {
+            color: "#FEFCE1",
+            duration: 1,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+          });
+        },
+      }
+    );
+
+    gsap.fromTo(
+      ".feature-check",
+      { opacity: 0 },
+      { opacity: 1, duration: 1.5, ease: "power3.out", delay: 1 }
+    );
   }, []);
 
   const handleFeatureCheckClick = () => {
-    navigate('/');
-  };
-
-  const handleFeatureCheckHover = (event) => {
-    gsap.to(event.currentTarget, {
-      scale: 1.05,
-      duration: 0.3,
-      ease: 'power1.inOut',
-    });
-  };
-
-  const handleFeatureCheckLeave = (event) => {
-    gsap.to(event.currentTarget, {
-      scale: 1,
-      duration: 0.3,
-      ease: 'power1.inOut',
-    });
+    navigate("/");
   };
 
   return (
     <div className="login-page">
-      <h1 className="intro-caption" ref={introCaptionRef}>
-        링클과 함께하세요
+      <h1 className="intro-caption" ref={joinUsRef}>
+        Join us with
       </h1>
-
-      <div className="logo-container" ref={logoContainerRef}>
-        <img src={logo} alt="logo" className="logo" />
-        <span className="brand-name">
-          <span className="highlight">LIN</span>
-          <span className="dark">KKLE</span>
-        </span>
-      </div>
-
-      <div className="social-login" ref={socialLoginRef}>
+      <h1 className="intro-caption highlight" ref={linkkleRef}>
+        LINKKLE !
+      </h1>
+      <div className="social-login">
         <GoogleLoginBtn setIsLoggedIn={setIsLoggedIn} />
       </div>
-
-      <p
-        className="feature-check"
-        ref={featureCheckRef}
-        onClick={handleFeatureCheckClick}
-        onMouseEnter={handleFeatureCheckHover}
-        onMouseLeave={handleFeatureCheckLeave}
-      >
+      <p className="feature-check" onClick={handleFeatureCheckClick}>
         링클의 기능을 다시 확인하고 싶으신가요?
+      </p>
+
+      <p className="extension-link">
+        <a
+          href="https://chromewebstore.google.com/category/extensions?hl=ko&utm_source=ext_sidebar"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          링클의 확장 프로그램 설치하기
+        </a>
       </p>
     </div>
   );
