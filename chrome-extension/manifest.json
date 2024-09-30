@@ -2,6 +2,7 @@
   "manifest_version": 3,
   "name": "Likkle2",
   "version": "1.0",
+  "description": "LINKKLE 웹을 200% 활용하기 위한 크롬 확장프로그램 입니다. 구글 방문 기록을 불러와 드래그 & 드랍으로 손쉽게 URL을 저장하세요.",
   "permissions": ["history", "storage"],
   "action": {
     "default_popup": "popup.html",
@@ -10,5 +11,10 @@
       "48": "./assets/icon.png",
       "128": "./assets/icon.png"
     }
+  },
+  "icons": {
+    "16": "./assets/icon.png",
+    "48": "./assets/icon.png",
+    "128": "./assets/icon.png"
   }
 }
