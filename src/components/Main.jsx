@@ -8,6 +8,9 @@ import AddUrlModal from './AddUrlModal';
 import axios from 'axios';
 import PostCard from './PostCard';
 import Swal from 'sweetalert2';
+import { FaCircleArrowUp } from "react-icons/fa6";
+import { FaHeartCirclePlus } from "react-icons/fa6";
+import { FaCirclePlus } from "react-icons/fa6";
 
 function Main({ setIsLoggedIn }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -215,11 +218,11 @@ function Main({ setIsLoggedIn }) {
           className="addUrl-floating-button"
           onClick={() => setModalOpen(true)}
         >
-          <FontAwesomeIcon icon={faPlus} size="2x" />
+          <FaCirclePlus icon={faPlus} size="2x" />
         </button>
 
         <button className="scrollUp-floating-button" onClick={scrollToTop}>
-          <FontAwesomeIcon icon={faArrowUp} size="2x" />
+          <FaCircleArrowUp icon={faArrowUp} size="2x" />
         </button>
       </div>
 

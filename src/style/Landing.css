@@ -39,7 +39,7 @@ body {
 .landing-firstComment {
   font-size: 200px;
   font-weight: 700;
-  color: #ccff00;
+  color: #FEFCE1;
   text-align: center;
 }
 
@@ -51,7 +51,7 @@ body {
   height: 60px;
   background-color: black;
   color: white;
-  border: 2px solid #ccff00;
+  border: 2px solid #FEFCE1;
   padding: 10px 20px;
   font-size: 20px;
   border-radius: 30px;
@@ -60,7 +60,7 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 .landing-start-btn:hover {
-  background-color: #ccff00;
+  background-color: #FEFCE1;
   color: black;
   font-weight:bold;
 }
@@ -145,11 +145,11 @@ body {
 }
 
 #landing-h2 {
-  color:#FF8709;
+  color:  #EAB8FF;
   font-size: 100px;
 }
 #landing-h3 {
-  color: #FEC5FB;
+  color: #FEFCE1;
   font-size: 100px;
 }
 
@@ -189,15 +189,13 @@ body {
 }
 
 .sort-category-description{
-  width:880px;
+  width:860px;
   margin: 0px;
   height: auto; 
 }
 
-
-
 .LangingImg3-page{
-  animation: slideUp 3s ease-in-out ; 
+  animation: slideUp 4s ease-in-out infinite ; 
 }
 
 .landingImg3-description{
@@ -225,4 +223,10 @@ body {
     transform: translateY(0);
     opacity: 1; 
   }
+}
+.LandingImg3-first-description{
+  color: #EAB8FF;
+}
+.category-sort{
+  font-size:20px;
 }

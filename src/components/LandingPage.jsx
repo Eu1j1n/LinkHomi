@@ -155,7 +155,7 @@ const LandingPage = () => {
             서비스입니다.
           </p>
           <p
-            className="landing-second-page-emphasize"
+            
             style={{ fontSize: '50px' }}
           >
             한 번의 드래그로 URL을 쉽게 복사하세요!
@@ -173,8 +173,11 @@ const LandingPage = () => {
       <section id="landing-section2" className="section">
         <div className="LangingImg3-page">
           <p className="landingImg3-description">
-            <span style={{ fontSize: '60px', fontWeight: 'bold' }}>
-              URL 관리, 이제 더 쉽고 간편하게
+            <span style={{ 
+              fontSize: '60px', 
+              fontWeight: 'bold' 
+            }}>
+            <span className='LandingImg3-first-description'>URL 관리, 이제 더 쉽고 간편하게</span>
             </span>{' '}
             <br />
             나만의 카테고리를 만들어 필요한 URL을 저장하고 관리하세요.<br></br>
@@ -187,25 +190,18 @@ const LandingPage = () => {
           />
         </div>
       </section>
-
+    {/*3-2카테고리 설명 부분*/}
       <div className="landing-divider"></div>
       <section id="landing-section2" className="section">
         <div className="LangingImg3-page">
           <p className="landingImg3-description">
-            결제 프리미엄 서비스를 제공합니다<br></br>등급별로 제공되는 다양한
-            기능을 통해 작업 효율을 극대화할 수 있습니다.{' '}
-          </p>
-          <img src={payService} alt="payService" className="payService" />
-        </div>
-      </section>
-
-      {/*결제 서비스 설명 부분*/}
-      <div className="landing-divider"></div>
-      <section id="landing-section2" className="section">
-        <div className="LangingImg3-page">
-          <p className="landingImg3-description">
-            결제 프리미엄 서비스를 제공합니다<br></br>등급별로 제공되는 다양한
-            기능을 통해 작업 효율을 극대화할 수 있습니다.{' '}
+          <span style={{ 
+              fontSize: '60px', 
+              fontWeight: 'bold' 
+            }}>
+            <span className='LandingImg3-first-description'>프리미엄 결제 옵션</span>
+            </span><br />
+            결제 등급에 따라 카테고리 개수를 조절하여 더욱 효율적인 콘텐츠 관리를 경험해보세요.
           </p>
           <img src={payService} alt="payService" className="payService" />
         </div>

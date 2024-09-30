@@ -115,8 +115,8 @@
 
 .addUrl-floating-button,
 .scrollUp-floating-button {
-  width: 40px;
-  height: 50px;
+  width:40px;
+  height: 60px;
   color: black;
   border: none;
   border-radius: 5px;
@@ -141,42 +141,29 @@
 }
 
 /*main부분 오래된순-최신순 부분 css*/
-.main-sort-order {
-  font-size: 13px;
+.main-sort-order{
+  font-size:13px;
   border: none;
-  background-color: white;
+  background-color:white;
 }
-.main-sort-order:hover {
-  font-size: 13px;
+.main-sort-order:hover{
+  font-size:13px;
   border: none;
-  background-color: white;
-  cursor: pointer;
-  color: #325eff;
-  font-weight: bold;
+  background-color:white;
+  cursor:pointer;
+  color: #325eff; 
+  font-weight:bold;
 }
 .main-sort-order.active {
-  color: #325eff;
-  font-weight: bold;
+  color: #325eff; 
+  font-weight: bold; 
 }
 
 .sort-oldest {
-  margin-left: 500px;
-  margin-right: 10px;
+  margin-left:500px;
+  margin-right:10px;
 }
 
 .sort-latest {
-  margin-left: 10px;
-}
-//main 오래된 순 최신순 반응형 디자인
-@media (min-width: 1920px) and (min-height: 1080px) {
-  .sort-oldest {
-    margin-left: 830px;
-    margin-right: 10px;
-  }
-}
-@media (min-width: 1920px) and (min-height: 935px) {
-  .sort-oldest {
-    margin-left: 830px;
-    margin-right: 10px;
-  }
+  margin-left:10px;
 }
