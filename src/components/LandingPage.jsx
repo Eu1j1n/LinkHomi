@@ -8,6 +8,7 @@ import { RxDoubleArrowUp } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
 import payService from '../assets/images/payService.png';
 import category from '../assets/images/category.png';
+import description from '../assets/images/description.gif';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -204,6 +205,21 @@ const LandingPage = () => {
             결제 등급에 따라 카테고리 개수를 조절하여 더욱 효율적인 콘텐츠 관리를 경험해보세요.
           </p>
           <img src={payService} alt="payService" className="payService" />
+        </div>
+      </section>
+            <div className="landing-divider"></div>
+      <section id="landing-section2" className="section">
+        <div className="LangingImg3-page">
+          <p className="landingImg3-description">
+          <span style={{ 
+              fontSize: '60px', 
+              fontWeight: 'bold' 
+            }}>
+            <span className='LandingImg3-description-gif'>CTRL+C, CTRL+V는 더이상 그만 !</span>
+            </span><br />
+            드래그 한번으로 URL을 복사하세요
+          </p>
+          <img src={description} alt="payService" className="payService" />
         </div>
       </section>
       <div className="landing-divider"></div>
