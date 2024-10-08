@@ -13,7 +13,7 @@
       </a>
     </td>
     <td>
-      <a href="https://github.com/gawgjiug">
+      <a href="https://github.com/gwagjiug">
         <img src="https://avatars.githubusercontent.com/u/99489686?v=4" width="200"/>
       </a>
     </td>
@@ -30,7 +30,7 @@
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/gawgjiug">
+      <a href="https://github.com/gwagjiug">
         곽지욱_FE
       </a>
     </td>
