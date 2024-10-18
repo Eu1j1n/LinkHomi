@@ -1,14 +1,14 @@
-## LINKKLE
+## 1️⃣ LINKKLE
 URL 관리 및 리서치 생산성 향상 웹 서비스🙌
 
-## 🔨 서비스 주요 기능
+## 2️⃣ 서비스 기능
 ### 랜딩 페이지
 
 <div align="center" style="width:100%;">
   <img src="https://github.com/user-attachments/assets/a6609f72-7943-42cd-ab6a-142ba8a86cec" width ="100%" />
 </div>
 
-## 기술 스택
+## 3️⃣ 기술 스택
 ### Node.js Version
 
 `v20.17.0`
@@ -21,7 +21,7 @@ URL 관리 및 리서치 생산성 향상 웹 서비스🙌
 | Formatting           | ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)     |
 | Package Manager      | ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
-## 🧚🏻팀원 소개
+## 4️⃣ 팀원 소개
 <br/>
 <div align="center">
 <table>
@@ -60,4 +60,4 @@ URL 관리 및 리서치 생산성 향상 웹 서비스🙌
 <br />
 <br />
 
-## 아티클
+## 5️⃣ 아티클
