@@ -2,6 +2,12 @@
 URL 관리 및 리서치 생산성 향상 웹 서비스
 
 ## 🔨 서비스 주요 기능
+### 랜딩 페이지
+
+<div align="center" style="width:100%;">
+  <img src="https://github.com/user-attachments/assets/a6609f72-7943-42cd-ab6a-142ba8a86cec" width ="100%" />
+</div>
+
 
 ## 기술 스택
 ### Node.js Version
