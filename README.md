@@ -66,8 +66,20 @@ URL 관리 및 리서치 생산성 향상 웹 서비스
       </a>
     </td>
   </tr>
+  <tr>
+    <td align="center">
+      <a href="https://gaudy-omelet-3ba.notion.site/1230e48132a78057934cf1849096acb5" target="_blank">수빈</a>
+    </td>
+    <td align="center">
+      <a href="https://gaudy-omelet-3ba.notion.site/1230e48132a780448c27fd8dd494a72b" target="_blank">의진</a>
+    </td>
+    <td align="center">
+      <a href="https://gaudy-omelet-3ba.notion.site/1230e48132a7808a8aeef68da06e47a1" target="_blank">지욱</a>
+    </td>
+  </tr>
 </table>
-<table align="center">
+
+
 
 
 ## 아티클
