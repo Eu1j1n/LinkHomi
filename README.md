@@ -8,7 +8,6 @@ URL 관리 및 리서치 생산성 향상 웹 서비스
   <img src="https://github.com/user-attachments/assets/a6609f72-7943-42cd-ab6a-142ba8a86cec" width ="100%" />
 </div>
 
-
 ## 기술 스택
 ### Node.js Version
 
@@ -19,68 +18,46 @@ URL 관리 및 리서치 생산성 향상 웹 서비스
 | Programming Language | ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)                                                                                                |
 | Styling              | ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)                                                                                                             |
 | Data Fetching        | ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=Axios&logoColor=white)                                                                                                                   |
-| Formatting           | ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white) ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=prettier&logoColor=white)    |
+| Formatting           | ![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)     |
 | Package Manager      | ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-
-
-
-                                                                                               
-
-
-
 
 ## 🧚🏻팀원 소개
 <br/>
-<table align="center">
+<div align="center">
+<table>
   <tr>
+    <th>팀원</th>
+    <th>곽지욱 <a href="https://github.com/gwagjiug"><br/><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a></th>
+    <th>김의진 <a href="https://github.com/Eu1j1n"><br/><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a></th>
+    <th>송수빈 <a href="https://github.com/subinsong01"><br/><img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/></a></th>
+  </tr>
+  <tr>
+    <td>팀원 소개</td>
     <td>
-      <a href="https://github.com/subinsong01">
-        <img src="https://avatars.githubusercontent.com/u/134045937?v=4" width="200"/>
-      </a>
+      <img width="200" alt="IMG_1293" src="https://avatars.githubusercontent.com/u/99489686?v=4" />
     </td>
     <td>
-      <a href="https://github.com/Eu1j1n">
-        <img src="https://avatars.githubusercontent.com/u/162551578?v=4" width="200"/>
-      </a>
+      <img width="200" alt="IMG_1341" src="https://avatars.githubusercontent.com/u/162551578?v=4" />
     </td>
     <td>
-      <a href="https://github.com/gwagjiug">
-        <img src="https://avatars.githubusercontent.com/u/99489686?v=4" width="200"/>
-      </a>
+      <img width="200" alt="IMG_1342" src="https://avatars.githubusercontent.com/u/134045937?v=4" />
     </td>
   </tr>
   <tr>
-    <td align="center">
-      <a href="https://github.com/subinsong01">
-        송수빈_FE
-      </a>
+    <td>역할</td>
+    <td>
+      <p align="center"><a href="https://gaudy-omelet-3ba.notion.site/1230e48132a7808a8aeef68da06e47a1">지욱</a></p>
     </td>
-    <td align="center">
-      <a href="https://github.com/Eu1j1n">
-        김의진_FE
-      </a>
+    <td>
+      <p align="center"><a href="https://gaudy-omelet-3ba.notion.site/1230e48132a780448c27fd8dd494a72b">의진</a></p>
     </td>
-    <td align="center">
-      <a href="https://github.com/gwagjiug">
-        곽지욱_FE
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <a href="https://gaudy-omelet-3ba.notion.site/1230e48132a78057934cf1849096acb5" target="_blank">수빈</a>
-    </td>
-    <td align="center">
-      <a href="https://gaudy-omelet-3ba.notion.site/1230e48132a780448c27fd8dd494a72b" target="_blank">의진</a>
-    </td>
-    <td align="center">
-      <a href="https://gaudy-omelet-3ba.notion.site/1230e48132a7808a8aeef68da06e47a1" target="_blank">지욱</a>
+    <td>
+      <p align="center"><a href="https://gaudy-omelet-3ba.notion.site/1230e48132a78057934cf1849096acb5">수빈</a></p>
     </td>
   </tr>
 </table>
-
-
-
+</div>
+<br />
+<br />
 
 ## 아티클
-
